@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/mm_test
+CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/mm_test
+CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel
 
 # Utility rule file for roscpp_generate_messages_eus.
 
@@ -86,6 +86,6 @@ CMakeFiles/roscpp_generate_messages_eus.dir/clean:
 .PHONY : CMakeFiles/roscpp_generate_messages_eus.dir/clean
 
 CMakeFiles/roscpp_generate_messages_eus.dir/depend:
-	cd /root/workspace/mm_test && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/workspace/mm_gpu_voxel && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/roscpp_generate_messages_eus.dir/depend
 

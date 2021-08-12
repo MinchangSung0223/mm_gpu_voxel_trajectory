@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/mm_test
+CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/mm_test
+CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel
 
 # Utility rule file for doxygen.
 
@@ -86,6 +86,6 @@ CMakeFiles/doxygen.dir/clean:
 .PHONY : CMakeFiles/doxygen.dir/clean
 
 CMakeFiles/doxygen.dir/depend:
-	cd /root/workspace/mm_test && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test /root/workspace/mm_test/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/workspace/mm_gpu_voxel && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doxygen.dir/depend
 

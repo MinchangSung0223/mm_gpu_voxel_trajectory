@@ -99,7 +99,7 @@ void GvlOmplPlannerHelper::rosIter(){
         const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f, map_dimensions.y * voxel_side_length * 0.5f, map_dimensions.z * voxel_side_length * 0.0f);
         tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0), camera_offsets);
         shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
-        //shared_ptr<BitVectorVoxelList> obstacleBitvectorMap = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("ObstacleBitvectorMap"));
+        shared_ptr<BitVectorVoxelList> obstacleBitvectorMap = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("ObstacleBitvectorMap"));
 
         while (ros::ok())
         {
@@ -109,9 +109,9 @@ void GvlOmplPlannerHelper::rosIter(){
                         new_data_received = false;
                         countingVoxelList->clearMap();
                         countingVoxelList->insertPointCloud(my_point_cloud, eBVM_OCCUPIED);
-                        //countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
-     // gvl->getMap("ObstacleBitvectorMap")->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
-     // Vector3f());
+                        countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
+      obstacleBitvectorMap->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
+      Vector3f());
                 }
                 r.sleep();
         }
