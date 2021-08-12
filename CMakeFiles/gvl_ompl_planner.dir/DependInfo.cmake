@@ -10,6 +10,14 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "DISABLE_LIBUSB_1_0"
+  "DISABLE_PCAP"
+  "DISABLE_PNG"
+  "H5_BUILT_AS_DYNAMIC_LIB"
+  "IC_PERFORMANCE_MONITOR"
+  "ROSCONSOLE_BACKEND_LOG4CXX"
+  "ROS_BUILD_SHARED_LIBS=1"
+  "ROS_PACKAGE_NAME=\"gvl_ompl_planning\""
   "_BUILD_GVL_WITH_KINECT_SUPPORT_"
   "_BUILD_GVL_WITH_PCL_SUPPORT_"
   "_BUILD_GVL_WITH_TF_SUPPORT_"
@@ -41,17 +49,43 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "_IC_BUILDER_ICL_CORE_THREAD_"
   "_SYSTEM_LINUX_"
   "_SYSTEM_POSIX_"
+  "qh_QHpointer"
+  "vtkDomainsChemistry_AUTOINIT=1(vtkDomainsChemistryOpenGL2)"
+  "vtkIOExport_AUTOINIT=2(vtkIOExportOpenGL2,vtkIOExportPDF)"
+  "vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)"
+  "vtkRenderingCore_AUTOINIT=3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)"
+  "vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)"
+  "vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL2)"
   )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/opt/conda/envs/ros/include/python2.7"
+  "/opt/ros/kinetic/share/orocos_kdl/../../include"
+  "/usr/include/eigen3"
   "."
   "/root/workspace/gpu-voxels/packages/gpu_voxels/src"
   "/root/workspace/gpu-voxels/packages/icl_core/src"
   "/usr/local/cuda/include"
   "/opt/ros/kinetic/include"
-  "/opt/ros/kinetic/share/orocos_kdl/../../include"
-  "/usr/include/eigen3"
+  "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/pcl-1.7"
+  "/usr/include/vtk-6.2"
+  "/usr/include/freetype2"
+  "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent"
+  "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include"
+  "/usr/lib/openmpi/include"
+  "/usr/lib/openmpi/include/openmpi"
+  "/usr/include/jsoncpp"
+  "/usr/include/hdf5/serial"
+  "/usr/include/python2.7"
+  "/usr/include/tcl"
+  "/usr/include/libxml2"
+  "/usr/local/include/vtk-8.2"
+  "/usr/include/ni"
+  "/usr/local/include/eigen3"
+  "/usr/local/include/pcl-1.9"
+  "/usr/local/include/vtk-8.2/vtkogg/include"
   )
 
 # Targets to which this target links.

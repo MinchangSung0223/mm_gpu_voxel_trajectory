@@ -63,3 +63,2928 @@ make: *** [cmTC_5aceb/fast] Error 2
 
 
 
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0ec2d/fast && /usr/bin/make  -f CMakeFiles/cmTC_0ec2d.dir/build.make CMakeFiles/cmTC_0ec2d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0ec2d.dir/src.c.o
+/usr/bin/cc   -fPIC -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_0ec2d.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0ec2d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ec2d.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_0ec2d.dir/src.c.o -o cmTC_0ec2d 
+CMakeFiles/cmTC_0ec2d.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0ec2d.dir/build.make:105: recipe for target 'cmTC_0ec2d' failed
+make[1]: *** [cmTC_0ec2d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0ec2d/fast' failed
+make: *** [cmTC_0ec2d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9ebf8/fast && /usr/bin/make  -f CMakeFiles/cmTC_9ebf8.dir/build.make CMakeFiles/cmTC_9ebf8.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9ebf8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_9ebf8.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_9ebf8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9ebf8.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_9ebf8.dir/CheckFunctionExists.c.o -o cmTC_9ebf8  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9ebf8.dir/build.make:105: recipe for target 'cmTC_9ebf8' failed
+make[1]: *** [cmTC_9ebf8] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_9ebf8/fast' failed
+make: *** [cmTC_9ebf8/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_50c18/fast && /usr/bin/make  -f CMakeFiles/cmTC_50c18.dir/build.make CMakeFiles/cmTC_50c18.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_50c18.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_50c18.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_50c18
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50c18.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_50c18.dir/src.c.o -o cmTC_50c18 
+CMakeFiles/cmTC_50c18.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_50c18.dir/build.make:105: recipe for target 'cmTC_50c18' failed
+make[1]: *** [cmTC_50c18] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_50c18/fast' failed
+make: *** [cmTC_50c18/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b8a7d/fast && /usr/bin/make  -f CMakeFiles/cmTC_b8a7d.dir/build.make CMakeFiles/cmTC_b8a7d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b8a7d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_b8a7d.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b8a7d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b8a7d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_b8a7d.dir/CheckFunctionExists.c.o -o cmTC_b8a7d  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b8a7d.dir/build.make:105: recipe for target 'cmTC_b8a7d' failed
+make[1]: *** [cmTC_b8a7d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_b8a7d/fast' failed
+make: *** [cmTC_b8a7d/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_583fe/fast && /usr/bin/make  -f CMakeFiles/cmTC_583fe.dir/build.make CMakeFiles/cmTC_583fe.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_583fe.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_583fe.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_583fe
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_583fe.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_583fe.dir/src.c.o -o cmTC_583fe 
+CMakeFiles/cmTC_583fe.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_583fe.dir/build.make:105: recipe for target 'cmTC_583fe' failed
+make[1]: *** [cmTC_583fe] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_583fe/fast' failed
+make: *** [cmTC_583fe/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_56e78/fast && /usr/bin/make  -f CMakeFiles/cmTC_56e78.dir/build.make CMakeFiles/cmTC_56e78.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_56e78.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_56e78.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_56e78
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56e78.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_56e78.dir/CheckFunctionExists.c.o -o cmTC_56e78  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_56e78.dir/build.make:105: recipe for target 'cmTC_56e78' failed
+make[1]: *** [cmTC_56e78] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_56e78/fast' failed
+make: *** [cmTC_56e78/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_09b45/fast && /usr/bin/make  -f CMakeFiles/cmTC_09b45.dir/build.make CMakeFiles/cmTC_09b45.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_09b45.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_09b45.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_09b45
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_09b45.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_09b45.dir/src.c.o -o cmTC_09b45 
+CMakeFiles/cmTC_09b45.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_09b45.dir/build.make:105: recipe for target 'cmTC_09b45' failed
+make[1]: *** [cmTC_09b45] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_09b45/fast' failed
+make: *** [cmTC_09b45/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1d6fa/fast && /usr/bin/make  -f CMakeFiles/cmTC_1d6fa.dir/build.make CMakeFiles/cmTC_1d6fa.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1d6fa.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_1d6fa.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1d6fa
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1d6fa.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_1d6fa.dir/CheckFunctionExists.c.o -o cmTC_1d6fa  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1d6fa.dir/build.make:105: recipe for target 'cmTC_1d6fa' failed
+make[1]: *** [cmTC_1d6fa] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_1d6fa/fast' failed
+make: *** [cmTC_1d6fa/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9d245/fast && /usr/bin/make  -f CMakeFiles/cmTC_9d245.dir/build.make CMakeFiles/cmTC_9d245.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9d245.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_9d245.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9d245
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9d245.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_9d245.dir/src.c.o -o cmTC_9d245 
+CMakeFiles/cmTC_9d245.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9d245.dir/build.make:105: recipe for target 'cmTC_9d245' failed
+make[1]: *** [cmTC_9d245] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_9d245/fast' failed
+make: *** [cmTC_9d245/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_64fbc/fast && /usr/bin/make  -f CMakeFiles/cmTC_64fbc.dir/build.make CMakeFiles/cmTC_64fbc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_64fbc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_64fbc.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_64fbc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64fbc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_64fbc.dir/CheckFunctionExists.c.o -o cmTC_64fbc  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_64fbc.dir/build.make:105: recipe for target 'cmTC_64fbc' failed
+make[1]: *** [cmTC_64fbc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_64fbc/fast' failed
+make: *** [cmTC_64fbc/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cfccf/fast && /usr/bin/make  -f CMakeFiles/cmTC_cfccf.dir/build.make CMakeFiles/cmTC_cfccf.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cfccf.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_cfccf.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_cfccf
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cfccf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_cfccf.dir/src.c.o -o cmTC_cfccf 
+CMakeFiles/cmTC_cfccf.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_cfccf.dir/build.make:105: recipe for target 'cmTC_cfccf' failed
+make[1]: *** [cmTC_cfccf] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_cfccf/fast' failed
+make: *** [cmTC_cfccf/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_af6f3/fast && /usr/bin/make  -f CMakeFiles/cmTC_af6f3.dir/build.make CMakeFiles/cmTC_af6f3.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_af6f3.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_af6f3.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_af6f3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_af6f3.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_af6f3.dir/CheckFunctionExists.c.o -o cmTC_af6f3  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_af6f3.dir/build.make:105: recipe for target 'cmTC_af6f3' failed
+make[1]: *** [cmTC_af6f3] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_af6f3/fast' failed
+make: *** [cmTC_af6f3/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0564b/fast && /usr/bin/make  -f CMakeFiles/cmTC_0564b.dir/build.make CMakeFiles/cmTC_0564b.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0564b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_0564b.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0564b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0564b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_0564b.dir/src.c.o -o cmTC_0564b 
+CMakeFiles/cmTC_0564b.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0564b.dir/build.make:105: recipe for target 'cmTC_0564b' failed
+make[1]: *** [cmTC_0564b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0564b/fast' failed
+make: *** [cmTC_0564b/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d5977/fast && /usr/bin/make  -f CMakeFiles/cmTC_d5977.dir/build.make CMakeFiles/cmTC_d5977.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d5977.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_d5977.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d5977
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d5977.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_d5977.dir/CheckFunctionExists.c.o -o cmTC_d5977  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d5977.dir/build.make:105: recipe for target 'cmTC_d5977' failed
+make[1]: *** [cmTC_d5977] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d5977/fast' failed
+make: *** [cmTC_d5977/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fcc65/fast && /usr/bin/make  -f CMakeFiles/cmTC_fcc65.dir/build.make CMakeFiles/cmTC_fcc65.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fcc65.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_fcc65.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_fcc65
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcc65.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_fcc65.dir/src.c.o -o cmTC_fcc65 
+CMakeFiles/cmTC_fcc65.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fcc65.dir/build.make:105: recipe for target 'cmTC_fcc65' failed
+make[1]: *** [cmTC_fcc65] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_fcc65/fast' failed
+make: *** [cmTC_fcc65/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ba75d/fast && /usr/bin/make  -f CMakeFiles/cmTC_ba75d.dir/build.make CMakeFiles/cmTC_ba75d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ba75d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_ba75d.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ba75d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ba75d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_ba75d.dir/CheckFunctionExists.c.o -o cmTC_ba75d  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_ba75d.dir/build.make:105: recipe for target 'cmTC_ba75d' failed
+make[1]: *** [cmTC_ba75d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_ba75d/fast' failed
+make: *** [cmTC_ba75d/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_36850/fast && /usr/bin/make  -f CMakeFiles/cmTC_36850.dir/build.make CMakeFiles/cmTC_36850.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_36850.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_36850.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_36850
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36850.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_36850.dir/src.c.o -o cmTC_36850 
+CMakeFiles/cmTC_36850.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_36850.dir/build.make:105: recipe for target 'cmTC_36850' failed
+make[1]: *** [cmTC_36850] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_36850/fast' failed
+make: *** [cmTC_36850/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_eb49e/fast && /usr/bin/make  -f CMakeFiles/cmTC_eb49e.dir/build.make CMakeFiles/cmTC_eb49e.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eb49e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_eb49e.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_eb49e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb49e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_eb49e.dir/CheckFunctionExists.c.o -o cmTC_eb49e  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_eb49e.dir/build.make:105: recipe for target 'cmTC_eb49e' failed
+make[1]: *** [cmTC_eb49e] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_eb49e/fast' failed
+make: *** [cmTC_eb49e/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_af027/fast && /usr/bin/make  -f CMakeFiles/cmTC_af027.dir/build.make CMakeFiles/cmTC_af027.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_af027.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_af027.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_af027
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_af027.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_af027.dir/src.c.o -o cmTC_af027 
+CMakeFiles/cmTC_af027.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_af027.dir/build.make:105: recipe for target 'cmTC_af027' failed
+make[1]: *** [cmTC_af027] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_af027/fast' failed
+make: *** [cmTC_af027/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7685b/fast && /usr/bin/make  -f CMakeFiles/cmTC_7685b.dir/build.make CMakeFiles/cmTC_7685b.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7685b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_7685b.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7685b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7685b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_7685b.dir/CheckFunctionExists.c.o -o cmTC_7685b  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7685b.dir/build.make:105: recipe for target 'cmTC_7685b' failed
+make[1]: *** [cmTC_7685b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7685b/fast' failed
+make: *** [cmTC_7685b/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0c311/fast && /usr/bin/make  -f CMakeFiles/cmTC_0c311.dir/build.make CMakeFiles/cmTC_0c311.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0c311.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_0c311.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0c311
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c311.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_0c311.dir/src.c.o -o cmTC_0c311 
+CMakeFiles/cmTC_0c311.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0c311.dir/build.make:105: recipe for target 'cmTC_0c311' failed
+make[1]: *** [cmTC_0c311] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0c311/fast' failed
+make: *** [cmTC_0c311/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_02cf6/fast && /usr/bin/make  -f CMakeFiles/cmTC_02cf6.dir/build.make CMakeFiles/cmTC_02cf6.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_02cf6.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_02cf6.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_02cf6
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02cf6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_02cf6.dir/CheckFunctionExists.c.o -o cmTC_02cf6  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_02cf6.dir/build.make:105: recipe for target 'cmTC_02cf6' failed
+make[1]: *** [cmTC_02cf6] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_02cf6/fast' failed
+make: *** [cmTC_02cf6/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_27ccc/fast && /usr/bin/make  -f CMakeFiles/cmTC_27ccc.dir/build.make CMakeFiles/cmTC_27ccc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_27ccc.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_27ccc.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_27ccc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27ccc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_27ccc.dir/src.c.o -o cmTC_27ccc 
+CMakeFiles/cmTC_27ccc.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_27ccc.dir/build.make:105: recipe for target 'cmTC_27ccc' failed
+make[1]: *** [cmTC_27ccc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_27ccc/fast' failed
+make: *** [cmTC_27ccc/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fb258/fast && /usr/bin/make  -f CMakeFiles/cmTC_fb258.dir/build.make CMakeFiles/cmTC_fb258.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fb258.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_fb258.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fb258
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb258.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_fb258.dir/CheckFunctionExists.c.o -o cmTC_fb258  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fb258.dir/build.make:105: recipe for target 'cmTC_fb258' failed
+make[1]: *** [cmTC_fb258] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_fb258/fast' failed
+make: *** [cmTC_fb258/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_526af/fast && /usr/bin/make  -f CMakeFiles/cmTC_526af.dir/build.make CMakeFiles/cmTC_526af.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_526af.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_526af.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_526af
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_526af.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_526af.dir/src.c.o -o cmTC_526af 
+CMakeFiles/cmTC_526af.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_526af.dir/build.make:105: recipe for target 'cmTC_526af' failed
+make[1]: *** [cmTC_526af] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_526af/fast' failed
+make: *** [cmTC_526af/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7161e/fast && /usr/bin/make  -f CMakeFiles/cmTC_7161e.dir/build.make CMakeFiles/cmTC_7161e.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7161e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_7161e.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7161e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7161e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_7161e.dir/CheckFunctionExists.c.o -o cmTC_7161e  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7161e.dir/build.make:105: recipe for target 'cmTC_7161e' failed
+make[1]: *** [cmTC_7161e] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7161e/fast' failed
+make: *** [cmTC_7161e/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e7b0d/fast && /usr/bin/make  -f CMakeFiles/cmTC_e7b0d.dir/build.make CMakeFiles/cmTC_e7b0d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e7b0d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_e7b0d.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_e7b0d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7b0d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_e7b0d.dir/src.c.o -o cmTC_e7b0d 
+CMakeFiles/cmTC_e7b0d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e7b0d.dir/build.make:105: recipe for target 'cmTC_e7b0d' failed
+make[1]: *** [cmTC_e7b0d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_e7b0d/fast' failed
+make: *** [cmTC_e7b0d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fc9dc/fast && /usr/bin/make  -f CMakeFiles/cmTC_fc9dc.dir/build.make CMakeFiles/cmTC_fc9dc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fc9dc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_fc9dc.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fc9dc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc9dc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_fc9dc.dir/CheckFunctionExists.c.o -o cmTC_fc9dc  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fc9dc.dir/build.make:105: recipe for target 'cmTC_fc9dc' failed
+make[1]: *** [cmTC_fc9dc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_fc9dc/fast' failed
+make: *** [cmTC_fc9dc/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4a975/fast && /usr/bin/make  -f CMakeFiles/cmTC_4a975.dir/build.make CMakeFiles/cmTC_4a975.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4a975.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_4a975.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_4a975
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4a975.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_4a975.dir/src.c.o -o cmTC_4a975 
+CMakeFiles/cmTC_4a975.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4a975.dir/build.make:105: recipe for target 'cmTC_4a975' failed
+make[1]: *** [cmTC_4a975] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4a975/fast' failed
+make: *** [cmTC_4a975/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7bd58/fast && /usr/bin/make  -f CMakeFiles/cmTC_7bd58.dir/build.make CMakeFiles/cmTC_7bd58.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7bd58.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_7bd58.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7bd58
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7bd58.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_7bd58.dir/CheckFunctionExists.c.o -o cmTC_7bd58  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7bd58.dir/build.make:105: recipe for target 'cmTC_7bd58' failed
+make[1]: *** [cmTC_7bd58] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7bd58/fast' failed
+make: *** [cmTC_7bd58/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7633b/fast && /usr/bin/make  -f CMakeFiles/cmTC_7633b.dir/build.make CMakeFiles/cmTC_7633b.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7633b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_7633b.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7633b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7633b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_7633b.dir/src.c.o -o cmTC_7633b 
+CMakeFiles/cmTC_7633b.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7633b.dir/build.make:105: recipe for target 'cmTC_7633b' failed
+make[1]: *** [cmTC_7633b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7633b/fast' failed
+make: *** [cmTC_7633b/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ca3ee/fast && /usr/bin/make  -f CMakeFiles/cmTC_ca3ee.dir/build.make CMakeFiles/cmTC_ca3ee.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ca3ee.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_ca3ee.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ca3ee
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca3ee.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_ca3ee.dir/CheckFunctionExists.c.o -o cmTC_ca3ee  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_ca3ee.dir/build.make:105: recipe for target 'cmTC_ca3ee' failed
+make[1]: *** [cmTC_ca3ee] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_ca3ee/fast' failed
+make: *** [cmTC_ca3ee/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7032f/fast && /usr/bin/make  -f CMakeFiles/cmTC_7032f.dir/build.make CMakeFiles/cmTC_7032f.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7032f.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_7032f.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7032f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7032f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_7032f.dir/src.c.o -o cmTC_7032f 
+CMakeFiles/cmTC_7032f.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7032f.dir/build.make:105: recipe for target 'cmTC_7032f' failed
+make[1]: *** [cmTC_7032f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7032f/fast' failed
+make: *** [cmTC_7032f/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4d737/fast && /usr/bin/make  -f CMakeFiles/cmTC_4d737.dir/build.make CMakeFiles/cmTC_4d737.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d737.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4d737.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4d737
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d737.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_4d737.dir/CheckFunctionExists.c.o -o cmTC_4d737  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4d737.dir/build.make:105: recipe for target 'cmTC_4d737' failed
+make[1]: *** [cmTC_4d737] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4d737/fast' failed
+make: *** [cmTC_4d737/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4d175/fast && /usr/bin/make  -f CMakeFiles/cmTC_4d175.dir/build.make CMakeFiles/cmTC_4d175.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d175.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_4d175.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_4d175
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d175.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_4d175.dir/src.c.o -o cmTC_4d175 
+CMakeFiles/cmTC_4d175.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4d175.dir/build.make:105: recipe for target 'cmTC_4d175' failed
+make[1]: *** [cmTC_4d175] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4d175/fast' failed
+make: *** [cmTC_4d175/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d6508/fast && /usr/bin/make  -f CMakeFiles/cmTC_d6508.dir/build.make CMakeFiles/cmTC_d6508.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d6508.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_d6508.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d6508
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d6508.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_d6508.dir/CheckFunctionExists.c.o -o cmTC_d6508  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d6508.dir/build.make:105: recipe for target 'cmTC_d6508' failed
+make[1]: *** [cmTC_d6508] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d6508/fast' failed
+make: *** [cmTC_d6508/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d8524/fast && /usr/bin/make  -f CMakeFiles/cmTC_d8524.dir/build.make CMakeFiles/cmTC_d8524.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d8524.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_d8524.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_d8524
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d8524.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_d8524.dir/src.c.o -o cmTC_d8524 
+CMakeFiles/cmTC_d8524.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d8524.dir/build.make:105: recipe for target 'cmTC_d8524' failed
+make[1]: *** [cmTC_d8524] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d8524/fast' failed
+make: *** [cmTC_d8524/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bf3ef/fast && /usr/bin/make  -f CMakeFiles/cmTC_bf3ef.dir/build.make CMakeFiles/cmTC_bf3ef.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bf3ef.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_bf3ef.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bf3ef
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bf3ef.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_bf3ef.dir/CheckFunctionExists.c.o -o cmTC_bf3ef  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bf3ef.dir/build.make:105: recipe for target 'cmTC_bf3ef' failed
+make[1]: *** [cmTC_bf3ef] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_bf3ef/fast' failed
+make: *** [cmTC_bf3ef/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4d2ee/fast && /usr/bin/make  -f CMakeFiles/cmTC_4d2ee.dir/build.make CMakeFiles/cmTC_4d2ee.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d2ee.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_4d2ee.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_4d2ee
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d2ee.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_4d2ee.dir/src.c.o -o cmTC_4d2ee 
+CMakeFiles/cmTC_4d2ee.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4d2ee.dir/build.make:105: recipe for target 'cmTC_4d2ee' failed
+make[1]: *** [cmTC_4d2ee] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4d2ee/fast' failed
+make: *** [cmTC_4d2ee/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_06f30/fast && /usr/bin/make  -f CMakeFiles/cmTC_06f30.dir/build.make CMakeFiles/cmTC_06f30.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_06f30.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_06f30.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_06f30
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_06f30.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_06f30.dir/CheckFunctionExists.c.o -o cmTC_06f30  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_06f30.dir/build.make:105: recipe for target 'cmTC_06f30' failed
+make[1]: *** [cmTC_06f30] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_06f30/fast' failed
+make: *** [cmTC_06f30/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_679dc/fast && /usr/bin/make  -f CMakeFiles/cmTC_679dc.dir/build.make CMakeFiles/cmTC_679dc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_679dc.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_679dc.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_679dc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_679dc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_679dc.dir/src.c.o -o cmTC_679dc 
+CMakeFiles/cmTC_679dc.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_679dc.dir/build.make:105: recipe for target 'cmTC_679dc' failed
+make[1]: *** [cmTC_679dc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_679dc/fast' failed
+make: *** [cmTC_679dc/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_99491/fast && /usr/bin/make  -f CMakeFiles/cmTC_99491.dir/build.make CMakeFiles/cmTC_99491.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_99491.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_99491.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_99491
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_99491.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_99491.dir/CheckFunctionExists.c.o -o cmTC_99491  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_99491.dir/build.make:105: recipe for target 'cmTC_99491' failed
+make[1]: *** [cmTC_99491] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_99491/fast' failed
+make: *** [cmTC_99491/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_454b9/fast && /usr/bin/make  -f CMakeFiles/cmTC_454b9.dir/build.make CMakeFiles/cmTC_454b9.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_454b9.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_454b9.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_454b9
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_454b9.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_454b9.dir/src.c.o -o cmTC_454b9 
+CMakeFiles/cmTC_454b9.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_454b9.dir/build.make:105: recipe for target 'cmTC_454b9' failed
+make[1]: *** [cmTC_454b9] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_454b9/fast' failed
+make: *** [cmTC_454b9/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f6f32/fast && /usr/bin/make  -f CMakeFiles/cmTC_f6f32.dir/build.make CMakeFiles/cmTC_f6f32.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f6f32.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_f6f32.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f6f32
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6f32.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_f6f32.dir/CheckFunctionExists.c.o -o cmTC_f6f32  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f6f32.dir/build.make:105: recipe for target 'cmTC_f6f32' failed
+make[1]: *** [cmTC_f6f32] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f6f32/fast' failed
+make: *** [cmTC_f6f32/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_eeb91/fast && /usr/bin/make  -f CMakeFiles/cmTC_eeb91.dir/build.make CMakeFiles/cmTC_eeb91.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eeb91.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_eeb91.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_eeb91
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eeb91.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_eeb91.dir/src.c.o -o cmTC_eeb91 
+CMakeFiles/cmTC_eeb91.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_eeb91.dir/build.make:105: recipe for target 'cmTC_eeb91' failed
+make[1]: *** [cmTC_eeb91] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_eeb91/fast' failed
+make: *** [cmTC_eeb91/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_96c12/fast && /usr/bin/make  -f CMakeFiles/cmTC_96c12.dir/build.make CMakeFiles/cmTC_96c12.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_96c12.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_96c12.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_96c12
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_96c12.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_96c12.dir/CheckFunctionExists.c.o -o cmTC_96c12  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_96c12.dir/build.make:105: recipe for target 'cmTC_96c12' failed
+make[1]: *** [cmTC_96c12] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_96c12/fast' failed
+make: *** [cmTC_96c12/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_da58a/fast && /usr/bin/make  -f CMakeFiles/cmTC_da58a.dir/build.make CMakeFiles/cmTC_da58a.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_da58a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_da58a.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_da58a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da58a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_da58a.dir/src.c.o -o cmTC_da58a 
+CMakeFiles/cmTC_da58a.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_da58a.dir/build.make:105: recipe for target 'cmTC_da58a' failed
+make[1]: *** [cmTC_da58a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_da58a/fast' failed
+make: *** [cmTC_da58a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_41c94/fast && /usr/bin/make  -f CMakeFiles/cmTC_41c94.dir/build.make CMakeFiles/cmTC_41c94.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_41c94.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_41c94.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_41c94
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_41c94.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_41c94.dir/CheckFunctionExists.c.o -o cmTC_41c94  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_41c94.dir/build.make:105: recipe for target 'cmTC_41c94' failed
+make[1]: *** [cmTC_41c94] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_41c94/fast' failed
+make: *** [cmTC_41c94/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1b8dc/fast && /usr/bin/make  -f CMakeFiles/cmTC_1b8dc.dir/build.make CMakeFiles/cmTC_1b8dc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1b8dc.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_1b8dc.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_1b8dc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1b8dc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_1b8dc.dir/src.c.o -o cmTC_1b8dc 
+CMakeFiles/cmTC_1b8dc.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1b8dc.dir/build.make:105: recipe for target 'cmTC_1b8dc' failed
+make[1]: *** [cmTC_1b8dc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_1b8dc/fast' failed
+make: *** [cmTC_1b8dc/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a99da/fast && /usr/bin/make  -f CMakeFiles/cmTC_a99da.dir/build.make CMakeFiles/cmTC_a99da.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a99da.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_a99da.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a99da
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a99da.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_a99da.dir/CheckFunctionExists.c.o -o cmTC_a99da  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a99da.dir/build.make:105: recipe for target 'cmTC_a99da' failed
+make[1]: *** [cmTC_a99da] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a99da/fast' failed
+make: *** [cmTC_a99da/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_427fb/fast && /usr/bin/make  -f CMakeFiles/cmTC_427fb.dir/build.make CMakeFiles/cmTC_427fb.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_427fb.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_427fb.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_427fb
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_427fb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_427fb.dir/src.c.o -o cmTC_427fb 
+CMakeFiles/cmTC_427fb.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_427fb.dir/build.make:105: recipe for target 'cmTC_427fb' failed
+make[1]: *** [cmTC_427fb] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_427fb/fast' failed
+make: *** [cmTC_427fb/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f2ca8/fast && /usr/bin/make  -f CMakeFiles/cmTC_f2ca8.dir/build.make CMakeFiles/cmTC_f2ca8.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f2ca8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_f2ca8.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f2ca8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2ca8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_f2ca8.dir/CheckFunctionExists.c.o -o cmTC_f2ca8  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f2ca8.dir/build.make:105: recipe for target 'cmTC_f2ca8' failed
+make[1]: *** [cmTC_f2ca8] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f2ca8/fast' failed
+make: *** [cmTC_f2ca8/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7bd90/fast && /usr/bin/make  -f CMakeFiles/cmTC_7bd90.dir/build.make CMakeFiles/cmTC_7bd90.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7bd90.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_7bd90.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7bd90
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7bd90.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_7bd90.dir/src.c.o -o cmTC_7bd90 
+CMakeFiles/cmTC_7bd90.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7bd90.dir/build.make:105: recipe for target 'cmTC_7bd90' failed
+make[1]: *** [cmTC_7bd90] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7bd90/fast' failed
+make: *** [cmTC_7bd90/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_854cf/fast && /usr/bin/make  -f CMakeFiles/cmTC_854cf.dir/build.make CMakeFiles/cmTC_854cf.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_854cf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_854cf.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_854cf
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_854cf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_854cf.dir/CheckFunctionExists.c.o -o cmTC_854cf  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_854cf.dir/build.make:105: recipe for target 'cmTC_854cf' failed
+make[1]: *** [cmTC_854cf] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_854cf/fast' failed
+make: *** [cmTC_854cf/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2bc0c/fast && /usr/bin/make  -f CMakeFiles/cmTC_2bc0c.dir/build.make CMakeFiles/cmTC_2bc0c.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2bc0c.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_2bc0c.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_2bc0c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2bc0c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_2bc0c.dir/src.c.o -o cmTC_2bc0c 
+CMakeFiles/cmTC_2bc0c.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2bc0c.dir/build.make:105: recipe for target 'cmTC_2bc0c' failed
+make[1]: *** [cmTC_2bc0c] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2bc0c/fast' failed
+make: *** [cmTC_2bc0c/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_04c12/fast && /usr/bin/make  -f CMakeFiles/cmTC_04c12.dir/build.make CMakeFiles/cmTC_04c12.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_04c12.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_04c12.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_04c12
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04c12.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_04c12.dir/CheckFunctionExists.c.o -o cmTC_04c12  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_04c12.dir/build.make:105: recipe for target 'cmTC_04c12' failed
+make[1]: *** [cmTC_04c12] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_04c12/fast' failed
+make: *** [cmTC_04c12/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3b0bb/fast && /usr/bin/make  -f CMakeFiles/cmTC_3b0bb.dir/build.make CMakeFiles/cmTC_3b0bb.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3b0bb.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_3b0bb.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_3b0bb
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3b0bb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_3b0bb.dir/src.c.o -o cmTC_3b0bb 
+CMakeFiles/cmTC_3b0bb.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_3b0bb.dir/build.make:105: recipe for target 'cmTC_3b0bb' failed
+make[1]: *** [cmTC_3b0bb] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_3b0bb/fast' failed
+make: *** [cmTC_3b0bb/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0374b/fast && /usr/bin/make  -f CMakeFiles/cmTC_0374b.dir/build.make CMakeFiles/cmTC_0374b.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0374b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_0374b.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0374b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0374b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_0374b.dir/CheckFunctionExists.c.o -o cmTC_0374b  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0374b.dir/build.make:105: recipe for target 'cmTC_0374b' failed
+make[1]: *** [cmTC_0374b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0374b/fast' failed
+make: *** [cmTC_0374b/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c303e/fast && /usr/bin/make  -f CMakeFiles/cmTC_c303e.dir/build.make CMakeFiles/cmTC_c303e.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c303e.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c303e.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c303e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c303e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c303e.dir/src.c.o -o cmTC_c303e 
+CMakeFiles/cmTC_c303e.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c303e.dir/build.make:105: recipe for target 'cmTC_c303e' failed
+make[1]: *** [cmTC_c303e] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c303e/fast' failed
+make: *** [cmTC_c303e/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c2769/fast && /usr/bin/make  -f CMakeFiles/cmTC_c2769.dir/build.make CMakeFiles/cmTC_c2769.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c2769.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c2769.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c2769
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2769.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c2769.dir/CheckFunctionExists.c.o -o cmTC_c2769  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c2769.dir/build.make:105: recipe for target 'cmTC_c2769' failed
+make[1]: *** [cmTC_c2769] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c2769/fast' failed
+make: *** [cmTC_c2769/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_13141/fast && /usr/bin/make  -f CMakeFiles/cmTC_13141.dir/build.make CMakeFiles/cmTC_13141.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_13141.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_13141.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_13141
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13141.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_13141.dir/src.c.o -o cmTC_13141 
+CMakeFiles/cmTC_13141.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_13141.dir/build.make:105: recipe for target 'cmTC_13141' failed
+make[1]: *** [cmTC_13141] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_13141/fast' failed
+make: *** [cmTC_13141/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2c4ca/fast && /usr/bin/make  -f CMakeFiles/cmTC_2c4ca.dir/build.make CMakeFiles/cmTC_2c4ca.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2c4ca.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_2c4ca.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2c4ca
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c4ca.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_2c4ca.dir/CheckFunctionExists.c.o -o cmTC_2c4ca  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2c4ca.dir/build.make:105: recipe for target 'cmTC_2c4ca' failed
+make[1]: *** [cmTC_2c4ca] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2c4ca/fast' failed
+make: *** [cmTC_2c4ca/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dff2a/fast && /usr/bin/make  -f CMakeFiles/cmTC_dff2a.dir/build.make CMakeFiles/cmTC_dff2a.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_dff2a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_dff2a.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_dff2a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dff2a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_dff2a.dir/src.c.o -o cmTC_dff2a 
+CMakeFiles/cmTC_dff2a.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_dff2a.dir/build.make:105: recipe for target 'cmTC_dff2a' failed
+make[1]: *** [cmTC_dff2a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_dff2a/fast' failed
+make: *** [cmTC_dff2a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4312d/fast && /usr/bin/make  -f CMakeFiles/cmTC_4312d.dir/build.make CMakeFiles/cmTC_4312d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4312d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4312d.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4312d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4312d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_4312d.dir/CheckFunctionExists.c.o -o cmTC_4312d  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4312d.dir/build.make:105: recipe for target 'cmTC_4312d' failed
+make[1]: *** [cmTC_4312d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4312d/fast' failed
+make: *** [cmTC_4312d/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_61b4c/fast && /usr/bin/make  -f CMakeFiles/cmTC_61b4c.dir/build.make CMakeFiles/cmTC_61b4c.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_61b4c.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_61b4c.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_61b4c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_61b4c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_61b4c.dir/src.c.o -o cmTC_61b4c 
+CMakeFiles/cmTC_61b4c.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_61b4c.dir/build.make:105: recipe for target 'cmTC_61b4c' failed
+make[1]: *** [cmTC_61b4c] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_61b4c/fast' failed
+make: *** [cmTC_61b4c/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8eab0/fast && /usr/bin/make  -f CMakeFiles/cmTC_8eab0.dir/build.make CMakeFiles/cmTC_8eab0.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8eab0.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_8eab0.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8eab0
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8eab0.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_8eab0.dir/CheckFunctionExists.c.o -o cmTC_8eab0  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8eab0.dir/build.make:105: recipe for target 'cmTC_8eab0' failed
+make[1]: *** [cmTC_8eab0] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_8eab0/fast' failed
+make: *** [cmTC_8eab0/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7514d/fast && /usr/bin/make  -f CMakeFiles/cmTC_7514d.dir/build.make CMakeFiles/cmTC_7514d.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7514d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_7514d.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7514d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7514d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_7514d.dir/src.c.o -o cmTC_7514d 
+CMakeFiles/cmTC_7514d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7514d.dir/build.make:105: recipe for target 'cmTC_7514d' failed
+make[1]: *** [cmTC_7514d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7514d/fast' failed
+make: *** [cmTC_7514d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c0e68/fast && /usr/bin/make  -f CMakeFiles/cmTC_c0e68.dir/build.make CMakeFiles/cmTC_c0e68.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c0e68.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c0e68.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c0e68
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c0e68.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c0e68.dir/CheckFunctionExists.c.o -o cmTC_c0e68  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c0e68.dir/build.make:105: recipe for target 'cmTC_c0e68' failed
+make[1]: *** [cmTC_c0e68] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c0e68/fast' failed
+make: *** [cmTC_c0e68/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_21855/fast && /usr/bin/make  -f CMakeFiles/cmTC_21855.dir/build.make CMakeFiles/cmTC_21855.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_21855.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_21855.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_21855
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_21855.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_21855.dir/src.c.o -o cmTC_21855 
+CMakeFiles/cmTC_21855.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_21855.dir/build.make:105: recipe for target 'cmTC_21855' failed
+make[1]: *** [cmTC_21855] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_21855/fast' failed
+make: *** [cmTC_21855/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_07963/fast && /usr/bin/make  -f CMakeFiles/cmTC_07963.dir/build.make CMakeFiles/cmTC_07963.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_07963.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_07963.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_07963
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07963.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_07963.dir/CheckFunctionExists.c.o -o cmTC_07963  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_07963.dir/build.make:105: recipe for target 'cmTC_07963' failed
+make[1]: *** [cmTC_07963] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_07963/fast' failed
+make: *** [cmTC_07963/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_eceff/fast && /usr/bin/make  -f CMakeFiles/cmTC_eceff.dir/build.make CMakeFiles/cmTC_eceff.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eceff.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_eceff.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_eceff
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eceff.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_eceff.dir/src.c.o -o cmTC_eceff 
+CMakeFiles/cmTC_eceff.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_eceff.dir/build.make:105: recipe for target 'cmTC_eceff' failed
+make[1]: *** [cmTC_eceff] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_eceff/fast' failed
+make: *** [cmTC_eceff/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bf46f/fast && /usr/bin/make  -f CMakeFiles/cmTC_bf46f.dir/build.make CMakeFiles/cmTC_bf46f.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bf46f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_bf46f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bf46f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bf46f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_bf46f.dir/CheckFunctionExists.c.o -o cmTC_bf46f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bf46f.dir/build.make:105: recipe for target 'cmTC_bf46f' failed
+make[1]: *** [cmTC_bf46f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_bf46f/fast' failed
+make: *** [cmTC_bf46f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a06ca/fast && /usr/bin/make  -f CMakeFiles/cmTC_a06ca.dir/build.make CMakeFiles/cmTC_a06ca.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a06ca.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_a06ca.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a06ca
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a06ca.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_a06ca.dir/src.c.o -o cmTC_a06ca 
+CMakeFiles/cmTC_a06ca.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a06ca.dir/build.make:105: recipe for target 'cmTC_a06ca' failed
+make[1]: *** [cmTC_a06ca] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a06ca/fast' failed
+make: *** [cmTC_a06ca/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bd5c8/fast && /usr/bin/make  -f CMakeFiles/cmTC_bd5c8.dir/build.make CMakeFiles/cmTC_bd5c8.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bd5c8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_bd5c8.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bd5c8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bd5c8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_bd5c8.dir/CheckFunctionExists.c.o -o cmTC_bd5c8  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bd5c8.dir/build.make:105: recipe for target 'cmTC_bd5c8' failed
+make[1]: *** [cmTC_bd5c8] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_bd5c8/fast' failed
+make: *** [cmTC_bd5c8/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_22f17/fast && /usr/bin/make  -f CMakeFiles/cmTC_22f17.dir/build.make CMakeFiles/cmTC_22f17.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_22f17.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_22f17.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_22f17
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22f17.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_22f17.dir/src.c.o -o cmTC_22f17 
+CMakeFiles/cmTC_22f17.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_22f17.dir/build.make:105: recipe for target 'cmTC_22f17' failed
+make[1]: *** [cmTC_22f17] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_22f17/fast' failed
+make: *** [cmTC_22f17/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_69ffc/fast && /usr/bin/make  -f CMakeFiles/cmTC_69ffc.dir/build.make CMakeFiles/cmTC_69ffc.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_69ffc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_69ffc.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_69ffc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_69ffc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_69ffc.dir/CheckFunctionExists.c.o -o cmTC_69ffc  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_69ffc.dir/build.make:105: recipe for target 'cmTC_69ffc' failed
+make[1]: *** [cmTC_69ffc] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_69ffc/fast' failed
+make: *** [cmTC_69ffc/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_57f68/fast && /usr/bin/make  -f CMakeFiles/cmTC_57f68.dir/build.make CMakeFiles/cmTC_57f68.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_57f68.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_57f68.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_57f68
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_57f68.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_57f68.dir/src.c.o -o cmTC_57f68 
+CMakeFiles/cmTC_57f68.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_57f68.dir/build.make:105: recipe for target 'cmTC_57f68' failed
+make[1]: *** [cmTC_57f68] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_57f68/fast' failed
+make: *** [cmTC_57f68/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_92abf/fast && /usr/bin/make  -f CMakeFiles/cmTC_92abf.dir/build.make CMakeFiles/cmTC_92abf.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_92abf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_92abf.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_92abf
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92abf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_92abf.dir/CheckFunctionExists.c.o -o cmTC_92abf  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_92abf.dir/build.make:105: recipe for target 'cmTC_92abf' failed
+make[1]: *** [cmTC_92abf] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_92abf/fast' failed
+make: *** [cmTC_92abf/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b00db/fast && /usr/bin/make  -f CMakeFiles/cmTC_b00db.dir/build.make CMakeFiles/cmTC_b00db.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b00db.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_b00db.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b00db
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b00db.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_b00db.dir/src.c.o -o cmTC_b00db 
+CMakeFiles/cmTC_b00db.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b00db.dir/build.make:105: recipe for target 'cmTC_b00db' failed
+make[1]: *** [cmTC_b00db] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_b00db/fast' failed
+make: *** [cmTC_b00db/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0c177/fast && /usr/bin/make  -f CMakeFiles/cmTC_0c177.dir/build.make CMakeFiles/cmTC_0c177.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0c177.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_0c177.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0c177
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c177.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_0c177.dir/CheckFunctionExists.c.o -o cmTC_0c177  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0c177.dir/build.make:105: recipe for target 'cmTC_0c177' failed
+make[1]: *** [cmTC_0c177] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0c177/fast' failed
+make: *** [cmTC_0c177/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_27e73/fast && /usr/bin/make  -f CMakeFiles/cmTC_27e73.dir/build.make CMakeFiles/cmTC_27e73.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_27e73.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_27e73.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_27e73
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27e73.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_27e73.dir/src.c.o -o cmTC_27e73 
+CMakeFiles/cmTC_27e73.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_27e73.dir/build.make:105: recipe for target 'cmTC_27e73' failed
+make[1]: *** [cmTC_27e73] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_27e73/fast' failed
+make: *** [cmTC_27e73/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d076b/fast && /usr/bin/make  -f CMakeFiles/cmTC_d076b.dir/build.make CMakeFiles/cmTC_d076b.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d076b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_d076b.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d076b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d076b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_d076b.dir/CheckFunctionExists.c.o -o cmTC_d076b  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d076b.dir/build.make:105: recipe for target 'cmTC_d076b' failed
+make[1]: *** [cmTC_d076b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d076b/fast' failed
+make: *** [cmTC_d076b/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c905f/fast && /usr/bin/make  -f CMakeFiles/cmTC_c905f.dir/build.make CMakeFiles/cmTC_c905f.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c905f.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c905f.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c905f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c905f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c905f.dir/src.c.o -o cmTC_c905f 
+CMakeFiles/cmTC_c905f.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c905f.dir/build.make:105: recipe for target 'cmTC_c905f' failed
+make[1]: *** [cmTC_c905f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c905f/fast' failed
+make: *** [cmTC_c905f/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4172a/fast && /usr/bin/make  -f CMakeFiles/cmTC_4172a.dir/build.make CMakeFiles/cmTC_4172a.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4172a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4172a.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4172a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4172a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_4172a.dir/CheckFunctionExists.c.o -o cmTC_4172a  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4172a.dir/build.make:105: recipe for target 'cmTC_4172a' failed
+make[1]: *** [cmTC_4172a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4172a/fast' failed
+make: *** [cmTC_4172a/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_da298/fast && /usr/bin/make  -f CMakeFiles/cmTC_da298.dir/build.make CMakeFiles/cmTC_da298.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_da298.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_da298.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_da298
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da298.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_da298.dir/src.c.o -o cmTC_da298 
+CMakeFiles/cmTC_da298.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_da298.dir/build.make:105: recipe for target 'cmTC_da298' failed
+make[1]: *** [cmTC_da298] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_da298/fast' failed
+make: *** [cmTC_da298/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c41ef/fast && /usr/bin/make  -f CMakeFiles/cmTC_c41ef.dir/build.make CMakeFiles/cmTC_c41ef.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c41ef.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c41ef.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c41ef
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c41ef.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c41ef.dir/CheckFunctionExists.c.o -o cmTC_c41ef  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c41ef.dir/build.make:105: recipe for target 'cmTC_c41ef' failed
+make[1]: *** [cmTC_c41ef] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c41ef/fast' failed
+make: *** [cmTC_c41ef/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_68572/fast && /usr/bin/make  -f CMakeFiles/cmTC_68572.dir/build.make CMakeFiles/cmTC_68572.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_68572.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_68572.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_68572
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_68572.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_68572.dir/src.c.o -o cmTC_68572 
+CMakeFiles/cmTC_68572.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_68572.dir/build.make:105: recipe for target 'cmTC_68572' failed
+make[1]: *** [cmTC_68572] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_68572/fast' failed
+make: *** [cmTC_68572/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_972ef/fast && /usr/bin/make  -f CMakeFiles/cmTC_972ef.dir/build.make CMakeFiles/cmTC_972ef.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_972ef.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_972ef.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_972ef
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_972ef.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_972ef.dir/CheckFunctionExists.c.o -o cmTC_972ef  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_972ef.dir/build.make:105: recipe for target 'cmTC_972ef' failed
+make[1]: *** [cmTC_972ef] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_972ef/fast' failed
+make: *** [cmTC_972ef/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7b7c8/fast && /usr/bin/make  -f CMakeFiles/cmTC_7b7c8.dir/build.make CMakeFiles/cmTC_7b7c8.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7b7c8.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_7b7c8.dir/src.c.o -c /root/workspace/mm_test/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7b7c8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b7c8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_7b7c8.dir/src.c.o -o cmTC_7b7c8 
+CMakeFiles/cmTC_7b7c8.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7b7c8.dir/build.make:105: recipe for target 'cmTC_7b7c8' failed
+make[1]: *** [cmTC_7b7c8] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7b7c8/fast' failed
+make: *** [cmTC_7b7c8/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_test/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5b897/fast && /usr/bin/make  -f CMakeFiles/cmTC_5b897.dir/build.make CMakeFiles/cmTC_5b897.dir/build
+make[1]: Entering directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5b897.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_5b897.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5b897
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5b897.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_5b897.dir/CheckFunctionExists.c.o -o cmTC_5b897  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5b897.dir/build.make:105: recipe for target 'cmTC_5b897' failed
+make[1]: *** [cmTC_5b897] Error 1
+make[1]: Leaving directory '/root/workspace/mm_test/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_5b897/fast' failed
+make: *** [cmTC_5b897/fast] Error 2
+
+
+

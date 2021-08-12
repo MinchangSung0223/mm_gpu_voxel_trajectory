@@ -46,7 +46,7 @@ public:
     virtual bool checkMotion(const ompl::base::State *s1, const ompl::base::State *s2,
                              std::pair< ompl::base::State*, double > & lastValid) const;
     virtual bool checkMotion(const ompl::base::State *s1, const ompl::base::State *s2) const;
-
+    void rosIter();
     void plan();
 
     std::shared_ptr<GvlOmplPlannerHelper> getptr() {
