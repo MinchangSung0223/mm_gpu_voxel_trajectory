@@ -148,8 +148,8 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addRobot("myUrdfRobot", "ur10_coarse/ur10_joint_limited_robot.urdf", true);
     gvl->visualizeMap("myEnvironmentMap");
 
-Vector3f center1_min = Vector3f(0.0, 0.0, 0.2);
-  Vector3f center1_max = Vector3f(2.0, 2.0, 0.5);
+Vector3f center1_min = Vector3f(0.0, 0.0, 2.0);
+  Vector3f center1_max = Vector3f(5.0, 5.0, 2.5);
   gvl->insertBoxIntoMap(center1_min, center1_max, "ObstacleBitvectorMap", gpu_voxels::eBVM_OCCUPIED, 1);
 
     PERF_MON_ENABLE("pose_check");
@@ -189,6 +189,7 @@ void GvlOmplPlannerHelper::doVis()
     gvl->visualizeMap("mySolutionMap");
     gvl->visualizeMap("myQueryMap");
     gvl->visualizeMap("countingVoxelList");
+   // gvl->visualizeMap("ObstacleBitvectorMap");
 }
 
 void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
