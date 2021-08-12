@@ -39,6 +39,7 @@
 #include <signal.h>
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
+#include <sensor_msgs/JointState.h>
 
 using boost::dynamic_pointer_cast;
 using boost::shared_ptr;
@@ -52,6 +53,8 @@ bool new_data_received;
 PointCloud my_point_cloud;
 Matrix4f tf;
 Vector3ui map_dimensions(300,300,300);
+robot::JointValueMap state_joint_values;
+gpu_voxels::GpuVoxelsSharedPtr gvl;
 //--------------------------------------------------------------
 namespace ob = ompl::base;
 namespace og = ompl::geometric;
@@ -68,7 +71,7 @@ void killhandler(int)
 {
   exit(EXIT_SUCCESS);
 }
-void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg)
+void rosPointCloudCallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg)
 {
         std::vector<Vector3f> point_data;
         point_data.resize(msg->points.size());
@@ -83,8 +86,15 @@ void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg)
         new_data_received = true;
        // LOGGING_INFO(Gpu_voxels, "DistanceROSDemo camera callback. PointCloud size: " << msg->points.size() << endl);
 }
-
-
+void rosJointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
+        for(size_t i = 0; i < msg->name.size(); i++)
+        {
+                state_joint_values[msg->name[i]] = msg->position[i];
+        }
+        //gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
+        //gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (10 % 249) ));
+        LOGGING_INFO(Gpu_voxels, "JOINTSTATE  callback. " << endl);
+}
 void GvlOmplPlannerHelper::rosIter(){
         signal(SIGINT, ctrlchandler);
         signal(SIGTERM, killhandler);
@@ -92,14 +102,21 @@ void GvlOmplPlannerHelper::rosIter(){
         char **argv;
         ros::init(argc,argv,"gpu_voxel_temp",ros::init_options::NoSigintHandler); // except ros SIGINT handler
         ros::NodeHandle nh;
-        ros::Subscriber pc_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("camera/depth/color/points", 1,roscallback);
+        ros::Subscriber pc_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("camera/depth/color/points", 1,rosPointCloudCallback);
+        ros::Subscriber joint_sub = nh.subscribe("joint_states", 1, rosJointStateCallback); 
+
+
+
         ros::Rate r(100);
         
         gpu_voxels::Matrix4f matrix;
-        const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f, map_dimensions.y * voxel_side_length * 0.5f, map_dimensions.z * voxel_side_length * 0.0f);
+        const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f, 
+                                      map_dimensions.y * voxel_side_length * 0.5f,
+                                      map_dimensions.z * voxel_side_length * 0.0f);
         tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0), camera_offsets);
         shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
-        shared_ptr<BitVectorVoxelList> obstacleBitvectorMap = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("ObstacleBitvectorMap"));
+        shared_ptr<BitVectorVoxelList> obstacleBitvectorMap 
+                                               = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("ObstacleBitvectorMap"));
 
         while (ros::ok())
         {
@@ -145,7 +162,7 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
     gvl->addMap(MT_COUNTING_VOXELLIST, "countingVoxelList");
     gvl->addMap(MT_BITVECTOR_VOXELLIST, "ObstacleBitvectorMap");
-    gvl->addRobot("myUrdfRobot", "ur10_coarse/ur10_joint_limited_robot.urdf", true);
+    gvl->addRobot("myUrdfRobot", "./panda_coarse/panda_7link.urdf", true);
     gvl->visualizeMap("myEnvironmentMap");
 
 Vector3f center1_min = Vector3f(0.0, 0.0, 2.0);
@@ -212,12 +229,13 @@ void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
         const double *values = solution->getState(step)->as<ob::RealVectorStateSpace::StateType>()->values;
 
         robot::JointValueMap state_joint_values;
-        state_joint_values["shoulder_pan_joint"] = values[0];
-        state_joint_values["shoulder_lift_joint"] = values[1];
-        state_joint_values["elbow_joint"] = values[2];
-        state_joint_values["wrist_1_joint"] = values[3];
-        state_joint_values["wrist_2_joint"] = values[4];
-        state_joint_values["wrist_3_joint"] = values[5];
+        state_joint_values["panda_joint1"] = values[0];
+        state_joint_values["panda_joint2"] = values[1];
+        state_joint_values["panda_joint3"] = values[2];
+        state_joint_values["panda_joint4"] = values[3];
+        state_joint_values["panda_joint5"] = values[4];
+        state_joint_values["panda_joint6"] = values[5];
+        state_joint_values["panda_joint7"] = values[6];
 
         // update the robot joints:
         gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
@@ -235,23 +253,24 @@ void GvlOmplPlannerHelper::insertStartAndGoal(const ompl::base::ScopedState<> &s
     gvl->clearMap("myQueryMap");
 
     robot::JointValueMap state_joint_values;
-    state_joint_values["shoulder_pan_joint"] = start[0];
-    state_joint_values["shoulder_lift_joint"] = start[1];
-    state_joint_values["elbow_joint"] = start[2];
-    state_joint_values["wrist_1_joint"] = start[3];
-    state_joint_values["wrist_2_joint"] = start[4];
-    state_joint_values["wrist_3_joint"] = start[5];
-
+    state_joint_values["panda_joint1"] = start[0];
+    state_joint_values["panda_joint2"] = start[1];
+    state_joint_values["panda_joint3"] = start[2];
+    state_joint_values["panda_joint4"] = start[3];
+    state_joint_values["panda_joint5"] = start[4];
+    state_joint_values["panda_joint6"] = start[5];
+    state_joint_values["panda_joint7"] = start[6];
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
     gvl->insertRobotIntoMap("myUrdfRobot", "myQueryMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START));
 
-    state_joint_values["shoulder_pan_joint"] = goal[0];
-    state_joint_values["shoulder_lift_joint"] = goal[1];
-    state_joint_values["elbow_joint"] = goal[2];
-    state_joint_values["wrist_1_joint"] = goal[3];
-    state_joint_values["wrist_2_joint"] = goal[4];
-    state_joint_values["wrist_3_joint"] = goal[5];
+    state_joint_values["panda_joint1"] = goal[0];
+    state_joint_values["panda_joint2"] = goal[1];
+    state_joint_values["panda_joint3"] = goal[2];
+    state_joint_values["panda_joint4"] = goal[3];
+    state_joint_values["panda_joint5"] = goal[4];
+    state_joint_values["panda_joint6"] = goal[5];
+    state_joint_values["panda_joint7"] = goal[6];
 
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
@@ -271,12 +290,13 @@ bool GvlOmplPlannerHelper::isValid(const ompl::base::State *state) const
     const double *values = state->as<ob::RealVectorStateSpace::StateType>()->values;
 
     robot::JointValueMap state_joint_values;
-    state_joint_values["shoulder_pan_joint"] = values[0];
-    state_joint_values["shoulder_lift_joint"] = values[1];
-    state_joint_values["elbow_joint"] = values[2];
-    state_joint_values["wrist_1_joint"] = values[3];
-    state_joint_values["wrist_2_joint"] = values[4];
-    state_joint_values["wrist_3_joint"] = values[5];
+    state_joint_values["panda_joint1"] = values[0];
+    state_joint_values["panda_joint2"] = values[1];
+    state_joint_values["panda_joint3"] = values[2];
+    state_joint_values["panda_joint4"] = values[3];
+    state_joint_values["panda_joint5"] = values[4];
+    state_joint_values["panda_joint6"] = values[5];
+    state_joint_values["panda_joint7"] = values[6];
 
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
@@ -396,12 +416,13 @@ bool GvlOmplPlannerHelper::checkMotion(const ompl::base::State *s1, const ompl::
             const double *values = test->as<ob::RealVectorStateSpace::StateType>()->values;
 
             robot::JointValueMap state_joint_values;
-            state_joint_values["shoulder_pan_joint"] = values[0];
-            state_joint_values["shoulder_lift_joint"] = values[1];
-            state_joint_values["elbow_joint"] = values[2];
-            state_joint_values["wrist_1_joint"] = values[3];
-            state_joint_values["wrist_2_joint"] = values[4];
-            state_joint_values["wrist_3_joint"] = values[5];
+	        state_joint_values["panda_joint1"] = values[0];
+	        state_joint_values["panda_joint2"] = values[1];
+	        state_joint_values["panda_joint3"] = values[2];
+	        state_joint_values["panda_joint4"] = values[3];
+	        state_joint_values["panda_joint5"] = values[4];
+	        state_joint_values["panda_joint6"] = values[5];
+	        state_joint_values["panda_joint7"] = values[6];
 
             // update the robot joints:
             gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);

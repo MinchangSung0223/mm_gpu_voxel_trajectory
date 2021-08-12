@@ -62,18 +62,39 @@ signal(SIGTERM, killhandler);
     icl_core::logging::initialize(argc, argv);
     PERF_MON_INITIALIZE(100, 1000);
     PERF_MON_ENABLE("planning");
-    auto space(std::make_shared<ob::RealVectorStateSpace>(6));
-    ob::RealVectorBounds bounds(6);
+    auto space(std::make_shared<ob::RealVectorStateSpace>(7));
+    ob::RealVectorBounds bounds(7);
     bounds.setLow(-3.14159265);
     bounds.setHigh(3.14159265);
-    bounds.setHigh(1, 0.0);
+    bounds.setLow(0,-2.8973);
+    bounds.setHigh(0,2.9671);
+
+    bounds.setLow(1,-1.7628);
+    bounds.setHigh(1,1.7628);
+
+    bounds.setLow(2,-2.8973);
+    bounds.setHigh(2,2.8973);
+
+    bounds.setLow(3,-3.0718);
+    bounds.setHigh(3,-0.0698);
+
+    bounds.setLow(4,-2.8973);
+    bounds.setHigh(4,2.8973);
+
+    bounds.setLow(5,-0.0175);
+    bounds.setHigh(5,3.7525);
+
+    bounds.setLow(6,-2.8973);
+    bounds.setHigh(6,2.8973);
+
+ 
     space->setBounds(bounds);
     auto si(std::make_shared<ob::SpaceInformation>(space));
     std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr(std::make_shared<GvlOmplPlannerHelper>(si));
-    og::PathSimplifier simp(si);
-    si->setStateValidityChecker(my_class_ptr->getptr());
-    si->setMotionValidator(my_class_ptr->getptr());
-    si->setup();
+    //og::PathSimplifier simp(si);
+    //si->setStateValidityChecker(my_class_ptr->getptr());
+    //si->setMotionValidator(my_class_ptr->getptr());
+    //si->setup();
 
 
     thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
