@@ -96,11 +96,11 @@ void rosJointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
         LOGGING_INFO(Gpu_voxels, "JOINTSTATE  callback. " << endl);
 }
 void GvlOmplPlannerHelper::rosIter(){
-        signal(SIGINT, ctrlchandler);
-        signal(SIGTERM, killhandler);
+
         int argc;
         char **argv;
-        ros::init(argc,argv,"gpu_voxel_temp",ros::init_options::NoSigintHandler); // except ros SIGINT handler
+        //ros::init(argc,argv,"gpu_voxel_temp",ros::init_options::NoSigintHandler); // except ros SIGINT handler
+        ros::init(argc,argv,"gpu_voxel_temp"); 
         ros::NodeHandle nh;
         ros::Subscriber pc_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("camera/depth/color/points", 1,rosPointCloudCallback);
         ros::Subscriber joint_sub = nh.subscribe("joint_states", 1, rosJointStateCallback); 

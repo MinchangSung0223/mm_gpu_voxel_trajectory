@@ -95,7 +95,8 @@ signal(SIGTERM, killhandler);
     //si->setStateValidityChecker(my_class_ptr->getptr());
     //si->setMotionValidator(my_class_ptr->getptr());
     //si->setup();
-
+    std::cout << "Press Enter Key if ready!" << std::endl;
+    std::cin.ignore();
 
     thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
     while(true)
