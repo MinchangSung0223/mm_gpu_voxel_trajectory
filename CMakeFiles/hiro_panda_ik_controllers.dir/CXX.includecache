@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sung/workspace/gpu-voxels/gvl_ompl_planning/panda_trac_ik.cpp
+panda_trac_ik.h
+/home/sung/workspace/gpu-voxels/gvl_ompl_planning/panda_trac_ik.h
+
+/home/sung/workspace/gpu-voxels/gvl_ompl_planning/panda_trac_ik.h
+trac_ik/trac_ik.hpp
+-
+ros/ros.h
+-
+kdl/chainiksolverpos_nr_jl.hpp
+-
+geometry_msgs/Pose.h
+-
+sensor_msgs/JointState.h
+-
+memory
+-
+string
+-
+

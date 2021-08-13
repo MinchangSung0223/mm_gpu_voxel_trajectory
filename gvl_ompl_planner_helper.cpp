@@ -21,127 +21,105 @@
  */
 //----------------------------------------------------------------------/*
 #include "gvl_ompl_planner_helper.h"
+#include <Eigen/Dense>
+#include <signal.h>
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
-
+#include <ros/ros.h>
+#include <pcl_ros/point_cloud.h>
+#include <pcl/point_types.h>
+#include <std_msgs/String.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <sstream>
+#include <trajectory_msgs/JointTrajectory.h>
+#include <trajectory_msgs/JointTrajectoryPoint.h>
+#include <sensor_msgs/JointState.h>
 #include <gpu_voxels/GpuVoxels.h>
 #include <gpu_voxels/helpers/MetaPointCloud.h>
 #include <gpu_voxels/robot/urdf_robot/urdf_robot.h>
-#include <gpu_voxels/logging/logging_gpu_voxels.h>
+//#include <gpu_voxels/logging/logging_gpu_voxels.h>
 #include <thread>
 
+#include <stdio.h>
+#include <iostream>
 #define IC_PERFORMANCE_MONITOR
+#include <icl_core_config/Config.h>
 #include <icl_core_performance_monitor/PerformanceMonitor.h>
-
-//---------------------------SMC-------------------------------
-#include <ros/ros.h>
-#include <signal.h>
-#include <pcl_ros/point_cloud.h>
-#include <pcl/point_types.h>
-#include <sensor_msgs/JointState.h>
-
-using boost::dynamic_pointer_cast;
-using boost::shared_ptr;
-using gpu_voxels::voxelmap::ProbVoxelMap;
-using gpu_voxels::voxelmap::DistanceVoxelMap;
-using gpu_voxels::voxellist::CountingVoxelList;
-using gpu_voxels::voxellist::BitVectorVoxelList;
-
-float voxel_side_length = 0.02f; // 1 cm voxel size
-bool new_data_received;
-PointCloud my_point_cloud;
-Matrix4f tf;
-Vector3ui map_dimensions(300,300,300);
-robot::JointValueMap state_joint_values;
-gpu_voxels::GpuVoxelsSharedPtr gvl;
-//--------------------------------------------------------------
+#include <vector>
 namespace ob = ompl::base;
 namespace og = ompl::geometric;
 using namespace gpu_voxels;
 namespace bfs = boost::filesystem;
+#define PI 3.141592
+#define D2R 3.141592/180.0
+#define R2D 180.0/3.141592
 
-//-------------------------------------------------------------------------------------------------------------
-void ctrlchandler(int)
-{
-  exit(EXIT_SUCCESS);
+double joint_states[7] = {0,0,0,0,0,0,0};
+Vector3ui map_dimensions(300,300,500);
+
+void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
+    for(size_t i = 0; i < msg->name.size(); i++)
+    {
+        myRobotJointValues[msg->name[i]] = msg->position[i];
+        joint_states[i] = msg->position[i];
+    }
+    gvl->setRobotConfiguration("myUrdfRobot",myRobotJointValues);
+    gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+(10%249)))    ;
+
+}
+void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
+    std::vector<Vector3f> point_data;
+    point_data.resize(msg->points.size());
+    for (uint32_t i = 0; i < msg->points.size(); i++)
+    {
+    	point_data[i].x = msg->points[i].x;
+    	point_data[i].y = msg->points[i].y;
+    	point_data[i].z = msg->points[i].z;
+    }
+    my_point_cloud.update(point_data);
+    my_point_cloud.transformSelf(&tf);
+    new_data_received=true;
 }
 
-void killhandler(int)
-{
-  exit(EXIT_SUCCESS);
-}
-void rosPointCloudCallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg)
-{
-        std::vector<Vector3f> point_data;
-        point_data.resize(msg->points.size());
-        for (uint32_t i = 0; i < msg->points.size(); i++)
-        {
-                point_data[i].x = msg->points[i].x;
-                point_data[i].y = msg->points[i].y;
-                point_data[i].z = msg->points[i].z;
-        }
-        my_point_cloud.update(point_data);
-        my_point_cloud.transformSelf(&tf);
-        new_data_received = true;
-       // LOGGING_INFO(Gpu_voxels, "DistanceROSDemo camera callback. PointCloud size: " << msg->points.size() << endl);
-}
-void rosJointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
-        for(size_t i = 0; i < msg->name.size(); i++)
-        {
-                state_joint_values[msg->name[i]] = msg->position[i];
-        }
-        //gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
-        //gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (10 % 249) ));
-        LOGGING_INFO(Gpu_voxels, "JOINTSTATE  callback. " << endl);
-}
+
+
 void GvlOmplPlannerHelper::rosIter(){
+    int argc;
+    char **argv;
+    ros::init(argc,argv,"gpu_voxel_temp");
+    signal(SIGINT, ctrlchandler);
+    signal(SIGTERM, killhandler);
 
-        int argc;
-        char **argv;
-        //ros::init(argc,argv,"gpu_voxel_temp",ros::init_options::NoSigintHandler); // except ros SIGINT handler
-        ros::init(argc,argv,"gpu_voxel_temp"); 
-        ros::NodeHandle nh;
-        ros::Subscriber pc_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("camera/depth/color/points", 1,rosPointCloudCallback);
-        ros::Subscriber joint_sub = nh.subscribe("joint_states", 1, rosJointStateCallback); 
+    const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f,
+                                 map_dimensions.y * voxel_side_length * 0.5f, 
+                                 map_dimensions.z * voxel_side_length * 0.0f); 
+    tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
+    shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
 
 
 
-        ros::Rate r(100);
-        
-        gpu_voxels::Matrix4f matrix;
-        const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f, 
-                                      map_dimensions.y * voxel_side_length * 0.5f,
-                                      map_dimensions.z * voxel_side_length * 0.0f);
-        tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0), camera_offsets);
-        shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
-        shared_ptr<BitVectorVoxelList> obstacleBitvectorMap 
-                                               = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("ObstacleBitvectorMap"));
+    ros::NodeHandle nh;
+    ros::Subscriber joint_sub = nh.subscribe("joint_states", 1, rosjointStateCallback); 
+    ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
 
-        while (ros::ok())
-        {
+    ros::Rate r(100);
+    new_data_received = true; // call visualize on the first iteration
 
-                ros::spinOnce();
-                if(new_data_received){
-                        new_data_received = false;
-                        countingVoxelList->clearMap();
-                        countingVoxelList->insertPointCloud(my_point_cloud, eBVM_OCCUPIED);
-                        countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
-      obstacleBitvectorMap->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
-      Vector3f());
-                }
-                r.sleep();
-        }
+    while (ros::ok())
+    {
+        ros::spinOnce();
+        LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
+        countingVoxelList->clearMap();
+        countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+        GvlOmplPlannerHelper::doVis();
+        r.sleep();
+    }
+    exit(EXIT_SUCCESS);
 }
 
 
 
-
-
-
-
-
-//-------------------------------------------------------------------------------------------------------------
 
 GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     : ob::StateValidityChecker(si)
@@ -150,24 +128,18 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
 
     si_ = si;
     stateSpace_ = si_->getStateSpace().get();
+
     assert(stateSpace_ != nullptr);
 
     gvl = gpu_voxels::GpuVoxels::getInstance();
-     gvl->initialize(map_dimensions.x, map_dimensions.y, map_dimensions.z, voxel_side_length);
+  gvl->initialize(200,200, 200, 0.01);
 
     // We add maps with objects, to collide them
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
-    gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
     gvl->addMap(MT_BITVECTOR_VOXELLIST,"mySolutionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
-    gvl->addMap(MT_COUNTING_VOXELLIST, "countingVoxelList");
-    gvl->addMap(MT_BITVECTOR_VOXELLIST, "ObstacleBitvectorMap");
+    gvl->addMap(MT_COUNTING_VOXELLIST,"countingVoxelList");
     gvl->addRobot("myUrdfRobot", "./panda_coarse/panda_7link.urdf", true);
-    gvl->visualizeMap("myEnvironmentMap");
-
-Vector3f center1_min = Vector3f(0.0, 0.0, 2.0);
-  Vector3f center1_max = Vector3f(5.0, 5.0, 2.5);
-  gvl->insertBoxIntoMap(center1_min, center1_max, "ObstacleBitvectorMap", gpu_voxels::eBVM_OCCUPIED, 1);
 
     PERF_MON_ENABLE("pose_check");
     PERF_MON_ENABLE("motion_check");
@@ -183,31 +155,37 @@ GvlOmplPlannerHelper::~GvlOmplPlannerHelper()
 
 void GvlOmplPlannerHelper::moveObstacle()
 {
-    gvl->clearMap("myEnvironmentMap");
-    static float x(1.0);
+   //// gvl->clearMap("myEnvironmentMap");
+    static float x(0.0);
 
     // use this to animate a single moving box obstacle
-    //gvl->insertBoxIntoMap(Vector3f(2.0, x ,0.0), Vector3f(2.2, x + 0.2 ,1.2), "myEnvironmentMap", eBVM_OCCUPIED, 2);
-    x += 0.1;
+    //gvl->insertBoxIntoMap(Vector3f(1.5, 1.2 ,0.0), Vector3f(1.6, 1.3 ,1.0), "myEnvironmentMap", eBVM_OCCUPIED, 2);
+   // gvl->insertPointCloudFromFile("myEnvironmentMap", "hanyang_coarse/hanyang.binvox", true,
+     //                                gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.2+x, 1.0, 0.5),0.5);
 
-    gvl->insertBoxIntoMap(Vector3f(1.0,1.0,0.0), Vector3f(1.2,1.2,1.2), "myEnvironmentMap", eBVM_OCCUPIED, 2);
-    gvl->insertBoxIntoMap(Vector3f(1.8,1.8,0.0), Vector3f(2.0,2.0,1.2), "myEnvironmentMap", eBVM_OCCUPIED, 2);
-    gvl->insertBoxIntoMap(Vector3f(1.1,1.1,1.2), Vector3f(1.9,1.9,1.3), "myEnvironmentMap", eBVM_OCCUPIED, 2);
-    gvl->insertBoxIntoMap(Vector3f(0.0,0.0,0.0), Vector3f(3.0,3.0,0.01), "myEnvironmentMap", eBVM_OCCUPIED, 2);
+     //gvl->insertPointCloudFromFile("myEnvironmentMap", "table.binvox", true,
+     //                                 gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.85, 0.5, 0.0),1);
+    // gvl->insertPointCloudFromFile("myEnvironmentMap", "shelf2.binvox", true,
+    //                                  gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.55, 0.8, 0.85),1);
+    // gvl->insertPointCloudFromFile("myEnvironmentMap", "bowl.binvox", true,
+    //                                  gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.0, 0.5, 0.85),1);
+    // //gvl->insertPointCloudFromFile("myEnvironmentMap", "box.binvox", true,
+    // //                                 gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.0, 0.8, 0.2),0.5);
+    x += 0.05;
+
+   
     gvl->visualizeMap("myEnvironmentMap");
 }
 
 void GvlOmplPlannerHelper::doVis()
 {
-
-    // tell the visualier that the map has changed:
-    gvl->visualizeMap("myRobotMap");
+     //LOGGING_INFO(Gpu_voxels, "Dovis " << endl);
     gvl->visualizeMap("myEnvironmentMap");
-    gvl->visualizeMap("mySolutionMap");
-    gvl->visualizeMap("myQueryMap");
+    gvl->visualizeMap("myRobotMap");
     gvl->visualizeMap("countingVoxelList");
-   // gvl->visualizeMap("ObstacleBitvectorMap");
+
 }
+
 
 void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
 {
@@ -217,7 +195,7 @@ void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
     PERF_MON_SUMMARY_PREFIX_INFO("motion_check");
     PERF_MON_SUMMARY_PREFIX_INFO("motion_check_lv");
 
-    std::cout << "Robot consists of " << gvl->getRobot("myUrdfRobot")->getTransformedClouds()->getAccumulatedPointcloudSize() << " points" << std::endl;
+    //std::cout << "Robot consists of " << gvl->getRobot("myUrdfRobot")->getTransformedClouds()->getAccumulatedPointcloudSize() << " points" << std::endl;
 
     og::PathGeometric* solution = path->as<og::PathGeometric>();
     solution->interpolate();
@@ -236,7 +214,6 @@ void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
         state_joint_values["panda_joint5"] = values[4];
         state_joint_values["panda_joint6"] = values[5];
         state_joint_values["panda_joint7"] = values[6];
-
         // update the robot joints:
         gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
         // insert the robot into the map:
@@ -249,7 +226,6 @@ void GvlOmplPlannerHelper::visualizeSolution(ob::PathPtr path)
 
 void GvlOmplPlannerHelper::insertStartAndGoal(const ompl::base::ScopedState<> &start, const ompl::base::ScopedState<> &goal) const
 {
-
     gvl->clearMap("myQueryMap");
 
     robot::JointValueMap state_joint_values;
@@ -260,6 +236,7 @@ void GvlOmplPlannerHelper::insertStartAndGoal(const ompl::base::ScopedState<> &s
     state_joint_values["panda_joint5"] = start[4];
     state_joint_values["panda_joint6"] = start[5];
     state_joint_values["panda_joint7"] = start[6];
+
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
     gvl->insertRobotIntoMap("myUrdfRobot", "myQueryMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START));
@@ -271,16 +248,13 @@ void GvlOmplPlannerHelper::insertStartAndGoal(const ompl::base::ScopedState<> &s
     state_joint_values["panda_joint5"] = goal[4];
     state_joint_values["panda_joint6"] = goal[5];
     state_joint_values["panda_joint7"] = goal[6];
-
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
     gvl->insertRobotIntoMap("myUrdfRobot", "myQueryMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+1));
-
 }
 
 bool GvlOmplPlannerHelper::isValid(const ompl::base::State *state) const
 {
-
     PERF_MON_START("inserting");
 
     std::lock_guard<std::mutex> lock(g_i_mutex);
@@ -297,7 +271,6 @@ bool GvlOmplPlannerHelper::isValid(const ompl::base::State *state) const
     state_joint_values["panda_joint5"] = values[4];
     state_joint_values["panda_joint6"] = values[5];
     state_joint_values["panda_joint7"] = values[6];
-
     // update the robot joints:
     gvl->setRobotConfiguration("myUrdfRobot", state_joint_values);
     // insert the robot into the map:
@@ -307,6 +280,7 @@ bool GvlOmplPlannerHelper::isValid(const ompl::base::State *state) const
 
     PERF_MON_START("coll_test");
     size_t num_colls_pc = gvl->getMap("myRobotMap")->as<voxelmap::ProbVoxelMap>()->collideWith(gvl->getMap("myEnvironmentMap")->as<voxelmap::ProbVoxelMap>(), 0.7f);
+    gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+30));
     PERF_MON_SILENT_MEASURE_AND_RESET_INFO_P("coll_test", "Pose Collsion", "pose_check");
 
     //std::cout << "Validity check on state ["  << values[0] << ", " << values[1] << ", " << values[2] << ", " << values[3] << ", " << values[4] << ", " << values[5] << "] resulting in " <<  num_colls_pc << " colls." << std::endl;
@@ -377,6 +351,8 @@ bool GvlOmplPlannerHelper::checkMotion(const ompl::base::State *s1, const ompl::
     return result;
 }
 
+
+
 bool GvlOmplPlannerHelper::checkMotion(const ompl::base::State *s1, const ompl::base::State *s2) const
 {
     std::lock_guard<std::mutex> lock(g_i_mutex);
@@ -439,7 +415,8 @@ bool GvlOmplPlannerHelper::checkMotion(const ompl::base::State *s1, const ompl::
         //gvl->visualizeMap("myRobotMap");
         PERF_MON_START("coll_test");
         size_t num_colls_pc = gvl->getMap("myRobotMap")->as<voxelmap::ProbVoxelMap>()->collideWith(gvl->getMap("myEnvironmentMap")->as<voxelmap::ProbVoxelMap>(), 0.7f);
-        //std::cout << "CheckMotion1 for " << nd << " segments. Resulting in " << num_colls_pc << " colls." << std::endl;
+
+        std::cout << "CheckMotion1 for " << nd << " segments. Resulting in " << num_colls_pc << " colls." << std::endl;
         PERF_MON_SILENT_MEASURE_AND_RESET_INFO_P("coll_test", "Pose Collsion", "motion_check");
 
         result = (num_colls_pc == 0);
