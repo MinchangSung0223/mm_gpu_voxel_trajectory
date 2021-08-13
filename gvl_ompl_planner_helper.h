@@ -45,7 +45,9 @@ using boost::shared_ptr;
 using gpu_voxels::voxelmap::ProbVoxelMap;
 using gpu_voxels::voxelmap::DistanceVoxelMap;
 using gpu_voxels::voxellist::CountingVoxelList;
-float voxel_side_length = 0.01f; // 1 cm voxel size
+using gpu_voxels::voxellist::BitVectorVoxelList;
+
+float voxel_side_length = 0.015f; // 1 cm voxel size
 bool new_data_received;
 
 void ctrlchandler(int)

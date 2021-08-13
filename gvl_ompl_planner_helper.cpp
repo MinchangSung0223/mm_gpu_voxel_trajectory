@@ -59,14 +59,18 @@ double joint_states[7] = {0,0,0,0,0,0,0};
 Vector3ui map_dimensions(300,300,500);
 
 void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
+    gvl->clearMap("myRobotMap");
+    gvl->clearMap("myRobotMapBitVoxel");
+    
     for(size_t i = 0; i < msg->name.size(); i++)
     {
         myRobotJointValues[msg->name[i]] = msg->position[i];
         joint_states[i] = msg->position[i];
     }
     gvl->setRobotConfiguration("myUrdfRobot",myRobotJointValues);
-    gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+(10%249)))    ;
-
+    gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
+    gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
+    LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
 }
 void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
     std::vector<Vector3f> point_data;
@@ -91,16 +95,17 @@ void GvlOmplPlannerHelper::rosIter(){
     signal(SIGINT, ctrlchandler);
     signal(SIGTERM, killhandler);
 
-    const Vector3f camera_offsets(map_dimensions.x * voxel_side_length * 0.5f,
-                                 map_dimensions.y * voxel_side_length * 0.5f, 
-                                 map_dimensions.z * voxel_side_length * 0.0f); 
+    const Vector3f camera_offsets(0.5f,
+                                 0.5f, 
+                                 0.0f); 
     tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
     shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
+    shared_ptr<BitVectorVoxelList> myRobotMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotMapBitVoxel"));
 
 
 
     ros::NodeHandle nh;
-    ros::Subscriber joint_sub = nh.subscribe("joint_states", 1, rosjointStateCallback); 
+    ros::Subscriber joint_sub = nh.subscribe("/joint_states", 1, rosjointStateCallback); 
     ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
 
     ros::Rate r(100);
@@ -112,6 +117,11 @@ void GvlOmplPlannerHelper::rosIter(){
         LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
         countingVoxelList->clearMap();
         countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+
+      countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
+      myRobotMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
+      Vector3f());
+
         GvlOmplPlannerHelper::doVis();
         r.sleep();
     }
@@ -132,10 +142,14 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     assert(stateSpace_ != nullptr);
 
     gvl = gpu_voxels::GpuVoxels::getInstance();
-  gvl->initialize(200,200, 200, 0.01);
+    gvl->initialize(map_dimensions.x,map_dimensions.y, map_dimensions.y, voxel_side_length);
 
     // We add maps with objects, to collide them
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
+
+    gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
+    gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotMapBitVoxel");
+
     gvl->addMap(MT_BITVECTOR_VOXELLIST,"mySolutionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
     gvl->addMap(MT_COUNTING_VOXELLIST,"countingVoxelList");
@@ -180,7 +194,11 @@ void GvlOmplPlannerHelper::moveObstacle()
 void GvlOmplPlannerHelper::doVis()
 {
      //LOGGING_INFO(Gpu_voxels, "Dovis " << endl);
-    gvl->visualizeMap("myEnvironmentMap");
+   // gvl->visualizeMap("myEnvironmentMap");
+
+    //gvl->visualizeMap("myRobotMap");
+    gvl->visualizeMap("myRobotMapBitVoxel");
+
     gvl->visualizeMap("myRobotMap");
     gvl->visualizeMap("countingVoxelList");
 

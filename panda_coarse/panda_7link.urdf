@@ -233,7 +233,7 @@
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
     <child link="panda_link0"/>
-    <origin rpy="0.0 0.0 0.0" xyz="1.0 1.0 0.85"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.4 0.6 0"/>
   </joint>
 </robot>
 
