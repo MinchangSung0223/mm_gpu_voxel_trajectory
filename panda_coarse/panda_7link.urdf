@@ -12,7 +12,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link0.stl" />
+                <mesh filename="meshes/collision/link0.obj" />
             </geometry>
         </collision>
     </link>
@@ -24,7 +24,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link1.stl" />
+                <mesh filename="meshes/collision/link1.obj" />
             </geometry>
         </collision>
     </link>
@@ -44,7 +44,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link2.stl" />
+                <mesh filename="meshes/collision/link2.obj" />
             </geometry>
         </collision>
     </link>
@@ -64,7 +64,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link3.stl" />
+                <mesh filename="meshes/collision/link3.obj" />
             </geometry>
         </collision>
     </link>
@@ -84,7 +84,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link4.stl" />
+                <mesh filename="meshes/collision/link4.obj" />
             </geometry>
         </collision>
     </link>
@@ -104,7 +104,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link5.stl" />
+                <mesh filename="meshes/collision/link5.obj" />
             </geometry>
         </collision>
     </link>
@@ -124,7 +124,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link6.stl" />
+                <mesh filename="meshes/collision/link6.obj" />
             </geometry>
         </collision>
     </link>
@@ -144,7 +144,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/link7.stl" />
+                <mesh filename="meshes/collision/link7.obj" />
             </geometry>
         </collision>
     </link>
@@ -176,7 +176,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/hand.stl" />
+                <mesh filename="meshes/collision/hand.obj" />
             </geometry>
         </collision>
     </link>
@@ -188,7 +188,7 @@
         </visual>
         <collision>
             <geometry>
-                <mesh filename="meshes/visual/finger.stl" />
+                <mesh filename="meshes/collision/finger.obj" />
             </geometry>
         </collision>
     </link>
@@ -202,7 +202,7 @@
         <collision>
             <origin rpy="0 0 3.14159265359" xyz="0 0 0" />
             <geometry>
-                <mesh filename="meshes/visual/finger.stl" />
+                <mesh filename="meshes/collision/finger.obj" />
             </geometry>
         </collision>
     </link>
@@ -233,7 +233,7 @@
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
     <child link="panda_link0"/>
-    <origin rpy="0.0 0.0 0.0" xyz="0.4 0.6 0"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.5 0.5 0.0"/>
   </joint>
 </robot>
 

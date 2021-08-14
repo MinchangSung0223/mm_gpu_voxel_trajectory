@@ -47,7 +47,7 @@ def getCameraImage(cam_pos,cam_orn):
 	fov = 60
 	aspect = 640/480
 	angle = 0.0;
-        q = p.getQuaternionFromEuler(cam_orn)
+	q = p.getQuaternionFromEuler(cam_orn)
 	cam_orn = np.reshape(p.getMatrixFromQuaternion(q ),(3,3));
 	view_pos = np.matmul(cam_orn,np.array([-0.001,0,0.0]).T)
 	view_pos = np.array(view_pos+cam_pos)

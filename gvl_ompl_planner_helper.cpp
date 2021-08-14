@@ -70,6 +70,7 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->setRobotConfiguration("myUrdfRobot",myRobotJointValues);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
+
     LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
 }
 void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
@@ -117,7 +118,6 @@ void GvlOmplPlannerHelper::rosIter(){
         LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
         countingVoxelList->clearMap();
         countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
-
       countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
       myRobotMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
       Vector3f());
