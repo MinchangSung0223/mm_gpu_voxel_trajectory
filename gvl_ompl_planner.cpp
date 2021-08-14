@@ -70,6 +70,9 @@ using namespace std;
 
 std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr;
 
+
+
+
 int main(int argc, char **argv)
 { 
 
@@ -116,6 +119,10 @@ int main(int argc, char **argv)
   std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr(std::make_shared<GvlOmplPlannerHelper>(si));
 
   thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
+
+
+  std::cin.ignore();
+
   while(1){
         usleep(300000);
   }

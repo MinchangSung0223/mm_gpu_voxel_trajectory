@@ -92,6 +92,93 @@ void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
     new_data_received=true;
 }
 
+Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
+    std::string testline;
+    std::string word[4][4];
+    Eigen::Matrix4f TBaseToCamera = Eigen::Matrix4f::Identity();
+    std::ifstream Test (filename);
+
+    if (!Test)
+    {
+        std::cout << "There was an error opening the file.\n"<<std::endl;
+        return TBaseToCamera;
+    }
+    int x=0,y=0;
+    while( Test>>testline ){
+        word[y][x]=testline;
+        x++;
+        if (testline=="")
+        y++;
+    }
+        for (int y=0;y<4;y++)
+        {
+            for (int x=0;x<4;x++)
+                 TBaseToCamera(y,x)= std::stod(word[y][x]);
+        }
+
+
+    Eigen::Matrix3f Rx  = Eigen::Matrix3f::Identity();
+    Eigen::Matrix3f Ry  = Eigen::Matrix3f::Identity();
+    Eigen::Matrix3f Rz  = Eigen::Matrix3f::Identity();
+    float roll = 0.0;
+    float pitch = PI/2.0;
+    float yaw = PI/2.0;;
+
+    Rx(1,1) = cos(roll);
+    Rx(1,2) = -sin(roll);
+    Rx(2,1) = sin(roll);
+    Rx(2,2) = cos(roll);
+    Ry(0,0) = cos(pitch);
+    Ry(0,2) = sin(pitch);
+    Ry(2,0) = -sin(pitch);
+    Ry(2,2) = cos(pitch);
+    Rz(0,0) = cos(yaw);
+    Rz(0,1) = -sin(yaw);
+    Rz(1,0) = sin(yaw);
+    Rz(1,1) = cos(yaw);
+
+    std::cout<<"Rx"<<std::endl;
+    std::cout<<Rx<<std::endl;
+    std::cout<<"Ry"<<std::endl;
+    std::cout<<Ry<<std::endl;
+    std::cout<<"Rz"<<std::endl;
+    std::cout<<Rz<<std::endl;
+    
+
+
+    Eigen::Matrix3f R = Rz*Ry*Rx;
+    Eigen::Matrix4f T = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f TBaseToCameraTemp = TBaseToCamera;
+    T(0,0)=R(0,0);
+    T(0,1)=R(0,1);
+    T(0,2)=R(0,2);
+    T(1,0)=R(1,0);
+    T(1,1)=R(1,1);
+    T(1,2)=R(1,2);
+    T(2,0)=R(2,0);
+    T(2,1)=R(2,1);
+    T(2,2)=R(2,2);
+    std::cout<<"T"<<std::endl;
+    std::cout<<T<<std::endl;
+    std::cout<<"TBaseToCamera"<<std::endl;
+    TBaseToCamera(0,3) = 0.0;
+    TBaseToCamera(1,3) = 0.0;
+    TBaseToCamera(2,3) = 0.0;
+    std::cout<<TBaseToCamera<<std::endl;
+
+    
+    TBaseToCamera = T*TBaseToCamera;
+    std::cout<<"TBaseToCamera2"<<std::endl;
+    std::cout<<TBaseToCamera<<std::endl;
+
+    TBaseToCamera(0,3) = TBaseToCameraTemp(0,3);
+    TBaseToCamera(1,3) = TBaseToCameraTemp(1,3);
+    TBaseToCamera(2,3) = TBaseToCameraTemp(2,3);
+    
+    return TBaseToCamera;
+}
+
+
 
 
 void GvlOmplPlannerHelper::rosIter(){
@@ -101,10 +188,24 @@ void GvlOmplPlannerHelper::rosIter(){
     signal(SIGINT, ctrlchandler);
     signal(SIGTERM, killhandler);
 
-    const Vector3f camera_offsets(0.5f,
-                                 0.5f, 
-                                 0.0f); 
-    tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
+    const Vector3f camera_offsets(2.0f,
+                                 2.0f, 
+                                 1.0f); 
+    Eigen::Matrix4f TBaseToCamera = GvlOmplPlannerHelper::loadBaseToCam("TBaseToCamera.txt");
+    
+    tf = Matrix4f(TBaseToCamera(0,0),TBaseToCamera(0,1),TBaseToCamera(0,2),TBaseToCamera(0,3)+2.0
+        ,TBaseToCamera(1,0),TBaseToCamera(1,1),TBaseToCamera(1,2),TBaseToCamera(1,3)+2.0
+        ,TBaseToCamera(2,0),TBaseToCamera(2,1),TBaseToCamera(2,2),TBaseToCamera(2,3)+0.5
+        ,TBaseToCamera(3,0),TBaseToCamera(3,1),TBaseToCamera(3,2),TBaseToCamera(3,3));
+        
+    //tf = Matrix4f(1,0,0,2.0, 0,1,0,2.0, 0,0,1,1.0, 0,0,0,1);
+    std::cout<<"==========TBaseToCmaera.txt==========\n"<<std::endl;
+    std::cout<<tf<<std::endl;
+    std::cin.ignore();
+
+
+    //tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
+    
     shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
     shared_ptr<BitVectorVoxelList> myRobotCollisionMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotCollisionMapBitVoxel"));
 
@@ -120,7 +221,7 @@ void GvlOmplPlannerHelper::rosIter(){
     while (ros::ok())
     {
         ros::spinOnce();
-        LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
+        //LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
         countingVoxelList->clearMap();
         countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
       countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
@@ -179,26 +280,7 @@ GvlOmplPlannerHelper::~GvlOmplPlannerHelper()
 
 void GvlOmplPlannerHelper::moveObstacle()
 {
-   //// gvl->clearMap("myEnvironmentMap");
-    static float x(0.0);
 
-    // use this to animate a single moving box obstacle
-    //gvl->insertBoxIntoMap(Vector3f(1.5, 1.2 ,0.0), Vector3f(1.6, 1.3 ,1.0), "myEnvironmentMap", eBVM_OCCUPIED, 2);
-   // gvl->insertPointCloudFromFile("myEnvironmentMap", "hanyang_coarse/hanyang.binvox", true,
-     //                                gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.2+x, 1.0, 0.5),0.5);
-
-     //gvl->insertPointCloudFromFile("myEnvironmentMap", "table.binvox", true,
-     //                                 gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.85, 0.5, 0.0),1);
-    // gvl->insertPointCloudFromFile("myEnvironmentMap", "shelf2.binvox", true,
-    //                                  gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.55, 0.8, 0.85),1);
-    // gvl->insertPointCloudFromFile("myEnvironmentMap", "bowl.binvox", true,
-    //                                  gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.0, 0.5, 0.85),1);
-    // //gvl->insertPointCloudFromFile("myEnvironmentMap", "box.binvox", true,
-    // //                                 gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(1.0, 0.8, 0.2),0.5);
-    x += 0.05;
-
-   
-    gvl->visualizeMap("myEnvironmentMap");
 }
 
 void GvlOmplPlannerHelper::doVis()
