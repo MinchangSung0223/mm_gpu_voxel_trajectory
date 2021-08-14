@@ -60,7 +60,9 @@ Vector3ui map_dimensions(300,300,500);
 
 void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->clearMap("myRobotMap");
-    gvl->clearMap("myRobotMapBitVoxel");
+    gvl->clearMap("myRobotCollisionMap");
+    gvl->clearMap("myRobotCollisionMapBitVoxel");
+    
     
     for(size_t i = 0; i < msg->name.size(); i++)
     {
@@ -68,8 +70,11 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
         joint_states[i] = msg->position[i];
     }
     gvl->setRobotConfiguration("myUrdfRobot",myRobotJointValues);
+    gvl->setRobotConfiguration("myUrdfCollisionRobot",myRobotJointValues);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
-    gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
+    gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
+    gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
+
 
     LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
 }
@@ -101,7 +106,7 @@ void GvlOmplPlannerHelper::rosIter(){
                                  0.0f); 
     tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
     shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
-    shared_ptr<BitVectorVoxelList> myRobotMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotMapBitVoxel"));
+    shared_ptr<BitVectorVoxelList> myRobotCollisionMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotCollisionMapBitVoxel"));
 
 
 
@@ -119,7 +124,7 @@ void GvlOmplPlannerHelper::rosIter(){
         countingVoxelList->clearMap();
         countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
       countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
-      myRobotMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
+      myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
       Vector3f());
 
         GvlOmplPlannerHelper::doVis();
@@ -146,14 +151,19 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
 
     // We add maps with objects, to collide them
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
+    gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotCollisionMap");
+
 
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
-    gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotMapBitVoxel");
+    gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotCollisionMapBitVoxel");
+
 
     gvl->addMap(MT_BITVECTOR_VOXELLIST,"mySolutionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
     gvl->addMap(MT_COUNTING_VOXELLIST,"countingVoxelList");
+    gvl->addRobot("myUrdfCollisionRobot", "./panda_coarse_collision/panda_7link_collision.urdf", true);
     gvl->addRobot("myUrdfRobot", "./panda_coarse/panda_7link.urdf", true);
+    
 
     PERF_MON_ENABLE("pose_check");
     PERF_MON_ENABLE("motion_check");
@@ -197,9 +207,11 @@ void GvlOmplPlannerHelper::doVis()
    // gvl->visualizeMap("myEnvironmentMap");
 
     //gvl->visualizeMap("myRobotMap");
-    gvl->visualizeMap("myRobotMapBitVoxel");
-
     gvl->visualizeMap("myRobotMap");
+    //gvl->visualizeMap("myRobotCollisionMapBitVoxel");
+    //gvl->visualizeMap("myRobotCollisionMap");
+
+
     gvl->visualizeMap("countingVoxelList");
 
 }
