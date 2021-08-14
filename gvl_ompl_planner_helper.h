@@ -49,7 +49,10 @@ using gpu_voxels::voxellist::BitVectorVoxelList;
 
 float voxel_side_length = 0.015f; // 1 cm voxel size
 bool new_data_received;
+boost::shared_ptr<ProbVoxelMap> myEnvironmentMap;
+boost::shared_ptr<CountingVoxelList> countingVoxelList;
 
+boost::shared_ptr<BitVectorVoxelList> myRobotCollisionMapBitVoxel;
 void ctrlchandler(int)
 {
   exit(EXIT_SUCCESS);

@@ -93,6 +93,8 @@ void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
 }
 
 Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
+
+    // Image Coordinate -> Cam Coordinate -> World Coordinate
     std::string testline;
     std::string word[4][4];
     Eigen::Matrix4f TBaseToCamera = Eigen::Matrix4f::Identity();
@@ -115,8 +117,6 @@ Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
             for (int x=0;x<4;x++)
                  TBaseToCamera(y,x)= std::stod(word[y][x]);
         }
-
-
     Eigen::Matrix3f Rx  = Eigen::Matrix3f::Identity();
     Eigen::Matrix3f Ry  = Eigen::Matrix3f::Identity();
     Eigen::Matrix3f Rz  = Eigen::Matrix3f::Identity();
@@ -137,15 +137,6 @@ Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
     Rz(1,0) = sin(yaw);
     Rz(1,1) = cos(yaw);
 
-    std::cout<<"Rx"<<std::endl;
-    std::cout<<Rx<<std::endl;
-    std::cout<<"Ry"<<std::endl;
-    std::cout<<Ry<<std::endl;
-    std::cout<<"Rz"<<std::endl;
-    std::cout<<Rz<<std::endl;
-    
-
-
     Eigen::Matrix3f R = Rz*Ry*Rx;
     Eigen::Matrix4f T = Eigen::Matrix4f::Identity();
     Eigen::Matrix4f TBaseToCameraTemp = TBaseToCamera;
@@ -158,19 +149,10 @@ Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
     T(2,0)=R(2,0);
     T(2,1)=R(2,1);
     T(2,2)=R(2,2);
-    std::cout<<"T"<<std::endl;
-    std::cout<<T<<std::endl;
-    std::cout<<"TBaseToCamera"<<std::endl;
     TBaseToCamera(0,3) = 0.0;
     TBaseToCamera(1,3) = 0.0;
     TBaseToCamera(2,3) = 0.0;
-    std::cout<<TBaseToCamera<<std::endl;
-
-    
     TBaseToCamera = T*TBaseToCamera;
-    std::cout<<"TBaseToCamera2"<<std::endl;
-    std::cout<<TBaseToCamera<<std::endl;
-
     TBaseToCamera(0,3) = TBaseToCameraTemp(0,3);
     TBaseToCamera(1,3) = TBaseToCameraTemp(1,3);
     TBaseToCamera(2,3) = TBaseToCameraTemp(2,3);
@@ -204,13 +186,9 @@ void GvlOmplPlannerHelper::rosIter(){
     std::cin.ignore();
 
 
-    //tf = Matrix4f::createFromRotationAndTranslation(Matrix3f::createFromRPY(0,0,0),camera_offsets);
+    countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
+    myRobotCollisionMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotCollisionMapBitVoxel"));
     
-    shared_ptr<CountingVoxelList> countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
-    shared_ptr<BitVectorVoxelList> myRobotCollisionMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotCollisionMapBitVoxel"));
-
-
-
     ros::NodeHandle nh;
     ros::Subscriber joint_sub = nh.subscribe("/joint_states", 1, rosjointStateCallback); 
     ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
@@ -223,11 +201,15 @@ void GvlOmplPlannerHelper::rosIter(){
         ros::spinOnce();
         //LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
         countingVoxelList->clearMap();
+        myEnvironmentMap->clearMap();
+
         countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+        //myEnvironmentMap->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+
       countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
       myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
       Vector3f());
-
+      myEnvironmentMap->merge(countingVoxelList);
         GvlOmplPlannerHelper::doVis();
         r.sleep();
     }
@@ -257,7 +239,7 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
 
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
     gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotCollisionMapBitVoxel");
-
+    myEnvironmentMap = dynamic_pointer_cast<ProbVoxelMap>(gvl->getMap("myEnvironmentMap"));
 
     gvl->addMap(MT_BITVECTOR_VOXELLIST,"mySolutionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
@@ -286,7 +268,7 @@ void GvlOmplPlannerHelper::moveObstacle()
 void GvlOmplPlannerHelper::doVis()
 {
      //LOGGING_INFO(Gpu_voxels, "Dovis " << endl);
-   // gvl->visualizeMap("myEnvironmentMap");
+     gvl->visualizeMap("myEnvironmentMap");
 
     //gvl->visualizeMap("myRobotMap");
     gvl->visualizeMap("myRobotMap");
