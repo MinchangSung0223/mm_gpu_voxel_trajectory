@@ -56,7 +56,7 @@ namespace bfs = boost::filesystem;
 #define R2D 180.0/3.141592
 
 double joint_states[7] = {0,0,0,0,0,0,0};
-Vector3ui map_dimensions(300,300,500);
+Vector3ui map_dimensions(700,500,400);
 
 void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->clearMap("myRobotMap");
@@ -74,9 +74,7 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
-
-
-    LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
+    //LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
 }
 void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
     std::vector<Vector3f> point_data;
@@ -200,16 +198,21 @@ void GvlOmplPlannerHelper::rosIter(){
     {
         ros::spinOnce();
         //LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
+
+        //init
         countingVoxelList->clearMap();
         myEnvironmentMap->clearMap();
 
-        countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
-        //myEnvironmentMap->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
 
-      countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
-      myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
-      Vector3f());
-      myEnvironmentMap->merge(countingVoxelList);
+
+        countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+        countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
+        myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
+        Vector3f());
+        myEnvironmentMap->merge(countingVoxelList);
+
+
+
         GvlOmplPlannerHelper::doVis();
         r.sleep();
     }
@@ -235,7 +238,9 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     // We add maps with objects, to collide them
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotCollisionMap");
-
+    gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentAllMap");
+    gvl->insertPointCloudFromFile("myEnvironmentAllMap", "./binvox/environment_all.binvox", true,
+                                      gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.0, 0.0, 0.0),1);
 
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
     gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotCollisionMapBitVoxel");
@@ -269,6 +274,8 @@ void GvlOmplPlannerHelper::doVis()
 {
      //LOGGING_INFO(Gpu_voxels, "Dovis " << endl);
      gvl->visualizeMap("myEnvironmentMap");
+     gvl->visualizeMap("myEnvironmentAllMap");
+     
 
     //gvl->visualizeMap("myRobotMap");
     gvl->visualizeMap("myRobotMap");
