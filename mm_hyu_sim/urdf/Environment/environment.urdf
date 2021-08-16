@@ -1,0 +1,255 @@
+<?xml version="1.0" ?>
+<robot name="plane">
+  <link name="planeLink">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment.obj"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="3 0 0"/>
+      <geometry>
+	 	<box size="30 30 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="tablejoint" type="fixed">
+	    <origin rpy="0 0 0" xyz="4.0 0 0"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="table"/>
+  </joint>
+  <link name="table">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_table.obj"/>
+      </geometry>
+       <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.48 0.74 0.51"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+    <joint name="table_back_joint" type="fixed">
+	    <origin rpy="0 0 0" xyz="6.5 0.5 0"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="table_back"/>
+  </joint>
+  
+    <link name="table_back">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_table_back.obj"/>
+      </geometry>
+       <material name="brown">
+        <color rgba="0.6 0.4 0.0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.9 3.61 0.71"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+      <joint name="airconditioner_joint1" type="fixed">
+	    <origin rpy="0 0 1.5707" xyz="4.5 2.3 0"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="airconditioner1"/>
+  </joint>
+  
+    <link name="airconditioner1">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_ariconditioner.obj"/>
+      </geometry>
+       <material name="darkwhite">
+        <color rgba="0.9 0.9 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.0 0.0 0.0 "/>
+      </geometry>
+    </collision>
+  </link>
+ <joint name="airconditioner_joint2" type="fixed">
+	    <origin rpy="0 0 1.5707" xyz="1.5 2.3 0"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="airconditioner2"/>
+  </joint>
+<link name="airconditioner2">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_ariconditioner.obj"/>
+      </geometry>
+       <material name="darkwhite">
+        <color rgba="0.9 0.9 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.0 0.0 0.0 "/>
+      </geometry>
+    </collision>
+  </link>
+ <joint name="shelf_joint" type="fixed">
+	    <origin rpy="0 0 1.5707" xyz="0.4 -2.3 0.01"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="shelf"/>
+  </joint>
+<link name="shelf">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_shelf.obj"/>
+      </geometry>
+       <material name="shelf">
+        <color rgba="0.2 0.3 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.0 0.0 0.0 "/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="computertable_joint" type="fixed">
+	    <origin rpy="0 0 1.5707" xyz="0.7 -1.7 0.01"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="computertable"/>
+  </joint>
+<link name="computertable">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_computertable.obj"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.0 0.0 0.0 "/>
+      </geometry>
+    </collision>
+  </link> 
+  
+  
+    <joint name="chair_joint" type="fixed">
+	    <origin rpy="0 0 -1.007" xyz="6.6 -1.8 0.01"/>
+	    <axis xyz="0 0 1"/>
+	    <parent link="planeLink"/>
+	    <child link="chair"/>
+  </joint>
+<link name="chair">
+  <contact>
+      <lateral_friction value="1"/>
+  </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="environment_chair.obj"/>
+      </geometry>
+       <material name="chair">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<box size="0.0 0.0 0.0 "/>
+      </geometry>
+    </collision>
+  </link> 
+</robot>
+
