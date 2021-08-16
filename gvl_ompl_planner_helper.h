@@ -36,6 +36,8 @@
 #include <mutex>
 #include <vector>
 robot::JointValueMap myRobotJointValues;
+robot::JointValueMap myRobotJointValues_mm;
+
 gpu_voxels::GpuVoxelsSharedPtr gvl;
 PointCloud my_point_cloud;
 Matrix4f tf;

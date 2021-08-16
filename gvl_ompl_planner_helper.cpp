@@ -54,6 +54,7 @@ namespace bfs = boost::filesystem;
 #define PI 3.141592
 #define D2R 3.141592/180.0
 #define R2D 180.0/3.141592
+#define RED BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) )
 
 double joint_states[7] = {0,0,0,0,0,0,0};
 Vector3ui map_dimensions(700,500,400);
@@ -73,7 +74,8 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->setRobotConfiguration("myUrdfCollisionRobot",myRobotJointValues);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
-    gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (30 % 249) ));
+    gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", RED);
+
     //LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
 }
 void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
@@ -239,9 +241,9 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotCollisionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentAllMap");
-    gvl->insertPointCloudFromFile("myEnvironmentAllMap", "./binvox/environment_all.binvox", true,
-                                      gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.0, 0.0, 0.0),1);
 
+    //gvl->insertPointCloudFromFile("myEnvironmentAllMap", "./binvox/environment_all.binvox", true,
+    //                                  gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.0, 0.0, 0.0),1);
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
     gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotCollisionMapBitVoxel");
     myEnvironmentMap = dynamic_pointer_cast<ProbVoxelMap>(gvl->getMap("myEnvironmentMap"));
@@ -252,6 +254,20 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addRobot("myUrdfCollisionRobot", "./panda_coarse_collision/panda_7link_collision.urdf", true);
     gvl->addRobot("myUrdfRobot", "./panda_coarse/panda_7link.urdf", true);
     
+    gvl->addMap(MT_PROBAB_VOXELMAP,"myMMRobotMap");
+    gvl->addRobot("MMHYURobot", "./mm_hyu_coarse/right_sim.urdf", true);
+    robot::JointValueMap state_joint_values;
+    state_joint_values["lin_x_joint"] = 2.0;
+    state_joint_values["lin_y_joint"] = 2.0;
+    state_joint_values["rot_z_joint"] = 1.57;
+    state_joint_values["Arm_Joint_1"] = 1.0;
+    state_joint_values["Arm_Joint_2"] = 1.0;
+    state_joint_values["Arm_Joint_3"] = 1.0;
+    state_joint_values["Arm_Joint_4"] = 1.0;
+    state_joint_values["Arm_Joint_5"] = 1.0;
+    state_joint_values["Arm_Joint_6"] = 1.0;
+    gvl->setRobotConfiguration("MMHYURobot",state_joint_values);
+    gvl->insertRobotIntoMap("MMHYURobot","myMMRobotMap",eBVM_OCCUPIED);
 
     PERF_MON_ENABLE("pose_check");
     PERF_MON_ENABLE("motion_check");
@@ -279,6 +295,8 @@ void GvlOmplPlannerHelper::doVis()
 
     //gvl->visualizeMap("myRobotMap");
     gvl->visualizeMap("myRobotMap");
+    gvl->visualizeMap("myMMRobotMap");
+    
     //gvl->visualizeMap("myRobotCollisionMapBitVoxel");
     //gvl->visualizeMap("myRobotCollisionMap");
 
