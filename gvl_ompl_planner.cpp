@@ -85,31 +85,29 @@ int main(int argc, char **argv)
   PERF_MON_ENABLE("planning");
 
   // construct the state space we are planning in
-  auto space(std::make_shared<ob::RealVectorStateSpace>(7));
+  int robot_joint_num = 9;
+  auto space(std::make_shared<ob::RealVectorStateSpace>(robot_joint_num));
   //We then set the bounds for the R3 component of this state space:
-  ob::RealVectorBounds bounds(7);
-  bounds.setLow(-3.14159265);
-  bounds.setHigh(3.14159265);
-	  bounds.setLow(0,-2.8973);
-  bounds.setHigh(0,2.9671);
+  ob::RealVectorBounds bounds(robot_joint_num);
+  bounds.setHigh(2,PI);
+  bounds.setLow(2,-PI);
+  // bounds.setLow(3,-2.8973);
+  // bounds.setHigh(3,2.9671);
 
-  bounds.setLow(1,-1.7628);
-  bounds.setHigh(1,1.7628);
+  // bounds.setLow(4,-1.7628);
+  // bounds.setHigh(4,1.7628);
 
-  bounds.setLow(2,-2.8973);
-  bounds.setHigh(2,2.8973);
+  // bounds.setLow(5,-2.8973);
+  // bounds.setHigh(5,2.8973);
 
-  bounds.setLow(3,-3.0718);
-  bounds.setHigh(3,-0.0698);
+  // bounds.setLow(6,-3.0718);
+  // bounds.setHigh(6,-0.0698);
 
-  bounds.setLow(4,-2.8973);
-  bounds.setHigh(4,2.8973);
+  // bounds.setLow(7,-2.8973);
+  // bounds.setHigh(7,2.8973);
 
-  bounds.setLow(5,-0.0175);
-  bounds.setHigh(5,3.7525);
-
-  bounds.setLow(6,-2.8973);
-  bounds.setHigh(6,2.8973);
+  // bounds.setLow(8,-0.0175);
+  // bounds.setHigh(8,3.7525);
 
 
   space->setBounds(bounds);
