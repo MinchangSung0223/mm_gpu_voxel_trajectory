@@ -128,7 +128,7 @@ Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
     Eigen::Matrix3f Rz  = Eigen::Matrix3f::Identity();
     float roll = -PI/2.0;
     float pitch = 0.0;
-    float yaw = PI/2.0;
+    float yaw = -PI/2.0;
 
     Rx(1,1) = cos(roll);
     Rx(1,2) = -sin(roll);
@@ -155,8 +155,11 @@ Eigen::Matrix4f GvlOmplPlannerHelper::loadBaseToCam(std::string filename){
     T(2,0)=R(2,0);
     T(2,1)=R(2,1);
     T(2,2)=R(2,2);
-
-    TBaseToCamera = T*TBaseToCamera;
+    TBaseToCamera(0,3)=0;
+    TBaseToCamera(1,3)=0;
+    TBaseToCamera(2,3)=0;
+    
+    TBaseToCamera = TBaseToCamera*T;
     TBaseToCamera(0,3) = TBaseToCameraTemp(0,3);
     TBaseToCamera(1,3) = TBaseToCameraTemp(1,3);
     TBaseToCamera(2,3) = TBaseToCameraTemp(2,3);
@@ -181,7 +184,7 @@ void GvlOmplPlannerHelper::rosIter(){
     
     tf = Matrix4f(TBaseToCamera(0,0),TBaseToCamera(0,1),TBaseToCamera(0,2),TBaseToCamera(0,3)
         ,TBaseToCamera(1,0),TBaseToCamera(1,1),TBaseToCamera(1,2),TBaseToCamera(1,3)
-        ,TBaseToCamera(2,0),TBaseToCamera(2,1),TBaseToCamera(2,2),TBaseToCamera(2,3)+0.21-0.075
+        ,TBaseToCamera(2,0),TBaseToCamera(2,1),TBaseToCamera(2,2),TBaseToCamera(2,3)
         ,TBaseToCamera(3,0),TBaseToCamera(3,1),TBaseToCamera(3,2),TBaseToCamera(3,3));
         
     //tf = Matrix4f(1,0,0,2.0, 0,1,0,2.0, 0,0,1,1.0, 0,0,0,1);
