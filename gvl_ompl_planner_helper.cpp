@@ -399,6 +399,8 @@ void GvlOmplPlannerHelper::rosIter(){
            LOGGING_INFO(Gpu_voxels, "++++++++++++++++end PLANNING+++++++++++++++++\n" << endl);
 
             for(int j = 0;j<joint_trajectory.size();j++){
+                ros::spinOnce();
+
                 std::array<double,JOINTNUM> temp_q = joint_trajectory.at(j);
                 sensor_msgs::JointState jointState;
                 jointState.name.push_back("lin_x_joint");
@@ -416,7 +418,8 @@ void GvlOmplPlannerHelper::rosIter(){
                 
                 jointState.header.stamp=ros::Time::now();
                 pub_joint.publish(jointState);
-                r.sleep();                
+                r.sleep();       
+                usleep(1000000);         
             }
         }
 

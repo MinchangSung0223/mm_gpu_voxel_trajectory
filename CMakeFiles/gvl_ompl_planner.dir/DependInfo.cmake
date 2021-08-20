@@ -67,6 +67,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/root/workspace/gpu-voxels/packages/gpu_voxels/src"
   "/root/workspace/gpu-voxels/packages/icl_core/src"
   "/usr/local/cuda/include"
+  "/usr/local/include/ompl-1.5"
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/pcl-1.7"
@@ -82,8 +83,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/tcl"
   "/usr/include/libxml2"
   "/usr/local/include/vtk-8.2"
-  "/usr/include/ni"
   "/usr/local/include/eigen3"
+  "/usr/include/ni"
   "/usr/local/include/pcl-1.9"
   "/usr/local/include/vtk-8.2/vtkogg/include"
   )

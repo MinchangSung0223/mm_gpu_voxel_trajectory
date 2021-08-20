@@ -16,7 +16,7 @@ from sensor_msgs import point_cloud2
 
 import threading
 
-targetPosition = [2.0,2.0,0,0,0,0,0,0,0];
+targetPosition = [1.0,2.5,0,0,0,0,0,0,0];
 pi = np.pi
 near = 0.01
 far = 1000
