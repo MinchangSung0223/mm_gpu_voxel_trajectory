@@ -30,24 +30,7 @@ using namespace std;
 #define IC_PERFORMANCE_MONITOR
 #include <icl_core_performance_monitor/PerformanceMonitor.h>
 #include <unistd.h> 
-#include <ompl/geometric/planners/sbl/SBL.h>
-#include <ompl/geometric/planners/kpiece/LBKPIECE1.h>
-#include <ompl/geometric/planners/fmt/FMT.h>
 
-#include <kdl_parser/kdl_parser.hpp>
-#include <kdl/chain.hpp>
-#include <kdl/chainfksolver.hpp>
-#include <kdl/frames.hpp>
-#include <sensor_msgs/JointState.h>
-#include <kdl/chainfksolverpos_recursive.hpp>
-
-#include <kdl/chainiksolverpos_nr_jl.hpp>
-#include <kdl/chainiksolverpos_nr.hpp>
-
-#include <kdl/chainiksolvervel_pinv.hpp>
-#include <kdl/frames_io.hpp>
-
-#include <ompl/geometric/PathSimplifier.h>
 
 #include "gvl_ompl_planner_helper.h"
 #include <stdlib.h>
@@ -64,12 +47,10 @@ namespace og = ompl::geometric;
 #define PI 3.141592
 #define D2R 3.141592/180.0
 #define R2D 180.0/3.141592
-using namespace KDL;
 using namespace std;
 // initial quaternion 0.49996,0.86605,0.00010683,0
 
 std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr;
-
 
 
 
@@ -85,44 +66,52 @@ int main(int argc, char **argv)
   PERF_MON_ENABLE("planning");
 
   // construct the state space we are planning in
-  int robot_joint_num = 9;
-  auto space(std::make_shared<ob::RealVectorStateSpace>(robot_joint_num));
+  auto space(std::make_shared<ob::RealVectorStateSpace>(JOINTNUM));
   //We then set the bounds for the R3 component of this state space:
-  ob::RealVectorBounds bounds(robot_joint_num);
-  bounds.setHigh(2,PI);
-  bounds.setLow(2,-PI);
-  // bounds.setLow(3,-2.8973);
-  // bounds.setHigh(3,2.9671);
-
-  // bounds.setLow(4,-1.7628);
-  // bounds.setHigh(4,1.7628);
-
-  // bounds.setLow(5,-2.8973);
-  // bounds.setHigh(5,2.8973);
-
-  // bounds.setLow(6,-3.0718);
-  // bounds.setHigh(6,-0.0698);
-
-  // bounds.setLow(7,-2.8973);
-  // bounds.setHigh(7,2.8973);
-
-  // bounds.setLow(8,-0.0175);
-  // bounds.setHigh(8,3.7525);
-
+  ob::RealVectorBounds bounds(JOINTNUM);
+    bounds.setLow(0,-7);
+    bounds.setHigh(0,7);
+    bounds.setLow(1,-5);
+    bounds.setHigh(1,5);
+    bounds.setLow(2,-PI);
+    bounds.setHigh(2,PI);
+    bounds.setLow(3,-PI);
+    bounds.setHigh(3,PI);
+    bounds.setLow(4,-PI);
+    bounds.setHigh(4,PI);
+    bounds.setLow(5,-PI);
+    bounds.setHigh(5,PI);
+    bounds.setLow(6,-PI);
+    bounds.setHigh(6,PI);
+    bounds.setLow(7,-PI);
+    bounds.setHigh(7,PI);
+    bounds.setLow(8,-PI);
+    bounds.setHigh(8,PI);
 
   space->setBounds(bounds);
   //Create an instance of ompl::base::SpaceInformation for the state space
   auto si(std::make_shared<ob::SpaceInformation>(space));
   //Set the state validity checker
   std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr(std::make_shared<GvlOmplPlannerHelper>(si));
+  si->setStateValidityChecker(my_class_ptr->getptr());
+  si->setMotionValidator(my_class_ptr->getptr());
+  si->setup();
 
-  thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
 
 
+
+  my_class_ptr->doVis();
+  std::cout << "Press Enter Key if ready!" << std::endl;
   std::cin.ignore();
 
+
+  thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
   while(1){
-        usleep(300000);
+       // double task_goal_values[7] ={0,0,0,1,3.0,2.5,1.325};
+      //  double start_values[JOINTNUM]={3.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};      
+      //  my_class_ptr->doTaskPlanning(task_goal_values,start_values);
+      //  std::cout<<"===========Task Planning End=========="<<std::endl;
+        usleep(3000000);
   }
 //----------------------------------------------------//
     t1.join();

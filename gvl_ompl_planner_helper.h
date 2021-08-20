@@ -22,11 +22,21 @@
 //----------------------------------------------------------------------/*
 #ifndef GVL_LINKAGE_TEST_LIB_H_INCLUDED
 #define GVL_LINKAGE_TEST_LIB_H_INCLUDED
-
+#define JOINTNUM 9
 #include <gpu_voxels/GpuVoxels.h>
 
 #include <ompl/base/SpaceInformation.h>
 #include <ompl/base/spaces/SE3StateSpace.h>
+#include <ompl/geometric/planners/sbl/SBL.h>
+#include <ompl/geometric/planners/kpiece/LBKPIECE1.h>
+#include <ompl/geometric/planners/kpiece/KPIECE1.h>
+#include <ompl/geometric/planners/rrt/RRTstar.h>
+#include <ompl/geometric/planners/rrt/RRT.h>
+#include <ompl/geometric/planners/cforest/CForest.h>
+#include <ompl/geometric/planners/informedtrees/ABITstar.h>
+
+#include <ompl/geometric/planners/fmt/FMT.h>
+#include <ompl/geometric/PathSimplifier.h>
 #include <ompl/geometric/SimpleSetup.h>
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
@@ -35,12 +45,32 @@
 #include <tuple>
 #include <mutex>
 #include <vector>
+
+
+
 robot::JointValueMap myRobotJointValues;
 robot::JointValueMap myRobotJointValues_mm;
 
 gpu_voxels::GpuVoxelsSharedPtr gvl;
 PointCloud my_point_cloud;
 Matrix4f tf;
+#include <kdl_parser/kdl_parser.hpp>
+#include <kdl/chain.hpp>
+#include <kdl/chainfksolver.hpp>
+#include <kdl/frames.hpp>
+#include <sensor_msgs/JointState.h>
+#include <kdl/chainfksolverpos_recursive.hpp>
+
+#include <kdl/chainiksolverpos_nr_jl.hpp>
+#include <kdl/chainiksolverpos_nr.hpp>
+
+#include <kdl/chainiksolvervel_pinv.hpp>
+#include <kdl/frames_io.hpp>
+
+KDL::Tree my_tree;
+KDL::Chain my_chain;
+KDL::JntArray q_min(JOINTNUM);
+KDL::JntArray q_max(JOINTNUM);
 
 using boost::dynamic_pointer_cast;
 using boost::shared_ptr;
@@ -49,8 +79,10 @@ using gpu_voxels::voxelmap::DistanceVoxelMap;
 using gpu_voxels::voxellist::CountingVoxelList;
 using gpu_voxels::voxellist::BitVectorVoxelList;
 
-float voxel_side_length = 0.015f; // 1 cm voxel size
+float voxel_side_length = 0.1f; // 1 cm voxel size
 bool new_data_received;
+bool new_pose_received;
+
 boost::shared_ptr<ProbVoxelMap> myEnvironmentMap;
 boost::shared_ptr<CountingVoxelList> countingVoxelList;
 
@@ -85,6 +117,7 @@ public:
     std::shared_ptr<GvlOmplPlannerHelper> getptr() {
         return shared_from_this();
     }
+    std::vector<std::array<double,JOINTNUM>>  doTaskPlanning(double goal_values[7],double start_values[JOINTNUM]);
 
     void insertStartAndGoal(const ompl::base::ScopedState<> &start, const ompl::base::ScopedState<> &goal) const;
     void visualizeSolution(ompl::base::PathPtr path);

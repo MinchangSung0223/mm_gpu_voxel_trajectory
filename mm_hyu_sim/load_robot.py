@@ -3,7 +3,6 @@ import numpy as np
 np.set_printoptions(formatter={'float_kind': lambda x: "{0:0.5f}".format(x)})
 
 from parameter import *
-from func.mr import *
 import time
 import pybullet_data
 from functions import *
@@ -17,20 +16,24 @@ from sensor_msgs import point_cloud2
 
 import threading
 
-targetPosition = [0.0,0,0,0,0,0,0,0,0];
+targetPosition = [2.0,2.0,0,0,0,0,0,0,0];
 pi = np.pi
 near = 0.01
 far = 1000
+fov = 60
+
+focal_length_x = 1/(math.tan((fov/180.0*pi)/2)*2/640)
+focal_length_y = 1/(math.tan((fov/180.0*pi)/2)*2/480)
+print(focal_length_x)
+print(focal_length_y)
 def callback(data):
 
 	for i in range(len(data.position)):
 		targetPosition[i] = data.position[i]
-	targetPosition[1] = 	targetPosition[1]
 	
-	print(targetPosition)
 	
 def convert_depth_frame_to_pointcloud(depth_image):
-	camera_intrinsics ={"fx":380,"ppx": 320,"fy":380,"ppy":240}
+	camera_intrinsics ={"fx":focal_length_x,"ppx": 320,"fy":focal_length_y,"ppy":240}
 	[height, width] = depth_image.shape
 	nx = np.linspace(0, width-1, width)
 	ny = np.linspace(0, height-1, height)
@@ -38,7 +41,7 @@ def convert_depth_frame_to_pointcloud(depth_image):
 	x = (u.flatten() - camera_intrinsics["ppx"])/camera_intrinsics["fx"]
 	y = (v.flatten() - camera_intrinsics["ppy"])/camera_intrinsics["fy"]
 
-	z = depth_image.flatten() / 1000;
+	z = depth_image.flatten() / 1000.0;
 	x = np.multiply(x,z)
 	y = np.multiply(y,z)
 
@@ -46,9 +49,8 @@ def convert_depth_frame_to_pointcloud(depth_image):
 	y = y[np.nonzero(z)]
 	z = z[np.nonzero(z)]
 	return x, y, z
-
 def getCameraImage(cam_pos,cam_orn):
-	fov = 60
+
 	aspect = 640/480
 	angle = 0.0;
 	q = p.getQuaternionFromEuler(cam_orn)
@@ -66,8 +68,9 @@ def getCameraImage(cam_pos,cam_orn):
 	return images
 def publishPointCloud(d435Id,d435Id2):
 	global pub
-
+	global pub_joint
 	while 1:
+		print("pub_start")
 		d435pos, d435orn = p.getBasePositionAndOrientation(d435Id)
 		d435quat = d435orn
 		d435orn =  p.getEulerFromQuaternion(d435orn)
@@ -88,11 +91,10 @@ def publishPointCloud(d435Id,d435Id2):
 		R = np.eye(3);
 		R = np.matmul(R,R2);
 		T = np.array([0.0,0.0,0.0])
-		print(T)
 		for i in range(0,len(depth),8):
-		    x = (R[0,0]*depth[i,0]*1000+R[0,1]*depth[i,1]*1000+R[0,2]*depth[i,2]*1000+T[0])
-		    y = (R[1,0]*depth[i,0]*1000+R[1,1]*depth[i,1]*1000+R[1,2]*depth[i,2]*1000+T[1])
-		    z = (R[2,0]*depth[i,0]*1000+R[2,1]*depth[i,1]*1000+R[2,2]*depth[i,2]*1000+T[2])
+		    x = (R[0,0]*depth[i,0]*1000.0+R[0,1]*depth[i,1]*1000.0+R[0,2]*depth[i,2]*1000.0+T[0])
+		    y = (R[1,0]*depth[i,0]*1000.0+R[1,1]*depth[i,1]*1000.0+R[1,2]*depth[i,2]*1000.0+T[1])
+		    z = (R[2,0]*depth[i,0]*1000.0+R[2,1]*depth[i,1]*1000.0+R[2,2]*depth[i,2]*1000.0+T[2])
 		    r = int(color_img[i,0])
 		    g = int(color_img[i,1])
 		    b = int(color_img[i,2])
@@ -113,6 +115,20 @@ def publishPointCloud(d435Id,d435Id2):
 		pc2.header.stamp = rospy.Time.now()
 
 		pub.publish(pc2)
+		js = JointState()
+		js.name.append("lin_x_joint")
+		js.name.append("lin_y_joint")
+		js.name.append("rot_z_joint")		
+		js.name.append("Arm_Joint_1")
+		js.name.append("Arm_Joint_2")
+		js.name.append("Arm_Joint_3")
+		js.name.append("Arm_Joint_4")
+		js.name.append("Arm_Joint_5")
+		js.name.append("Arm_Joint_6")
+
+		for i in range(0,8):
+			js.position.append(targetPosition[i])
+		pub_joint.publish(js)
 def getHomogeneousMatrix(Id):
 	pos, orn = p.getBasePositionAndOrientation(Id)
 	T = np.eye(4);
@@ -132,6 +148,8 @@ def getJointState(robotId,ArmJoint):
 
 def main():
 	global pub
+	global pub_joint
+
 	p.connect(p.GUI)
 	p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
@@ -144,7 +162,7 @@ def main():
 	p.setGravity(0, 0, -9.8)
 	robotId = p.loadURDF(robotPATH,[1.0,0,0.0], p.getQuaternionFromEuler([0,0,0]))
 	d435Id = p.loadURDF("./urdf/d435/d435.urdf", [0, 0, 0.0])
-	p.resetBasePositionAndOrientation(d435Id, [0.0, 2.5, 1.5],p.getQuaternionFromEuler([0,pi/4,0]))
+	p.resetBasePositionAndOrientation(d435Id, [0.0, 2.5, 1.5],p.getQuaternionFromEuler([0,pi/8,0]))
 
 
 	NumberofJoint = p.getNumJoints(robotId)
@@ -160,24 +178,28 @@ def main():
 	wz = 0;
 
 	rospy.init_node('listener', anonymous=True)
-	rospy.Subscriber("/joint_states", JointState, callback)
+	rospy.Subscriber("/joint_states_desired", JointState, callback)
+
 	pub = rospy.Publisher("/camera/depth/color/points", PointCloud2, queue_size=2)
+	pub_joint = rospy.Publisher("/joint_states", JointState, queue_size=2)
+	
 	t = threading.Thread(target=publishPointCloud, args=(d435Id,d435Id))
 	t.start()
-
+	print(getHomogeneousMatrix(d435Id));
+	rate=rospy.Rate(10);
 	while(1):
 		x = targetPosition[0];
 		y = targetPosition[1];
 		wz = targetPosition[2];
 		p.resetBasePositionAndOrientation(robotId, [x, y, 0], p.getQuaternionFromEuler([0,0,wz]))	
-		print(getHomogeneousMatrix(d435Id));
-		armPosition = targetPosition[3:9];
 		armNum=0;
 		for j in ArmJoint:
-			p.setJointMotorControl2(robotId, j, p.POSITION_CONTROL, targetPosition=armPosition[armNum], force=1000)
+			p.resetJointState(robotId, j, targetPosition[armNum+3])
+			print(armNum,targetPosition[armNum+3])
 			armNum = armNum+1
-		
-		p.stepSimulation()
+		joint_states = targetPosition
+
+		rate.sleep()
 		
 
 

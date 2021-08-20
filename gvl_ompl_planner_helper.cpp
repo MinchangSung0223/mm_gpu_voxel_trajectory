@@ -31,6 +31,7 @@
 #include <pcl/point_types.h>
 #include <std_msgs/String.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Pose.h>
 #include <sstream>
 #include <trajectory_msgs/JointTrajectory.h>
 #include <trajectory_msgs/JointTrajectoryPoint.h>
@@ -59,8 +60,161 @@ namespace bfs = boost::filesystem;
 #define BLUE BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (200 % 249))
 #define YELLOW BitVoxelMeaning(eBVM_SWEPT_VOLUME_START + (1 % 249))
 
-double joint_states[7] = {0,0,0,0,0,0,0};
+double joint_states[JOINTNUM] = {0,0,0,0,0,0,0,0,0};
+double task_goal_values[7] = {0,0,0,1,3.0,2.0,1.35}; 
 Vector3ui map_dimensions(700,500,400);
+
+
+void printCatesianKDLFrame(KDL::Frame frame,char* str ){
+    std::cout<<"======="<<str<<"=======\n\n"<<endl;
+    for(int i =0;i<4;i++){
+        for(int j=0;j<4;j++)
+            std::cout<<frame(i,j)<<"\t";
+        std::cout<<"\n"<<std::endl;
+    }
+}
+
+
+
+std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(double goal_values[7],double start_values[JOINTNUM]){
+    PERF_MON_INITIALIZE(100, 1000);
+    PERF_MON_ENABLE("planning");
+    auto space(std::make_shared<ob::RealVectorStateSpace>(JOINTNUM));
+    ob::RealVectorBounds bounds(JOINTNUM);
+    bounds.setLow(-10);
+    bounds.setHigh(10);
+
+    
+    space->setBounds(bounds);
+
+      this->si_->setStateValidityChecker(this->getptr());
+      this->si_->setMotionValidator(this->getptr());
+      this->si_->setup();
+
+    og::PathSimplifier simp(this->si_);
+
+    KDL::JntArray q_start(JOINTNUM);  
+    KDL::JntArray q_result(JOINTNUM);  
+    
+    KDL::ChainFkSolverPos_recursive fk_solver = KDL::ChainFkSolverPos_recursive(my_chain);
+    KDL::Frame cartesian_pos;
+    KDL::Frame cartesian_pos_result;
+    
+    KDL::Frame goal_pose( KDL::Rotation::Quaternion(goal_values[0],goal_values[1],goal_values[2],goal_values[3]),KDL::Vector(goal_values[4],goal_values[5],goal_values[6]));
+
+    fk_solver.JntToCart(q_start, cartesian_pos);
+
+    KDL::ChainIkSolverVel_pinv iksolver1v(my_chain);
+    KDL::ChainIkSolverPos_NR_JL iksolver1(my_chain,q_min,q_max,fk_solver,iksolver1v,2000,0.01);
+
+    for(int i=0;i<JOINTNUM;i++){
+        q_start(i) = start_values[i];
+    }
+
+    bool ret = iksolver1.CartToJnt(q_start,goal_pose,q_result);
+    //std::cout<<"ik ret : "<<ret<<std::endl;
+    //std::cout<<"ik q : "<<q_result(0)<<","<<q_result(1)<<","<<q_result(2)
+    //                    <<","<<q_result(3)<<","<<q_result(4)<<","
+    //                    <<q_result(5)<<","<<q_result(6)<<","
+    //                    <<q_result(7)<<","<<q_result(8)<<std::endl;
+
+    fk_solver.JntToCart(q_result, cartesian_pos_result);
+
+    ob::ScopedState<> start(space);
+    ob::ScopedState<> goal(space);
+    
+    for(int i = 0;i<JOINTNUM;i++){
+        start[i] = q_start(i);
+        goal[i] = q_result(i);
+    }
+    std::system("clear");
+    LOGGING_INFO(Gpu_voxels, "PDEF \n" << endl);
+    auto pdef(std::make_shared<ob::ProblemDefinition>(this->si_));
+    pdef->setStartAndGoalStates(start, goal);
+    LOGGING_INFO(Gpu_voxels, "PLANNER \n" << endl);
+
+    //auto planner(std::make_shared<og::KPIECE1>(this->si_));
+
+    auto planner(std::make_shared<og::ABITstar>(this->si_));
+
+    
+    planner->setProblemDefinition(pdef);
+    planner->setup();
+    int succs = 0;
+    
+    ob::PathPtr path ;
+    LOGGING_INFO(Gpu_voxels, "WHILE \n" << endl);
+
+     while(succs<1)
+    {
+        double sum = 0.0;
+        for(int k = 0;k<JOINTNUM;k++){
+            sum += sqrt((start[k]-goal[k])*(start[k]-goal[k]));
+        }
+        if(sum< 0.01){
+            LOGGING_INFO(Gpu_voxels, "COMPLETE MOTION PLANNING \n" << endl);
+            break;
+        }
+        try{
+            planner->clear();
+            LOGGING_INFO(Gpu_voxels,"SUCCESS : " <<succs<<", START PLANNING \n" << endl);
+
+            ob::PlannerStatus  solved = planner->ob::Planner::solve(1.0);
+            LOGGING_INFO(Gpu_voxels, "end PLANNING \n" << endl);
+
+            PERF_MON_SILENT_MEASURE_AND_RESET_INFO_P("planner", "Planning time", "planning");
+
+
+            if (solved)
+            {
+                ++succs;
+                path = pdef->getSolutionPath();
+                std::cout << "Found solution:" << std::endl;
+                path->print(std::cout);
+                simp.simplifyMax(*(path->as<og::PathGeometric>()));
+
+            }else{
+                std::cout << "No solution could be found" << std::endl;
+            }
+
+            PERF_MON_SUMMARY_PREFIX_INFO("planning");
+            std::cout << "END OMPL" << std::endl;
+           }
+        catch(int expn){
+            std::cout << "ERRORROROROROR" << std::endl;
+        }
+
+    }
+
+
+
+    og::PathGeometric* solution= path->as<og::PathGeometric>();
+    solution->interpolate();
+    int step_count = solution->getStateCount();
+    std::vector<std::array<double,JOINTNUM>> q_list;
+    q_list.clear();
+    for(int i=0;i<step_count;i++){
+        const double *values = solution->getState(i)->as<ob::RealVectorStateSpace::StateType>()->values;
+        double *temp_values = (double*)values;
+        std::array<double,JOINTNUM> temp_joints_value={{temp_values[0],temp_values[1],temp_values[2],temp_values[3],temp_values[4],temp_values[5],temp_values[6]
+            ,temp_values[7],temp_values[8]}};
+        q_list.push_back(temp_joints_value);
+    
+     }
+    return q_list;
+
+
+}
+
+
+
+
+
+
+
+
+
+
 void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->clearMap("myRobotMap");
     gvl->clearMap("myRobotMapBitVoxel");
@@ -78,12 +232,28 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     gvl->setRobotConfiguration("myUrdfCollisionRobot",myRobotJointValues);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMapBitVoxel",YELLOW);
-    LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
+    //LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", BLUE);
 
-    
 }
+
+void rosDesiredPoseCallback(const geometry_msgs::Pose::ConstPtr& msg){
+    
+    LOGGING_INFO(Gpu_voxels,msg->position.x<< endl);
+     task_goal_values[0] = msg->orientation.x;
+     task_goal_values[1] = msg->orientation.y;
+     task_goal_values[2] = msg->orientation.z;
+     task_goal_values[3] = msg->orientation.w;
+     task_goal_values[4] = msg->position.x;
+     task_goal_values[5] = msg->position.y;
+     task_goal_values[6] = msg->position.z;
+    new_pose_received=true;
+
+}
+
+
+
 void roscallback(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& msg){
     std::vector<Vector3f> point_data;
     point_data.resize(msg->points.size());
@@ -190,7 +360,6 @@ void GvlOmplPlannerHelper::rosIter(){
     //tf = Matrix4f(1,0,0,2.0, 0,1,0,2.0, 0,0,1,1.0, 0,0,0,1);
     std::cout<<"==========TBaseToCmaera.txt==========\n"<<std::endl;
     std::cout<<tf<<std::endl;
-    std::cin.ignore();
 
 
     countingVoxelList = dynamic_pointer_cast<CountingVoxelList>(gvl->getMap("countingVoxelList"));
@@ -198,31 +367,63 @@ void GvlOmplPlannerHelper::rosIter(){
     
     ros::NodeHandle nh;
     ros::Subscriber joint_sub = nh.subscribe("/joint_states", 1, rosjointStateCallback); 
+    ros::Subscriber desiredPose_sub = nh.subscribe("/desired_pose", 1, rosDesiredPoseCallback); 
+    
     ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
+    ros::Publisher pub_joint =  nh.advertise<sensor_msgs::JointState>("/joint_states_desired", 1000);
 
-    ros::Rate r(100);
+    ros::Rate r(20);
     new_data_received = true; // call visualize on the first iteration
+    new_pose_received=false;
 
     while (ros::ok())
     {
         ros::spinOnce();
-        //LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
+        LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
 
         //init
-        countingVoxelList->clearMap();
-        myEnvironmentMap->clearMap();
+        if(new_data_received){
+            countingVoxelList->clearMap();
+            myEnvironmentMap->clearMap();
 
 
 
-        countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
-        countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
-        myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
-        Vector3f());
-        myEnvironmentMap->merge(countingVoxelList);
+            countingVoxelList->insertPointCloud(my_point_cloud,eBVM_OCCUPIED);
+            countingVoxelList->as<gpu_voxels::voxellist::CountingVoxelList>()->subtractFromCountingVoxelList(
+            myRobotCollisionMapBitVoxel->as<gpu_voxels::voxellist::BitVectorVoxelList>(),
+            Vector3f());
+            myEnvironmentMap->merge(countingVoxelList);
+        }
+        if(new_pose_received){
+            std::vector<std::array<double,JOINTNUM>> joint_trajectory=GvlOmplPlannerHelper::doTaskPlanning(task_goal_values,joint_states);
+           LOGGING_INFO(Gpu_voxels, "++++++++++++++++end PLANNING+++++++++++++++++\n" << endl);
 
-
+            for(int j = 0;j<joint_trajectory.size();j++){
+                std::array<double,JOINTNUM> temp_q = joint_trajectory.at(j);
+                sensor_msgs::JointState jointState;
+                jointState.name.push_back("lin_x_joint");
+                jointState.name.push_back("lin_y_joint");
+                jointState.name.push_back("rot_z_joint");
+                jointState.name.push_back("Arm_Joint_1");
+                jointState.name.push_back("Arm_Joint_2");
+                jointState.name.push_back("Arm_Joint_3");
+                jointState.name.push_back("Arm_Joint_4");
+                jointState.name.push_back("Arm_Joint_5");
+                jointState.name.push_back("Arm_Joint_6");
+                
+                for(int i = 0;i<JOINTNUM;i++)
+                    jointState.position.push_back(temp_q[i]);
+                
+                jointState.header.stamp=ros::Time::now();
+                pub_joint.publish(jointState);
+                r.sleep();                
+            }
+        }
 
         GvlOmplPlannerHelper::doVis();
+        new_data_received = false;
+        new_pose_received=false;
+
         r.sleep();
     }
     exit(EXIT_SUCCESS);
@@ -236,13 +437,17 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     , ob::MotionValidator(si)
 {
 
+
+    const char* urdf_name = "./mm_hyu_coarse/right_sim.urdf";
+    const char* colilsion_urdf_name = "./mm_hyu_coarse_collision/right_sim.urdf";    
+
     si_ = si;
     stateSpace_ = si_->getStateSpace().get();
 
     assert(stateSpace_ != nullptr);
 
     gvl = gpu_voxels::GpuVoxels::getInstance();
-    gvl->initialize(map_dimensions.x,map_dimensions.y, map_dimensions.y, voxel_side_length);
+    gvl->initialize(map_dimensions.x,map_dimensions.y, map_dimensions.z, voxel_side_length);
 
     // We add maps with objects, to collide them
     gvl->addMap(MT_PROBAB_VOXELMAP,"myRobotMap");
@@ -253,7 +458,7 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentAllMap");
 
     gvl->insertPointCloudFromFile("myEnvironmentAllMap", "./binvox/environment_all.binvox", true,
-                                      gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.0, 0.0, 0.0),1);
+                                      gpu_voxels::eBVM_OCCUPIED, true, gpu_voxels::Vector3f(0.0, 0.0, -0.01),1);
     gvl->addMap(MT_PROBAB_VOXELMAP,"myEnvironmentMap");
     gvl->addMap(MT_BITVECTOR_VOXELLIST, "myRobotCollisionMapBitVoxel");
     myEnvironmentMap = dynamic_pointer_cast<ProbVoxelMap>(gvl->getMap("myEnvironmentMap"));
@@ -261,9 +466,40 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     gvl->addMap(MT_BITVECTOR_VOXELLIST,"mySolutionMap");
     gvl->addMap(MT_PROBAB_VOXELMAP,"myQueryMap");
     gvl->addMap(MT_COUNTING_VOXELLIST,"countingVoxelList");
-    gvl->addRobot("myUrdfCollisionRobot", "./mm_hyu_coarse_collision/right_sim.urdf", true);
-    gvl->addRobot("myUrdfRobot", "./mm_hyu_coarse/right_sim.urdf", true);
+    gvl->addRobot("myUrdfCollisionRobot",colilsion_urdf_name , true);
+    gvl->addRobot("myUrdfRobot",urdf_name , true);
     
+
+     if (!kdl_parser::treeFromFile(urdf_name, my_tree)){
+             LOGGING_INFO(Gpu_voxels,"Failed to construct kdl tree");
+    }
+
+    LOGGING_INFO(Gpu_voxels, "\n\nKDL Number of Joints : "<<my_tree.getNrOfJoints() <<"\n"<< endl);
+
+    LOGGING_INFO(Gpu_voxels, "\n\nKDL Chain load : "<<my_tree.getChain("world","SPA_Link_06",my_chain) <<"\n"<< endl);
+
+    q_min(0) = 0;
+    q_min(1) = 0;
+    q_min(2) = -3.141592;
+    q_min(3) = -3.141592;
+    q_min(4) = -3.141592;
+    q_min(5) = -3.141592;
+    q_min(6) = -3.141592;
+    q_min(7) = -3.141592;
+    q_min(8) = -3.141592;
+
+
+    q_max(0) = 7;
+    q_max(1) = 5;
+    q_max(2) = 3.141592;
+    q_max(3) = 3.141592;
+    q_max(4) = 3.141592;
+    q_max(5) = 3.141592;
+    q_max(6) = 3.141592;
+    q_max(7) = 3.141592;
+    q_max(8) = 3.141592;
+
+
     PERF_MON_ENABLE("pose_check");
     PERF_MON_ENABLE("motion_check");
     PERF_MON_ENABLE("motion_check_lv");

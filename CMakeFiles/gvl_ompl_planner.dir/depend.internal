@@ -129,19 +129,33 @@ CMakeFiles/gvl_ompl_planner.dir/gvl_ompl_planner.cpp.o
  /opt/ros/kinetic/include/ompl/base/spaces/SO3StateSpace.h
  /opt/ros/kinetic/include/ompl/config.h
  /opt/ros/kinetic/include/ompl/datastructures/BinaryHeap.h
+ /opt/ros/kinetic/include/ompl/datastructures/GreedyKCenters.h
  /opt/ros/kinetic/include/ompl/datastructures/Grid.h
  /opt/ros/kinetic/include/ompl/datastructures/GridB.h
  /opt/ros/kinetic/include/ompl/datastructures/GridN.h
  /opt/ros/kinetic/include/ompl/datastructures/NearestNeighbors.h
+ /opt/ros/kinetic/include/ompl/datastructures/NearestNeighborsGNAT.h
+ /opt/ros/kinetic/include/ompl/datastructures/NearestNeighborsGNATNoThreadSafety.h
+ /opt/ros/kinetic/include/ompl/datastructures/NearestNeighborsLinear.h
+ /opt/ros/kinetic/include/ompl/datastructures/NearestNeighborsSqrtApprox.h
  /opt/ros/kinetic/include/ompl/datastructures/PDF.h
+ /opt/ros/kinetic/include/ompl/datastructures/Permutation.h
  /opt/ros/kinetic/include/ompl/geometric/PathGeometric.h
  /opt/ros/kinetic/include/ompl/geometric/PathSimplifier.h
  /opt/ros/kinetic/include/ompl/geometric/SimpleSetup.h
  /opt/ros/kinetic/include/ompl/geometric/planners/PlannerIncludes.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/cforest/CForest.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/cforest/CForestStateSampler.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/cforest/CForestStateSpaceWrapper.h
  /opt/ros/kinetic/include/ompl/geometric/planners/fmt/FMT.h
  /opt/ros/kinetic/include/ompl/geometric/planners/kpiece/Discretization.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/kpiece/KPIECE1.h
  /opt/ros/kinetic/include/ompl/geometric/planners/kpiece/LBKPIECE1.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/rrt/InformedRRTstar.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/rrt/RRT.h
+ /opt/ros/kinetic/include/ompl/geometric/planners/rrt/RRTstar.h
  /opt/ros/kinetic/include/ompl/geometric/planners/sbl/SBL.h
+ /opt/ros/kinetic/include/ompl/tools/config/SelfConfig.h
  /opt/ros/kinetic/include/ompl/util/ClassForward.h
  /opt/ros/kinetic/include/ompl/util/Console.h
  /opt/ros/kinetic/include/ompl/util/Deprecation.h
