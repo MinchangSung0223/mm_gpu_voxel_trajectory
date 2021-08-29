@@ -41,8 +41,6 @@ using namespace std;
 #include <Python.h>
 #include <stdlib.h>
 #include <vector>
-namespace ob = ompl::base;
-namespace og = ompl::geometric;
 
 #define PI 3.141592
 #define D2R 3.141592/180.0

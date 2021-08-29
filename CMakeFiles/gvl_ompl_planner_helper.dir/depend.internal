@@ -107,6 +107,7 @@ CMakeFiles/gvl_ompl_planner_helper.dir/gvl_ompl_planner_helper.cpp.o
  /opt/ros/kinetic/include/sensor_msgs/JointState.h
  /opt/ros/kinetic/include/sensor_msgs/PointCloud2.h
  /opt/ros/kinetic/include/sensor_msgs/PointField.h
+ /opt/ros/kinetic/include/std_msgs/Bool.h
  /opt/ros/kinetic/include/std_msgs/Header.h
  /opt/ros/kinetic/include/std_msgs/String.h
  /opt/ros/kinetic/include/trajectory_msgs/JointTrajectory.h

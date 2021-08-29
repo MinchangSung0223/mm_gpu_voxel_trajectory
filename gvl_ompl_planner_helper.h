@@ -46,6 +46,7 @@
 #include <mutex>
 #include <vector>
 
+std::vector<std::array<double,JOINTNUM>> joint_trajectory;
 
 
 robot::JointValueMap myRobotJointValues;
@@ -71,7 +72,8 @@ KDL::Tree my_tree;
 KDL::Chain my_chain;
 KDL::JntArray q_min(JOINTNUM);
 KDL::JntArray q_max(JOINTNUM);
-
+namespace ob = ompl::base;
+namespace og = ompl::geometric;
 using boost::dynamic_pointer_cast;
 using boost::shared_ptr;
 using gpu_voxels::voxelmap::ProbVoxelMap;
@@ -79,10 +81,10 @@ using gpu_voxels::voxelmap::DistanceVoxelMap;
 using gpu_voxels::voxellist::CountingVoxelList;
 using gpu_voxels::voxellist::BitVectorVoxelList;
 
-float voxel_side_length = 0.1f; // 1 cm voxel size
+float voxel_side_length = 0.05f; // 1 cm voxel size
 bool new_data_received;
 bool new_pose_received;
-
+bool isMoving = false;
 boost::shared_ptr<ProbVoxelMap> myEnvironmentMap;
 boost::shared_ptr<CountingVoxelList> countingVoxelList;
 
@@ -117,10 +119,11 @@ public:
     std::shared_ptr<GvlOmplPlannerHelper> getptr() {
         return shared_from_this();
     }
-    std::vector<std::array<double,JOINTNUM>>  doTaskPlanning(double goal_values[7],double start_values[JOINTNUM]);
+    std::vector<std::array<double,JOINTNUM>>  doTaskPlanning(double goal_values[7],double start_values[JOINTNUM], ob::PathPtr path);
 
     void insertStartAndGoal(const ompl::base::ScopedState<> &start, const ompl::base::ScopedState<> &goal) const;
     void visualizeSolution(ompl::base::PathPtr path);
+    void visualizeSolution( std::vector<std::array<double,JOINTNUM>> solution);
     void doVis();
     void doVis2();
     void setTransformation(Eigen::Matrix<float, 4, 4> T);
