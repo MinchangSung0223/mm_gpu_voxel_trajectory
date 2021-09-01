@@ -34,7 +34,7 @@
 #include <ompl/geometric/planners/rrt/RRT.h>
 #include <ompl/geometric/planners/cforest/CForest.h>
 #include <ompl/geometric/planners/informedtrees/ABITstar.h>
-
+#include <ompl/base/PlannerTerminationCondition.h>
 #include <ompl/geometric/planners/fmt/FMT.h>
 #include <ompl/geometric/PathSimplifier.h>
 #include <ompl/geometric/SimpleSetup.h>

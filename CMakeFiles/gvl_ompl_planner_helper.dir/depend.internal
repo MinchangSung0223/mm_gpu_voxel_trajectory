@@ -1309,6 +1309,8 @@ CMakeFiles/gvl_ompl_planner_helper.dir/gvl_ompl_planner_helper.cpp.o
  /usr/local/include/ompl-1.5/ompl/geometric/planners/kpiece/Discretization.h
  /usr/local/include/ompl-1.5/ompl/geometric/planners/kpiece/KPIECE1.h
  /usr/local/include/ompl-1.5/ompl/geometric/planners/kpiece/LBKPIECE1.h
+ /usr/local/include/ompl-1.5/ompl/geometric/planners/prm/PRM.h
+ /usr/local/include/ompl-1.5/ompl/geometric/planners/prm/PRMstar.h
  /usr/local/include/ompl-1.5/ompl/geometric/planners/rrt/RRT.h
  /usr/local/include/ompl-1.5/ompl/geometric/planners/rrt/RRTstar.h
  /usr/local/include/ompl-1.5/ompl/geometric/planners/sbl/SBL.h

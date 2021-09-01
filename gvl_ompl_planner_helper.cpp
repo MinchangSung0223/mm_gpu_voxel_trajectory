@@ -23,7 +23,7 @@
 #include "gvl_ompl_planner_helper.h"
 #include <Eigen/Dense>
 #include <signal.h>
-
+#include <ompl/geometric/planners/prm/PRMstar.h>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 #include <ros/ros.h>
@@ -85,7 +85,8 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
     bounds.setLow(-10);
     bounds.setHigh(10);
 
-    
+    std::vector<std::array<double,JOINTNUM>> q_list;
+    q_list.clear();
     space->setBounds(bounds);
 
       this->si_->setStateValidityChecker(this->getptr());
@@ -145,6 +146,7 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
     
     LOGGING_INFO(Gpu_voxels, "WHILE \n" << endl);
     float solveTime = 0.1;
+    int no_succs_count = 0;
      while(succs<1)
     {
         double sum = 0.0;
@@ -158,6 +160,8 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
         try{
             planner->clear();
             LOGGING_INFO(Gpu_voxels,"SUCCESS : " <<succs<<", START PLANNING \n" << endl);
+
+            const std::function< bool()> ptc;
 
             ob::PlannerStatus  solved = planner->ob::Planner::solve(solveTime);
             LOGGING_INFO(Gpu_voxels, "end PLANNING \n" << endl);
@@ -176,7 +180,9 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
 
             }else{
                 std::cout << "No solution could be found" << std::endl;
+                no_succs_count++;
                 solveTime +=0.1; 
+                if(no_succs_count>5)return q_list;
             }
 
             PERF_MON_SUMMARY_PREFIX_INFO("planning");
@@ -184,6 +190,7 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
            }
         catch(int expn){
             std::cout << "ERRORROROROROR" << std::endl;
+             return q_list;
         }
 
     }
@@ -193,8 +200,7 @@ std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(d
     og::PathGeometric* solution= path->as<og::PathGeometric>();
     solution->interpolate(100);
     int step_count = solution->getStateCount();
-    std::vector<std::array<double,JOINTNUM>> q_list;
-    q_list.clear();
+
     for(int i=0;i<step_count;i++){
         const double *values = solution->getState(i)->as<ob::RealVectorStateSpace::StateType>()->values;
         double *temp_values = (double*)values;
@@ -416,7 +422,10 @@ void GvlOmplPlannerHelper::rosIter(){
     ros::Subscriber moving_flag = nh.subscribe("/ismoving", 1, rosMovingFlagCallback); 
     
     
-    ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
+    //ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
+    ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/merged", 1,roscallback);
+
+    //ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/cam_0_zf", 1,roscallback);
     ros::Publisher pub_joint =  nh.advertise<sensor_msgs::JointState>("/joint_states_desired", 1000);
 
     ros::Rate r(100);
@@ -445,7 +454,7 @@ void GvlOmplPlannerHelper::rosIter(){
             Vector3f());
             myEnvironmentMap->merge(countingVoxelList);
             num_colls = gvl->getMap("countingVoxelList")->as<gpu_voxels::voxellist::CountingVoxelList>()->collideWith(gvl->getMap("mySolutionMap")->as<gpu_voxels::voxellist::BitVectorVoxelList>(), 1.0f);
-            if(num_colls>5){
+            if(num_colls>50){
                 std::cout << "!!!!!!!!!!!!!!!Detected Collision!!!!!!!!! " << num_colls << " collisions " << std::endl;
                 new_pose_received = true;
             }
@@ -457,12 +466,11 @@ void GvlOmplPlannerHelper::rosIter(){
             ob::PathPtr path;
             joint_trajectory=GvlOmplPlannerHelper::doTaskPlanning(task_goal_values,joint_states,path);
                 GvlOmplPlannerHelper::visualizeSolution(joint_trajectory);    
-
-
                     
         }
         else{
-            if(joint_trajectory.size()>0){
+          std::cout << "!!!!!!!!!!!!!!!isMoving!!!!!!!!! " << isMoving << std::endl;
+            if(joint_trajectory.size()>0 && isMoving){
                 GvlOmplPlannerHelper::visualizeSolution(joint_trajectory);  
                 std::array<double,JOINTNUM> temp_q = joint_trajectory.at(0);
                 sensor_msgs::JointState jointState;
