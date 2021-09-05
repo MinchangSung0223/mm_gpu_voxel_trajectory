@@ -31,6 +31,11 @@
 #include <pcl/point_types.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Bool.h>
+#include "Poco/Net/Net.h"
+
+
+
+
 
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Pose.h>
@@ -52,6 +57,14 @@
 #include <vector>
 
 using namespace gpu_voxels;
+using namespace Poco;
+using namespace Poco::Dynamic;
+using Poco::Net::SocketAddress;
+using Poco::Net::StreamSocket;
+using Poco::Net::Socket;
+using Poco::Timer;
+using Poco::TimerCallback;
+using Poco::Thread;
 namespace bfs = boost::filesystem;
 #define PI 3.141592
 #define D2R 3.141592/180.0
@@ -64,7 +77,7 @@ namespace bfs = boost::filesystem;
 double joint_states[JOINTNUM] = {0,0,0,0,0,0,0,0,0};
 double task_goal_values[7] = {0,0,0,1,3.0,2.0,1.35}; 
 Vector3ui map_dimensions(700,500,400);
-
+std::array<double,JOINTNUM> send_q = {0};
 
 void printCatesianKDLFrame(KDL::Frame frame,char* str ){
     std::cout<<"======="<<str<<"=======\n\n"<<endl;
@@ -74,7 +87,6 @@ void printCatesianKDLFrame(KDL::Frame frame,char* str ){
         std::cout<<"\n"<<std::endl;
     }
 }
-
 
 
 std::vector<std::array<double,JOINTNUM>>  GvlOmplPlannerHelper::doTaskPlanning(double goal_values[7],double start_values[JOINTNUM],ob::PathPtr path){
@@ -383,6 +395,23 @@ void pubJointState(double *jointValue,ros::Publisher *pub_joint ){
 
 }
 
+void GvlOmplPlannerHelper::tcpIter(){
+	StreamSocket ss;
+	Data data_rev, data;
+	unsigned char writeBuff[SIZE_DATA_MAX];
+	ss.connect(SocketAddress(hostname, PORT));
+        Data data_send;
+	int count = 0;
+	while(true){
+		for(int i =0;i<6;i++)
+			data.value[i+3] = send_q.at(i);
+		memcpy(writeBuff, data.byte, SIZE_DATA_MAX);
+		ss.sendBytes(writeBuff, SIZE_DATA_MAX);
+		usleep(1000);
+	}
+	ss.close();
+
+}
 
 void GvlOmplPlannerHelper::rosIter(){
           std::cout<<"ddd"<<std::endl;
@@ -433,6 +462,7 @@ void GvlOmplPlannerHelper::rosIter(){
     new_pose_received=false;
       std::cout<<"ddd"<<std::endl;
     size_t num_colls = 0;
+  
 
     while (ros::ok())
     {
@@ -473,6 +503,7 @@ void GvlOmplPlannerHelper::rosIter(){
             if(joint_trajectory.size()>0 && isMoving){
                 GvlOmplPlannerHelper::visualizeSolution(joint_trajectory);  
                 std::array<double,JOINTNUM> temp_q = joint_trajectory.at(0);
+                send_q = temp_q;
                 sensor_msgs::JointState jointState;
                 jointState.name.push_back("lin_x_joint");
                 jointState.name.push_back("lin_y_joint");
@@ -501,6 +532,7 @@ void GvlOmplPlannerHelper::rosIter(){
 
         r.sleep();
     }
+
     exit(EXIT_SUCCESS);
 }
 

@@ -46,6 +46,42 @@
 #include <mutex>
 #include <vector>
 
+
+
+#include "Poco/Net/StreamSocket.h"
+#include "Poco/Net/SocketAddress.h"
+#include "Poco/Dynamic/Var.h"
+#include "Poco/Exception.h"
+#include "Poco/Timer.h"
+#include "Poco/Stopwatch.h"
+#include "Poco/Thread.h"
+#include "Poco/DateTime.h"
+#include "Poco/Timespan.h"
+#include "Poco/NumericString.h"
+const std::string hostname = "127.0.0.1"; //localhost IP Address
+//const std::string hostname = "192.168.0.39"; //STEP2 IP Address 
+//const std::string hostname = "192.168.0.100"; //STEP2 IP Address Monkey
+//const std::string hostname = "192.168.1.18"; //STEP2 IP Address Tensegrity
+//const std::string hostname = "192.168.0.122"; //STEP2 IP Address Tensegrity
+const Poco::UInt16 PORT = 9911;
+enum {
+	SIZE_HEADER = 52,
+	SIZE_COMMAND = 4,
+	SIZE_HEADER_COMMAND = 56,
+	SIZE_DATA_MAX = 37,
+	SIZE_DATA_ASCII_MAX = 32
+};
+union Data
+
+{
+	unsigned char byte[1];
+	float value[9];
+
+};
+
+ 
+
+
 std::vector<std::array<double,JOINTNUM>> joint_trajectory;
 
 
@@ -113,6 +149,7 @@ public:
 
     void plan();
     void rosIter();
+    void tcpIter();
     void rosPublishJointTrajectory(std::vector<std::array<double,7>>& q_list);
     void rosPublishJointStates(double *values);
     Eigen::Matrix4f loadBaseToCam(std::string filename);

@@ -422,6 +422,8 @@ gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_serialization.so
 gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_chrono.so
 gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_atomic.so
 gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_regex.so
+gvl_ompl_planner: /usr/local/lib/libPocoNetd.so.80
+gvl_ompl_planner: /usr/local/lib/libPocoUtild.so.80
 gvl_ompl_planner: /usr/local/lib/libpcl_registration.so
 gvl_ompl_planner: /usr/local/lib/libpcl_segmentation.so
 gvl_ompl_planner: /usr/local/lib/libpcl_features.so
@@ -578,6 +580,9 @@ gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_atomic.so
 gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libboost_regex.so
 gvl_ompl_planner: //usr/lib/x86_64-linux-gnu/libqhull.so
 gvl_ompl_planner: /usr/lib/libOpenNI.so
+gvl_ompl_planner: /usr/local/lib/libPocoXMLd.so.80
+gvl_ompl_planner: /usr/local/lib/libPocoJSONd.so.80
+gvl_ompl_planner: /usr/local/lib/libPocoFoundationd.so.80
 gvl_ompl_planner: CMakeFiles/gvl_ompl_planner.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/workspace/mm_gpu_voxel/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable gvl_ompl_planner"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gvl_ompl_planner.dir/link.txt --verbose=$(VERBOSE)

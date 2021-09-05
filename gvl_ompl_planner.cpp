@@ -46,14 +46,24 @@ using namespace std;
 #define D2R 3.141592/180.0
 #define R2D 180.0/3.141592
 using namespace std;
+
+
+using namespace Poco;
+using namespace Poco::Dynamic;
+using Poco::Net::SocketAddress;
+using Poco::Net::StreamSocket;
+using Poco::Net::Socket;
+using Poco::Timer;
+using Poco::TimerCallback;
+using Poco::Thread;
+
 // initial quaternion 0.49996,0.86605,0.00010683,0
 
 std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr;
 
-
-
 int main(int argc, char **argv)
 { 
+
 
   signal(SIGINT, ctrlchandler);
   signal(SIGTERM, killhandler);
@@ -103,7 +113,10 @@ int main(int argc, char **argv)
   std::cin.ignore();
 
 
-  thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};    
+  thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};  
+  thread t2{&GvlOmplPlannerHelper::tcpIter ,my_class_ptr};  
+
+
   while(1){
        // double task_goal_values[7] ={0,0,0,1,3.0,2.5,1.325};
       //  double start_values[JOINTNUM]={3.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};      
@@ -113,6 +126,6 @@ int main(int argc, char **argv)
   }
 //----------------------------------------------------//
     t1.join();
-
+    t2.join();
     return 1;
 }
