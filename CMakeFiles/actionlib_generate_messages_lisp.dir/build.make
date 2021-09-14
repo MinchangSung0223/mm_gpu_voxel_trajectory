@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel
+CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel_trajectory
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel
+CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel_trajectory
 
 # Utility rule file for actionlib_generate_messages_lisp.
 
@@ -86,6 +86,6 @@ CMakeFiles/actionlib_generate_messages_lisp.dir/clean:
 .PHONY : CMakeFiles/actionlib_generate_messages_lisp.dir/clean
 
 CMakeFiles/actionlib_generate_messages_lisp.dir/depend:
-	cd /root/workspace/mm_gpu_voxel && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel/CMakeFiles/actionlib_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/workspace/mm_gpu_voxel_trajectory && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/actionlib_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/actionlib_generate_messages_lisp.dir/depend
 

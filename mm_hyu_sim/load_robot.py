@@ -195,6 +195,7 @@ def main():
 		armNum=0;
 		for j in ArmJoint:
 			p.resetJointState(robotId, j, targetPosition[armNum+3])
+			p.resetJointState(robotId, 17, 0.5)
 			print(armNum,targetPosition[armNum+3])
 			armNum = armNum+1
 		joint_states = targetPosition

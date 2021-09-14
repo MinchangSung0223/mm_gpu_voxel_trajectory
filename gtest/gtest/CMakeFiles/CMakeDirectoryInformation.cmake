@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/usr/src/gtest")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/root/workspace/mm_gpu_voxel")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/root/workspace/mm_gpu_voxel_trajectory")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

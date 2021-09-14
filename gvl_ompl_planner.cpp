@@ -48,15 +48,6 @@ using namespace std;
 using namespace std;
 
 
-using namespace Poco;
-using namespace Poco::Dynamic;
-using Poco::Net::SocketAddress;
-using Poco::Net::StreamSocket;
-using Poco::Net::Socket;
-using Poco::Timer;
-using Poco::TimerCallback;
-using Poco::Thread;
-
 // initial quaternion 0.49996,0.86605,0.00010683,0
 
 std::shared_ptr<GvlOmplPlannerHelper> my_class_ptr;
@@ -83,18 +74,22 @@ int main(int argc, char **argv)
     bounds.setHigh(1,5);
     bounds.setLow(2,-PI);
     bounds.setHigh(2,PI);
-    bounds.setLow(3,-PI);
-    bounds.setHigh(3,PI);
-    bounds.setLow(4,-PI);
-    bounds.setHigh(4,PI);
-    bounds.setLow(5,-PI);
-    bounds.setHigh(5,PI);
-    bounds.setLow(6,-PI);
-    bounds.setHigh(6,PI);
+
+
+
+    bounds.setLow(3,-2.63);
+    bounds.setHigh(3,1.57);
+    bounds.setLow(4,-0.6981);
+    bounds.setHigh(4,1.9);
+    bounds.setLow(5,-1.34);
+    bounds.setHigh(5,1.09);
+    bounds.setLow(6,-0.156);
+    bounds.setHigh(6,2.48);
     bounds.setLow(7,-PI);
     bounds.setHigh(7,PI);
-    bounds.setLow(8,-PI);
-    bounds.setHigh(8,PI);
+    bounds.setLow(8,-1.41);
+    bounds.setHigh(8,392);
+
 
   space->setBounds(bounds);
   //Create an instance of ompl::base::SpaceInformation for the state space
@@ -114,7 +109,7 @@ int main(int argc, char **argv)
 
 
   thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};  
-  thread t2{&GvlOmplPlannerHelper::tcpIter ,my_class_ptr};  
+  //thread t2{&GvlOmplPlannerHelper::tcpIter ,my_class_ptr};  
 
 
   while(1){
@@ -126,6 +121,6 @@ int main(int argc, char **argv)
   }
 //----------------------------------------------------//
     t1.join();
-    t2.join();
+    //t2.join();
     return 1;
 }

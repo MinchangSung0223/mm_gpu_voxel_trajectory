@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel
+CMAKE_SOURCE_DIR = /root/workspace/mm_gpu_voxel_trajectory
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel
+CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel_trajectory
 
 # Utility rule file for clean_test_results.
 
@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /root/workspace/mm_gpu_voxel
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/opt/conda/envs/ros/bin/python2 /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /root/workspace/mm_gpu_voxel/test_results
+	/opt/conda/envs/ros/bin/python2 /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /root/workspace/mm_gpu_voxel_trajectory/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -90,6 +90,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /root/workspace/mm_gpu_voxel && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel /root/workspace/mm_gpu_voxel/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/workspace/mm_gpu_voxel_trajectory && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

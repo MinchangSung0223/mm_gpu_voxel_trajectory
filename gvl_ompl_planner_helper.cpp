@@ -31,7 +31,7 @@
 #include <pcl/point_types.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Bool.h>
-#include "Poco/Net/Net.h"
+//#include "Poco/Net/Net.h"
 
 
 
@@ -57,14 +57,6 @@
 #include <vector>
 
 using namespace gpu_voxels;
-using namespace Poco;
-using namespace Poco::Dynamic;
-using Poco::Net::SocketAddress;
-using Poco::Net::StreamSocket;
-using Poco::Net::Socket;
-using Poco::Timer;
-using Poco::TimerCallback;
-using Poco::Thread;
 namespace bfs = boost::filesystem;
 #define PI 3.141592
 #define D2R 3.141592/180.0
@@ -396,6 +388,7 @@ void pubJointState(double *jointValue,ros::Publisher *pub_joint ){
 }
 
 void GvlOmplPlannerHelper::tcpIter(){
+        /*
 	StreamSocket ss;
 	Data data_rev, data;
 	unsigned char writeBuff[SIZE_DATA_MAX];
@@ -410,6 +403,7 @@ void GvlOmplPlannerHelper::tcpIter(){
 		usleep(1000);
 	}
 	ss.close();
+        */
 
 }
 
@@ -520,6 +514,8 @@ void GvlOmplPlannerHelper::rosIter(){
                 
                 jointState.header.stamp=ros::Time::now();
                 pub_joint.publish(jointState);
+                std::cout << "!!!!!!!!!!!!!!!PUBLISH!!!!!!!!! " << isMoving << std::endl;
+                isMoving=false;
             }
 
         }
@@ -587,23 +583,25 @@ GvlOmplPlannerHelper::GvlOmplPlannerHelper(const ob::SpaceInformationPtr &si)
     q_min(0) = 0;
     q_min(1) = 0;
     q_min(2) = -3.141592;
-    q_min(3) = -3.141592;
-    q_min(4) = -3.141592;
-    q_min(5) = -3.141592;
-    q_min(6) = -3.141592;
+
+    q_min(3) = -2.63;
+    q_min(4) = -0.6981;
+    q_min(5) = -1.34;
+    q_min(6) = -0.156;
     q_min(7) = -3.141592;
-    q_min(8) = -3.141592;
+    q_min(8) = -1.41;
 
 
     q_max(0) = 7;
     q_max(1) = 5;
     q_max(2) = 3.141592;
-    q_max(3) = 3.141592;
-    q_max(4) = 3.141592;
-    q_max(5) = 3.141592;
-    q_max(6) = 3.141592;
+
+    q_max(3) = 1.57;
+    q_max(4) = 1.9;
+    q_max(5) = 1.09;
+    q_max(6) = 2.48;
     q_max(7) = 3.141592;
-    q_max(8) = 3.141592;
+    q_max(8) = 1.392;
 
 
     PERF_MON_ENABLE("pose_check");

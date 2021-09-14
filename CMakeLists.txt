@@ -19,7 +19,7 @@ FIND_PACKAGE(PCL)
 FIND_PACKAGE(ROS)
 FIND_PACKAGE(pcl_ros)
 find_package(Eigen3 REQUIRED)
-find_package(Poco REQUIRED Foundation Net Util)
+#find_package(Poco REQUIRED Foundation Net Util)
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
 if(NOT EIGEN3_INCLUDE_DIRS)
@@ -75,9 +75,9 @@ target_link_libraries (gvl_ompl_planner_helper
     LINK_PUBLIC ${orocos_kdl_LIBRARIES} 
     LINK_PUBLIC ${moveit_LIBRARIES} 
     LINK_PUBLIC ${PYTHON_LIBRARIES}
-    LINK_PUBLIC    PocoNet
-    LINK_PUBLIC    PocoFoundation
-    LINK_PUBLIC PocoUtil
+   # LINK_PUBLIC    PocoNet
+    #LINK_PUBLIC    PocoFoundation
+   # LINK_PUBLIC PocoUtil
 
 )
 
@@ -115,7 +115,7 @@ target_include_directories (gvl_ompl_planner_helper
     PUBLIC ${moveit_INCLUDE_DIRS} # this should be removed in upcoming versions.
     PUBLIC  ${catkin_INCLUDE_DIRS}
     PUBLIC ${Eigen_INCLUDE_DIRS}
-    PUBLIC ${Poco_INCLUDE}
+   # PUBLIC ${Poco_INCLUDE}
 
 )
 
@@ -137,9 +137,9 @@ target_link_libraries (gvl_ompl_planner
     LINK_PUBLIC ${orocos_kdl_LIBRARIES} 
     LINK_PUBLIC ${Boost_LIBRARIES}
     LINK_PUBLIC ${Poco_LIBRARIES}
-    LINK_PUBLIC PocoNet
-    LINK_PUBLIC PocoFoundation
-    LINK_PUBLIC PocoUtil
+   # LINK_PUBLIC PocoNet
+   # LINK_PUBLIC PocoFoundation
+   # LINK_PUBLIC PocoUtil
 
 )
 target_include_directories(gvl_ompl_planner

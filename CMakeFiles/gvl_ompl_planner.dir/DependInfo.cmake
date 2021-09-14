@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/root/workspace/mm_gpu_voxel/gvl_ompl_planner.cpp" "/root/workspace/mm_gpu_voxel/CMakeFiles/gvl_ompl_planner.dir/gvl_ompl_planner.cpp.o"
+  "/root/workspace/mm_gpu_voxel_trajectory/gvl_ompl_planner.cpp" "/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/gvl_ompl_planner.dir/gvl_ompl_planner.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,19 +15,13 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "DISABLE_PNG"
   "H5_BUILT_AS_DYNAMIC_LIB"
   "IC_PERFORMANCE_MONITOR"
-  "POCO_ENABLE_CPP11"
-  "POCO_ENABLE_CPP14"
-  "POCO_HAVE_FD_EPOLL"
-  "POCO_OS_FAMILY_UNIX"
   "ROSCONSOLE_BACKEND_LOG4CXX"
   "ROS_BUILD_SHARED_LIBS=1"
   "ROS_PACKAGE_NAME=\"gvl_ompl_planning\""
-  "XML_DTD"
   "_BUILD_GVL_WITH_KINECT_SUPPORT_"
   "_BUILD_GVL_WITH_PCL_SUPPORT_"
   "_BUILD_GVL_WITH_TF_SUPPORT_"
   "_BUILD_GVL_WITH_URDF_SUPPORT_"
-  "_FILE_OFFSET_BITS=64"
   "_IC_BUILDER_GPU_VIS_CORE_"
   "_IC_BUILDER_GPU_VOXELS_"
   "_IC_BUILDER_GPU_VOXELS_CORE_"
@@ -53,12 +47,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "_IC_BUILDER_ICL_CORE_PERFORMANCE_MONITOR_"
   "_IC_BUILDER_ICL_CORE_PLUGIN_"
   "_IC_BUILDER_ICL_CORE_THREAD_"
-  "_LARGEFILE64_SOURCE"
-  "_REENTRANT"
   "_SYSTEM_LINUX_"
   "_SYSTEM_POSIX_"
-  "_THREAD_SAFE"
-  "_XOPEN_SOURCE=500"
   "qh_QHpointer"
   "vtkDomainsChemistry_AUTOINIT=1(vtkDomainsChemistryOpenGL2)"
   "vtkIOExport_AUTOINIT=2(vtkIOExportOpenGL2,vtkIOExportPDF)"
@@ -101,7 +91,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/root/workspace/mm_gpu_voxel/CMakeFiles/gvl_ompl_planner_helper.dir/DependInfo.cmake"
+  "/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/gvl_ompl_planner_helper.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
