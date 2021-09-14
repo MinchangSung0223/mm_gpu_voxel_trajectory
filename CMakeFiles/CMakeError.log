@@ -42883,3 +42883,2278 @@ make: *** [cmTC_6daad/fast] Error 2
 
 
 
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8b1f6/fast && /usr/bin/make  -f CMakeFiles/cmTC_8b1f6.dir/build.make CMakeFiles/cmTC_8b1f6.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8b1f6.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_8b1f6.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_8b1f6
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8b1f6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_8b1f6.dir/src.c.o -o cmTC_8b1f6 
+CMakeFiles/cmTC_8b1f6.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8b1f6.dir/build.make:105: recipe for target 'cmTC_8b1f6' failed
+make[1]: *** [cmTC_8b1f6] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_8b1f6/fast' failed
+make: *** [cmTC_8b1f6/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a4391/fast && /usr/bin/make  -f CMakeFiles/cmTC_a4391.dir/build.make CMakeFiles/cmTC_a4391.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a4391.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_a4391.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a4391
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a4391.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_a4391.dir/CheckFunctionExists.c.o -o cmTC_a4391  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a4391.dir/build.make:105: recipe for target 'cmTC_a4391' failed
+make[1]: *** [cmTC_a4391] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a4391/fast' failed
+make: *** [cmTC_a4391/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a9a19/fast && /usr/bin/make  -f CMakeFiles/cmTC_a9a19.dir/build.make CMakeFiles/cmTC_a9a19.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a9a19.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_a9a19.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a9a19
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9a19.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_a9a19.dir/src.c.o -o cmTC_a9a19 
+CMakeFiles/cmTC_a9a19.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a9a19.dir/build.make:105: recipe for target 'cmTC_a9a19' failed
+make[1]: *** [cmTC_a9a19] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a9a19/fast' failed
+make: *** [cmTC_a9a19/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_840c5/fast && /usr/bin/make  -f CMakeFiles/cmTC_840c5.dir/build.make CMakeFiles/cmTC_840c5.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_840c5.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_840c5.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_840c5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_840c5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_840c5.dir/CheckFunctionExists.c.o -o cmTC_840c5  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_840c5.dir/build.make:105: recipe for target 'cmTC_840c5' failed
+make[1]: *** [cmTC_840c5] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_840c5/fast' failed
+make: *** [cmTC_840c5/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_de2bd/fast && /usr/bin/make  -f CMakeFiles/cmTC_de2bd.dir/build.make CMakeFiles/cmTC_de2bd.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_de2bd.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_de2bd.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_de2bd
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_de2bd.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_de2bd.dir/src.c.o -o cmTC_de2bd 
+CMakeFiles/cmTC_de2bd.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_de2bd.dir/build.make:105: recipe for target 'cmTC_de2bd' failed
+make[1]: *** [cmTC_de2bd] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_de2bd/fast' failed
+make: *** [cmTC_de2bd/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f576b/fast && /usr/bin/make  -f CMakeFiles/cmTC_f576b.dir/build.make CMakeFiles/cmTC_f576b.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f576b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_f576b.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f576b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f576b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_f576b.dir/CheckFunctionExists.c.o -o cmTC_f576b  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f576b.dir/build.make:105: recipe for target 'cmTC_f576b' failed
+make[1]: *** [cmTC_f576b] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f576b/fast' failed
+make: *** [cmTC_f576b/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_46e8c/fast && /usr/bin/make  -f CMakeFiles/cmTC_46e8c.dir/build.make CMakeFiles/cmTC_46e8c.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_46e8c.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_46e8c.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_46e8c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_46e8c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_46e8c.dir/src.c.o -o cmTC_46e8c 
+CMakeFiles/cmTC_46e8c.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_46e8c.dir/build.make:105: recipe for target 'cmTC_46e8c' failed
+make[1]: *** [cmTC_46e8c] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_46e8c/fast' failed
+make: *** [cmTC_46e8c/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_30181/fast && /usr/bin/make  -f CMakeFiles/cmTC_30181.dir/build.make CMakeFiles/cmTC_30181.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_30181.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_30181.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_30181
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30181.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_30181.dir/CheckFunctionExists.c.o -o cmTC_30181  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_30181.dir/build.make:105: recipe for target 'cmTC_30181' failed
+make[1]: *** [cmTC_30181] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_30181/fast' failed
+make: *** [cmTC_30181/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_64c82/fast && /usr/bin/make  -f CMakeFiles/cmTC_64c82.dir/build.make CMakeFiles/cmTC_64c82.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_64c82.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_64c82.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_64c82
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64c82.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_64c82.dir/src.c.o -o cmTC_64c82 
+CMakeFiles/cmTC_64c82.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_64c82.dir/build.make:105: recipe for target 'cmTC_64c82' failed
+make[1]: *** [cmTC_64c82] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_64c82/fast' failed
+make: *** [cmTC_64c82/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_73632/fast && /usr/bin/make  -f CMakeFiles/cmTC_73632.dir/build.make CMakeFiles/cmTC_73632.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_73632.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_73632.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_73632
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_73632.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_73632.dir/CheckFunctionExists.c.o -o cmTC_73632  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_73632.dir/build.make:105: recipe for target 'cmTC_73632' failed
+make[1]: *** [cmTC_73632] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_73632/fast' failed
+make: *** [cmTC_73632/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cf68f/fast && /usr/bin/make  -f CMakeFiles/cmTC_cf68f.dir/build.make CMakeFiles/cmTC_cf68f.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cf68f.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_cf68f.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_cf68f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf68f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_cf68f.dir/src.c.o -o cmTC_cf68f 
+CMakeFiles/cmTC_cf68f.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_cf68f.dir/build.make:105: recipe for target 'cmTC_cf68f' failed
+make[1]: *** [cmTC_cf68f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_cf68f/fast' failed
+make: *** [cmTC_cf68f/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cf517/fast && /usr/bin/make  -f CMakeFiles/cmTC_cf517.dir/build.make CMakeFiles/cmTC_cf517.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cf517.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_cf517.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_cf517
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf517.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_cf517.dir/CheckFunctionExists.c.o -o cmTC_cf517  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_cf517.dir/build.make:105: recipe for target 'cmTC_cf517' failed
+make[1]: *** [cmTC_cf517] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_cf517/fast' failed
+make: *** [cmTC_cf517/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f71a5/fast && /usr/bin/make  -f CMakeFiles/cmTC_f71a5.dir/build.make CMakeFiles/cmTC_f71a5.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f71a5.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_f71a5.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_f71a5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f71a5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_f71a5.dir/src.c.o -o cmTC_f71a5 
+CMakeFiles/cmTC_f71a5.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f71a5.dir/build.make:105: recipe for target 'cmTC_f71a5' failed
+make[1]: *** [cmTC_f71a5] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f71a5/fast' failed
+make: *** [cmTC_f71a5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_53ca3/fast && /usr/bin/make  -f CMakeFiles/cmTC_53ca3.dir/build.make CMakeFiles/cmTC_53ca3.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_53ca3.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_53ca3.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_53ca3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_53ca3.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_53ca3.dir/CheckFunctionExists.c.o -o cmTC_53ca3  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_53ca3.dir/build.make:105: recipe for target 'cmTC_53ca3' failed
+make[1]: *** [cmTC_53ca3] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_53ca3/fast' failed
+make: *** [cmTC_53ca3/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e2ad3/fast && /usr/bin/make  -f CMakeFiles/cmTC_e2ad3.dir/build.make CMakeFiles/cmTC_e2ad3.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e2ad3.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_e2ad3.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_e2ad3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e2ad3.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_e2ad3.dir/src.c.o -o cmTC_e2ad3 
+CMakeFiles/cmTC_e2ad3.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e2ad3.dir/build.make:105: recipe for target 'cmTC_e2ad3' failed
+make[1]: *** [cmTC_e2ad3] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_e2ad3/fast' failed
+make: *** [cmTC_e2ad3/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_78518/fast && /usr/bin/make  -f CMakeFiles/cmTC_78518.dir/build.make CMakeFiles/cmTC_78518.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_78518.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_78518.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_78518
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_78518.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_78518.dir/CheckFunctionExists.c.o -o cmTC_78518  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_78518.dir/build.make:105: recipe for target 'cmTC_78518' failed
+make[1]: *** [cmTC_78518] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_78518/fast' failed
+make: *** [cmTC_78518/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_25a12/fast && /usr/bin/make  -f CMakeFiles/cmTC_25a12.dir/build.make CMakeFiles/cmTC_25a12.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_25a12.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_25a12.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_25a12
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25a12.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_25a12.dir/src.c.o -o cmTC_25a12 
+CMakeFiles/cmTC_25a12.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_25a12.dir/build.make:105: recipe for target 'cmTC_25a12' failed
+make[1]: *** [cmTC_25a12] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_25a12/fast' failed
+make: *** [cmTC_25a12/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d453e/fast && /usr/bin/make  -f CMakeFiles/cmTC_d453e.dir/build.make CMakeFiles/cmTC_d453e.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d453e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_d453e.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d453e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d453e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_d453e.dir/CheckFunctionExists.c.o -o cmTC_d453e  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d453e.dir/build.make:105: recipe for target 'cmTC_d453e' failed
+make[1]: *** [cmTC_d453e] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d453e/fast' failed
+make: *** [cmTC_d453e/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8f181/fast && /usr/bin/make  -f CMakeFiles/cmTC_8f181.dir/build.make CMakeFiles/cmTC_8f181.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8f181.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_8f181.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_8f181
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8f181.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_8f181.dir/src.c.o -o cmTC_8f181 
+CMakeFiles/cmTC_8f181.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8f181.dir/build.make:105: recipe for target 'cmTC_8f181' failed
+make[1]: *** [cmTC_8f181] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_8f181/fast' failed
+make: *** [cmTC_8f181/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e076f/fast && /usr/bin/make  -f CMakeFiles/cmTC_e076f.dir/build.make CMakeFiles/cmTC_e076f.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e076f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_e076f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e076f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e076f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_e076f.dir/CheckFunctionExists.c.o -o cmTC_e076f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e076f.dir/build.make:105: recipe for target 'cmTC_e076f' failed
+make[1]: *** [cmTC_e076f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_e076f/fast' failed
+make: *** [cmTC_e076f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3ee5a/fast && /usr/bin/make  -f CMakeFiles/cmTC_3ee5a.dir/build.make CMakeFiles/cmTC_3ee5a.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3ee5a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_3ee5a.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_3ee5a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ee5a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_3ee5a.dir/src.c.o -o cmTC_3ee5a 
+CMakeFiles/cmTC_3ee5a.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_3ee5a.dir/build.make:105: recipe for target 'cmTC_3ee5a' failed
+make[1]: *** [cmTC_3ee5a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_3ee5a/fast' failed
+make: *** [cmTC_3ee5a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4cfef/fast && /usr/bin/make  -f CMakeFiles/cmTC_4cfef.dir/build.make CMakeFiles/cmTC_4cfef.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4cfef.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4cfef.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4cfef
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cfef.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_4cfef.dir/CheckFunctionExists.c.o -o cmTC_4cfef  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4cfef.dir/build.make:105: recipe for target 'cmTC_4cfef' failed
+make[1]: *** [cmTC_4cfef] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4cfef/fast' failed
+make: *** [cmTC_4cfef/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c1e7a/fast && /usr/bin/make  -f CMakeFiles/cmTC_c1e7a.dir/build.make CMakeFiles/cmTC_c1e7a.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c1e7a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c1e7a.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c1e7a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1e7a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c1e7a.dir/src.c.o -o cmTC_c1e7a 
+CMakeFiles/cmTC_c1e7a.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c1e7a.dir/build.make:105: recipe for target 'cmTC_c1e7a' failed
+make[1]: *** [cmTC_c1e7a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c1e7a/fast' failed
+make: *** [cmTC_c1e7a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_86194/fast && /usr/bin/make  -f CMakeFiles/cmTC_86194.dir/build.make CMakeFiles/cmTC_86194.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_86194.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_86194.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_86194
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_86194.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_86194.dir/CheckFunctionExists.c.o -o cmTC_86194  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_86194.dir/build.make:105: recipe for target 'cmTC_86194' failed
+make[1]: *** [cmTC_86194] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_86194/fast' failed
+make: *** [cmTC_86194/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_25e92/fast && /usr/bin/make  -f CMakeFiles/cmTC_25e92.dir/build.make CMakeFiles/cmTC_25e92.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_25e92.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_25e92.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_25e92
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25e92.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_25e92.dir/src.c.o -o cmTC_25e92 
+CMakeFiles/cmTC_25e92.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_25e92.dir/build.make:105: recipe for target 'cmTC_25e92' failed
+make[1]: *** [cmTC_25e92] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_25e92/fast' failed
+make: *** [cmTC_25e92/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c0078/fast && /usr/bin/make  -f CMakeFiles/cmTC_c0078.dir/build.make CMakeFiles/cmTC_c0078.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c0078.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c0078.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c0078
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c0078.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c0078.dir/CheckFunctionExists.c.o -o cmTC_c0078  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c0078.dir/build.make:105: recipe for target 'cmTC_c0078' failed
+make[1]: *** [cmTC_c0078] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c0078/fast' failed
+make: *** [cmTC_c0078/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bba4e/fast && /usr/bin/make  -f CMakeFiles/cmTC_bba4e.dir/build.make CMakeFiles/cmTC_bba4e.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bba4e.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_bba4e.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_bba4e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bba4e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_bba4e.dir/src.c.o -o cmTC_bba4e 
+CMakeFiles/cmTC_bba4e.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bba4e.dir/build.make:105: recipe for target 'cmTC_bba4e' failed
+make[1]: *** [cmTC_bba4e] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_bba4e/fast' failed
+make: *** [cmTC_bba4e/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cdaa1/fast && /usr/bin/make  -f CMakeFiles/cmTC_cdaa1.dir/build.make CMakeFiles/cmTC_cdaa1.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cdaa1.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_cdaa1.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_cdaa1
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cdaa1.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_cdaa1.dir/CheckFunctionExists.c.o -o cmTC_cdaa1  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_cdaa1.dir/build.make:105: recipe for target 'cmTC_cdaa1' failed
+make[1]: *** [cmTC_cdaa1] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_cdaa1/fast' failed
+make: *** [cmTC_cdaa1/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f9d43/fast && /usr/bin/make  -f CMakeFiles/cmTC_f9d43.dir/build.make CMakeFiles/cmTC_f9d43.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f9d43.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_f9d43.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_f9d43
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9d43.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_f9d43.dir/src.c.o -o cmTC_f9d43 
+CMakeFiles/cmTC_f9d43.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f9d43.dir/build.make:105: recipe for target 'cmTC_f9d43' failed
+make[1]: *** [cmTC_f9d43] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f9d43/fast' failed
+make: *** [cmTC_f9d43/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_314db/fast && /usr/bin/make  -f CMakeFiles/cmTC_314db.dir/build.make CMakeFiles/cmTC_314db.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_314db.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_314db.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_314db
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_314db.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_314db.dir/CheckFunctionExists.c.o -o cmTC_314db  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_314db.dir/build.make:105: recipe for target 'cmTC_314db' failed
+make[1]: *** [cmTC_314db] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_314db/fast' failed
+make: *** [cmTC_314db/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b9942/fast && /usr/bin/make  -f CMakeFiles/cmTC_b9942.dir/build.make CMakeFiles/cmTC_b9942.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b9942.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_b9942.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b9942
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b9942.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_b9942.dir/src.c.o -o cmTC_b9942 
+CMakeFiles/cmTC_b9942.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b9942.dir/build.make:105: recipe for target 'cmTC_b9942' failed
+make[1]: *** [cmTC_b9942] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_b9942/fast' failed
+make: *** [cmTC_b9942/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_34273/fast && /usr/bin/make  -f CMakeFiles/cmTC_34273.dir/build.make CMakeFiles/cmTC_34273.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_34273.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_34273.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_34273
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_34273.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_34273.dir/CheckFunctionExists.c.o -o cmTC_34273  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_34273.dir/build.make:105: recipe for target 'cmTC_34273' failed
+make[1]: *** [cmTC_34273] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_34273/fast' failed
+make: *** [cmTC_34273/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_af96d/fast && /usr/bin/make  -f CMakeFiles/cmTC_af96d.dir/build.make CMakeFiles/cmTC_af96d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_af96d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_af96d.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_af96d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_af96d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_af96d.dir/src.c.o -o cmTC_af96d 
+CMakeFiles/cmTC_af96d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_af96d.dir/build.make:105: recipe for target 'cmTC_af96d' failed
+make[1]: *** [cmTC_af96d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_af96d/fast' failed
+make: *** [cmTC_af96d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c2c62/fast && /usr/bin/make  -f CMakeFiles/cmTC_c2c62.dir/build.make CMakeFiles/cmTC_c2c62.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c2c62.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c2c62.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c2c62
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2c62.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c2c62.dir/CheckFunctionExists.c.o -o cmTC_c2c62  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c2c62.dir/build.make:105: recipe for target 'cmTC_c2c62' failed
+make[1]: *** [cmTC_c2c62] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c2c62/fast' failed
+make: *** [cmTC_c2c62/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f5f0d/fast && /usr/bin/make  -f CMakeFiles/cmTC_f5f0d.dir/build.make CMakeFiles/cmTC_f5f0d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f5f0d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_f5f0d.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_f5f0d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5f0d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_f5f0d.dir/src.c.o -o cmTC_f5f0d 
+CMakeFiles/cmTC_f5f0d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f5f0d.dir/build.make:105: recipe for target 'cmTC_f5f0d' failed
+make[1]: *** [cmTC_f5f0d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f5f0d/fast' failed
+make: *** [cmTC_f5f0d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0f30f/fast && /usr/bin/make  -f CMakeFiles/cmTC_0f30f.dir/build.make CMakeFiles/cmTC_0f30f.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0f30f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_0f30f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0f30f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0f30f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_0f30f.dir/CheckFunctionExists.c.o -o cmTC_0f30f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0f30f.dir/build.make:105: recipe for target 'cmTC_0f30f' failed
+make[1]: *** [cmTC_0f30f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0f30f/fast' failed
+make: *** [cmTC_0f30f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5266d/fast && /usr/bin/make  -f CMakeFiles/cmTC_5266d.dir/build.make CMakeFiles/cmTC_5266d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5266d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_5266d.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_5266d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5266d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_5266d.dir/src.c.o -o cmTC_5266d 
+CMakeFiles/cmTC_5266d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5266d.dir/build.make:105: recipe for target 'cmTC_5266d' failed
+make[1]: *** [cmTC_5266d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_5266d/fast' failed
+make: *** [cmTC_5266d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2c227/fast && /usr/bin/make  -f CMakeFiles/cmTC_2c227.dir/build.make CMakeFiles/cmTC_2c227.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2c227.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_2c227.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2c227
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c227.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_2c227.dir/CheckFunctionExists.c.o -o cmTC_2c227  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2c227.dir/build.make:105: recipe for target 'cmTC_2c227' failed
+make[1]: *** [cmTC_2c227] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2c227/fast' failed
+make: *** [cmTC_2c227/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c22b5/fast && /usr/bin/make  -f CMakeFiles/cmTC_c22b5.dir/build.make CMakeFiles/cmTC_c22b5.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c22b5.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c22b5.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c22b5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c22b5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c22b5.dir/src.c.o -o cmTC_c22b5 
+CMakeFiles/cmTC_c22b5.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c22b5.dir/build.make:105: recipe for target 'cmTC_c22b5' failed
+make[1]: *** [cmTC_c22b5] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c22b5/fast' failed
+make: *** [cmTC_c22b5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c5423/fast && /usr/bin/make  -f CMakeFiles/cmTC_c5423.dir/build.make CMakeFiles/cmTC_c5423.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c5423.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c5423.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c5423
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c5423.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_c5423.dir/CheckFunctionExists.c.o -o cmTC_c5423  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c5423.dir/build.make:105: recipe for target 'cmTC_c5423' failed
+make[1]: *** [cmTC_c5423] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c5423/fast' failed
+make: *** [cmTC_c5423/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_47097/fast && /usr/bin/make  -f CMakeFiles/cmTC_47097.dir/build.make CMakeFiles/cmTC_47097.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_47097.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_47097.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_47097
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_47097.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_47097.dir/src.c.o -o cmTC_47097 
+CMakeFiles/cmTC_47097.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_47097.dir/build.make:105: recipe for target 'cmTC_47097' failed
+make[1]: *** [cmTC_47097] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_47097/fast' failed
+make: *** [cmTC_47097/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0008c/fast && /usr/bin/make  -f CMakeFiles/cmTC_0008c.dir/build.make CMakeFiles/cmTC_0008c.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0008c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_0008c.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0008c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0008c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_0008c.dir/CheckFunctionExists.c.o -o cmTC_0008c  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0008c.dir/build.make:105: recipe for target 'cmTC_0008c' failed
+make[1]: *** [cmTC_0008c] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0008c/fast' failed
+make: *** [cmTC_0008c/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c8841/fast && /usr/bin/make  -f CMakeFiles/cmTC_c8841.dir/build.make CMakeFiles/cmTC_c8841.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c8841.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c8841.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c8841
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c8841.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c8841.dir/src.c.o -o cmTC_c8841 
+CMakeFiles/cmTC_c8841.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c8841.dir/build.make:105: recipe for target 'cmTC_c8841' failed
+make[1]: *** [cmTC_c8841] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c8841/fast' failed
+make: *** [cmTC_c8841/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5ed95/fast && /usr/bin/make  -f CMakeFiles/cmTC_5ed95.dir/build.make CMakeFiles/cmTC_5ed95.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5ed95.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_5ed95.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5ed95
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5ed95.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_5ed95.dir/CheckFunctionExists.c.o -o cmTC_5ed95  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5ed95.dir/build.make:105: recipe for target 'cmTC_5ed95' failed
+make[1]: *** [cmTC_5ed95] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_5ed95/fast' failed
+make: *** [cmTC_5ed95/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2a47d/fast && /usr/bin/make  -f CMakeFiles/cmTC_2a47d.dir/build.make CMakeFiles/cmTC_2a47d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2a47d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_2a47d.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_2a47d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2a47d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_2a47d.dir/src.c.o -o cmTC_2a47d 
+CMakeFiles/cmTC_2a47d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2a47d.dir/build.make:105: recipe for target 'cmTC_2a47d' failed
+make[1]: *** [cmTC_2a47d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2a47d/fast' failed
+make: *** [cmTC_2a47d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d2698/fast && /usr/bin/make  -f CMakeFiles/cmTC_d2698.dir/build.make CMakeFiles/cmTC_d2698.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d2698.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_d2698.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d2698
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2698.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_d2698.dir/CheckFunctionExists.c.o -o cmTC_d2698  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d2698.dir/build.make:105: recipe for target 'cmTC_d2698' failed
+make[1]: *** [cmTC_d2698] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d2698/fast' failed
+make: *** [cmTC_d2698/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9fe1d/fast && /usr/bin/make  -f CMakeFiles/cmTC_9fe1d.dir/build.make CMakeFiles/cmTC_9fe1d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9fe1d.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_9fe1d.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9fe1d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9fe1d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_9fe1d.dir/src.c.o -o cmTC_9fe1d 
+CMakeFiles/cmTC_9fe1d.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9fe1d.dir/build.make:105: recipe for target 'cmTC_9fe1d' failed
+make[1]: *** [cmTC_9fe1d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_9fe1d/fast' failed
+make: *** [cmTC_9fe1d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f9cde/fast && /usr/bin/make  -f CMakeFiles/cmTC_f9cde.dir/build.make CMakeFiles/cmTC_f9cde.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f9cde.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_f9cde.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f9cde
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9cde.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_f9cde.dir/CheckFunctionExists.c.o -o cmTC_f9cde  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f9cde.dir/build.make:105: recipe for target 'cmTC_f9cde' failed
+make[1]: *** [cmTC_f9cde] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_f9cde/fast' failed
+make: *** [cmTC_f9cde/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5fd64/fast && /usr/bin/make  -f CMakeFiles/cmTC_5fd64.dir/build.make CMakeFiles/cmTC_5fd64.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5fd64.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_5fd64.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_5fd64
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5fd64.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_5fd64.dir/src.c.o -o cmTC_5fd64 
+CMakeFiles/cmTC_5fd64.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5fd64.dir/build.make:105: recipe for target 'cmTC_5fd64' failed
+make[1]: *** [cmTC_5fd64] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_5fd64/fast' failed
+make: *** [cmTC_5fd64/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_979a1/fast && /usr/bin/make  -f CMakeFiles/cmTC_979a1.dir/build.make CMakeFiles/cmTC_979a1.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_979a1.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_979a1.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_979a1
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_979a1.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_979a1.dir/CheckFunctionExists.c.o -o cmTC_979a1  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_979a1.dir/build.make:105: recipe for target 'cmTC_979a1' failed
+make[1]: *** [cmTC_979a1] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_979a1/fast' failed
+make: *** [cmTC_979a1/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2de19/fast && /usr/bin/make  -f CMakeFiles/cmTC_2de19.dir/build.make CMakeFiles/cmTC_2de19.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2de19.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_2de19.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_2de19
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2de19.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_2de19.dir/src.c.o -o cmTC_2de19 
+CMakeFiles/cmTC_2de19.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2de19.dir/build.make:105: recipe for target 'cmTC_2de19' failed
+make[1]: *** [cmTC_2de19] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2de19/fast' failed
+make: *** [cmTC_2de19/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_eada6/fast && /usr/bin/make  -f CMakeFiles/cmTC_eada6.dir/build.make CMakeFiles/cmTC_eada6.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eada6.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_eada6.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_eada6
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eada6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_eada6.dir/CheckFunctionExists.c.o -o cmTC_eada6  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_eada6.dir/build.make:105: recipe for target 'cmTC_eada6' failed
+make[1]: *** [cmTC_eada6] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_eada6/fast' failed
+make: *** [cmTC_eada6/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6061a/fast && /usr/bin/make  -f CMakeFiles/cmTC_6061a.dir/build.make CMakeFiles/cmTC_6061a.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6061a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_6061a.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_6061a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6061a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_6061a.dir/src.c.o -o cmTC_6061a 
+CMakeFiles/cmTC_6061a.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_6061a.dir/build.make:105: recipe for target 'cmTC_6061a' failed
+make[1]: *** [cmTC_6061a] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_6061a/fast' failed
+make: *** [cmTC_6061a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fe2d3/fast && /usr/bin/make  -f CMakeFiles/cmTC_fe2d3.dir/build.make CMakeFiles/cmTC_fe2d3.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fe2d3.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_fe2d3.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fe2d3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fe2d3.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_fe2d3.dir/CheckFunctionExists.c.o -o cmTC_fe2d3  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fe2d3.dir/build.make:105: recipe for target 'cmTC_fe2d3' failed
+make[1]: *** [cmTC_fe2d3] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_fe2d3/fast' failed
+make: *** [cmTC_fe2d3/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b9ff5/fast && /usr/bin/make  -f CMakeFiles/cmTC_b9ff5.dir/build.make CMakeFiles/cmTC_b9ff5.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b9ff5.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_b9ff5.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b9ff5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b9ff5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_b9ff5.dir/src.c.o -o cmTC_b9ff5 
+CMakeFiles/cmTC_b9ff5.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b9ff5.dir/build.make:105: recipe for target 'cmTC_b9ff5' failed
+make[1]: *** [cmTC_b9ff5] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_b9ff5/fast' failed
+make: *** [cmTC_b9ff5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2e399/fast && /usr/bin/make  -f CMakeFiles/cmTC_2e399.dir/build.make CMakeFiles/cmTC_2e399.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2e399.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_2e399.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2e399
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2e399.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_2e399.dir/CheckFunctionExists.c.o -o cmTC_2e399  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2e399.dir/build.make:105: recipe for target 'cmTC_2e399' failed
+make[1]: *** [cmTC_2e399] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_2e399/fast' failed
+make: *** [cmTC_2e399/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c56da/fast && /usr/bin/make  -f CMakeFiles/cmTC_c56da.dir/build.make CMakeFiles/cmTC_c56da.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c56da.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c56da.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c56da
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c56da.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c56da.dir/src.c.o -o cmTC_c56da 
+CMakeFiles/cmTC_c56da.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c56da.dir/build.make:105: recipe for target 'cmTC_c56da' failed
+make[1]: *** [cmTC_c56da] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c56da/fast' failed
+make: *** [cmTC_c56da/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_43e87/fast && /usr/bin/make  -f CMakeFiles/cmTC_43e87.dir/build.make CMakeFiles/cmTC_43e87.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_43e87.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_43e87.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_43e87
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_43e87.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_43e87.dir/CheckFunctionExists.c.o -o cmTC_43e87  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_43e87.dir/build.make:105: recipe for target 'cmTC_43e87' failed
+make[1]: *** [cmTC_43e87] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_43e87/fast' failed
+make: *** [cmTC_43e87/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0aafb/fast && /usr/bin/make  -f CMakeFiles/cmTC_0aafb.dir/build.make CMakeFiles/cmTC_0aafb.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0aafb.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_0aafb.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0aafb
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0aafb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_0aafb.dir/src.c.o -o cmTC_0aafb 
+CMakeFiles/cmTC_0aafb.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0aafb.dir/build.make:105: recipe for target 'cmTC_0aafb' failed
+make[1]: *** [cmTC_0aafb] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_0aafb/fast' failed
+make: *** [cmTC_0aafb/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7cf77/fast && /usr/bin/make  -f CMakeFiles/cmTC_7cf77.dir/build.make CMakeFiles/cmTC_7cf77.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7cf77.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_7cf77.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7cf77
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7cf77.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_7cf77.dir/CheckFunctionExists.c.o -o cmTC_7cf77  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7cf77.dir/build.make:105: recipe for target 'cmTC_7cf77' failed
+make[1]: *** [cmTC_7cf77] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_7cf77/fast' failed
+make: *** [cmTC_7cf77/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_06b32/fast && /usr/bin/make  -f CMakeFiles/cmTC_06b32.dir/build.make CMakeFiles/cmTC_06b32.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_06b32.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_06b32.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_06b32
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_06b32.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_06b32.dir/src.c.o -o cmTC_06b32 
+CMakeFiles/cmTC_06b32.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_06b32.dir/build.make:105: recipe for target 'cmTC_06b32' failed
+make[1]: *** [cmTC_06b32] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_06b32/fast' failed
+make: *** [cmTC_06b32/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bec05/fast && /usr/bin/make  -f CMakeFiles/cmTC_bec05.dir/build.make CMakeFiles/cmTC_bec05.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bec05.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_bec05.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bec05
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bec05.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_bec05.dir/CheckFunctionExists.c.o -o cmTC_bec05  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bec05.dir/build.make:105: recipe for target 'cmTC_bec05' failed
+make[1]: *** [cmTC_bec05] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_bec05/fast' failed
+make: *** [cmTC_bec05/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c62fe/fast && /usr/bin/make  -f CMakeFiles/cmTC_c62fe.dir/build.make CMakeFiles/cmTC_c62fe.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c62fe.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_c62fe.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c62fe
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c62fe.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_c62fe.dir/src.c.o -o cmTC_c62fe 
+CMakeFiles/cmTC_c62fe.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c62fe.dir/build.make:105: recipe for target 'cmTC_c62fe' failed
+make[1]: *** [cmTC_c62fe] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_c62fe/fast' failed
+make: *** [cmTC_c62fe/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6b540/fast && /usr/bin/make  -f CMakeFiles/cmTC_6b540.dir/build.make CMakeFiles/cmTC_6b540.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6b540.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_6b540.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_6b540
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6b540.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_6b540.dir/CheckFunctionExists.c.o -o cmTC_6b540  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_6b540.dir/build.make:105: recipe for target 'cmTC_6b540' failed
+make[1]: *** [cmTC_6b540] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_6b540/fast' failed
+make: *** [cmTC_6b540/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a39ab/fast && /usr/bin/make  -f CMakeFiles/cmTC_a39ab.dir/build.make CMakeFiles/cmTC_a39ab.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a39ab.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_a39ab.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a39ab
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a39ab.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_a39ab.dir/src.c.o -o cmTC_a39ab 
+CMakeFiles/cmTC_a39ab.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a39ab.dir/build.make:105: recipe for target 'cmTC_a39ab' failed
+make[1]: *** [cmTC_a39ab] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a39ab/fast' failed
+make: *** [cmTC_a39ab/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_df14f/fast && /usr/bin/make  -f CMakeFiles/cmTC_df14f.dir/build.make CMakeFiles/cmTC_df14f.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_df14f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_df14f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_df14f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_df14f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_df14f.dir/CheckFunctionExists.c.o -o cmTC_df14f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_df14f.dir/build.make:105: recipe for target 'cmTC_df14f' failed
+make[1]: *** [cmTC_df14f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_df14f/fast' failed
+make: *** [cmTC_df14f/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a5034/fast && /usr/bin/make  -f CMakeFiles/cmTC_a5034.dir/build.make CMakeFiles/cmTC_a5034.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a5034.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_a5034.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a5034
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5034.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_a5034.dir/src.c.o -o cmTC_a5034 
+CMakeFiles/cmTC_a5034.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a5034.dir/build.make:105: recipe for target 'cmTC_a5034' failed
+make[1]: *** [cmTC_a5034] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_a5034/fast' failed
+make: *** [cmTC_a5034/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4d62d/fast && /usr/bin/make  -f CMakeFiles/cmTC_4d62d.dir/build.make CMakeFiles/cmTC_4d62d.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d62d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4d62d.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4d62d
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d62d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_4d62d.dir/CheckFunctionExists.c.o -o cmTC_4d62d  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4d62d.dir/build.make:105: recipe for target 'cmTC_4d62d' failed
+make[1]: *** [cmTC_4d62d] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_4d62d/fast' failed
+make: *** [cmTC_4d62d/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d3462/fast && /usr/bin/make  -f CMakeFiles/cmTC_d3462.dir/build.make CMakeFiles/cmTC_d3462.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d3462.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_d3462.dir/src.c.o -c /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_d3462
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3462.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_d3462.dir/src.c.o -o cmTC_d3462 
+CMakeFiles/cmTC_d3462.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d3462.dir/build.make:105: recipe for target 'cmTC_d3462' failed
+make[1]: *** [cmTC_d3462] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_d3462/fast' failed
+make: *** [cmTC_d3462/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ff07f/fast && /usr/bin/make  -f CMakeFiles/cmTC_ff07f.dir/build.make CMakeFiles/cmTC_ff07f.dir/build
+make[1]: Entering directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ff07f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_ff07f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ff07f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff07f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_ff07f.dir/CheckFunctionExists.c.o -o cmTC_ff07f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_ff07f.dir/build.make:105: recipe for target 'cmTC_ff07f' failed
+make[1]: *** [cmTC_ff07f] Error 1
+make[1]: Leaving directory '/root/workspace/mm_gpu_voxel_trajectory/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_ff07f/fast' failed
+make: *** [cmTC_ff07f/fast] Error 2
+
+
+

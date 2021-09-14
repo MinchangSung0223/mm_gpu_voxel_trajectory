@@ -33,10 +33,6 @@
 #include <std_msgs/Bool.h>
 //#include "Poco/Net/Net.h"
 
-
-
-
-
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Pose.h>
 #include <sstream>
@@ -449,8 +445,8 @@ void GvlOmplPlannerHelper::rosIter(){
     ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/merged", 1,roscallback);
 
     //ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/cam_0_zf", 1,roscallback);
-    ros::Publisher pub_joint =  nh.advertise<sensor_msgs::JointState>("/joint_states_desired", 1000);
-
+    //ros::Publisher pub_joint =  nh.advertise<sensor_msgs::JointState>("/joint_states_desired", 1000);
+    ros::Publisher pub = nh.advertise<trajectory_msgs::JointTrajectory>("joint_trajectory", 1000);
     ros::Rate r(100);
     new_data_received = true; // call visualize on the first iteration
     new_pose_received=false;
@@ -460,7 +456,6 @@ void GvlOmplPlannerHelper::rosIter(){
 
     while (ros::ok())
     {
-        ros::spinOnce();
        // LOGGING_INFO(Gpu_voxels, "ROSITER " << endl);
 
         //init
@@ -492,32 +487,41 @@ void GvlOmplPlannerHelper::rosIter(){
                 GvlOmplPlannerHelper::visualizeSolution(joint_trajectory);    
                     
         }
-        else{
+        if(new_pose_received==false){
           std::cout << "!!!!!!!!!!!!!!!isMoving!!!!!!!!! " << isMoving << std::endl;
-            if(joint_trajectory.size()>0 && isMoving){
-                GvlOmplPlannerHelper::visualizeSolution(joint_trajectory);  
-                std::array<double,JOINTNUM> temp_q = joint_trajectory.at(0);
-                send_q = temp_q;
-                sensor_msgs::JointState jointState;
-                jointState.name.push_back("lin_x_joint");
-                jointState.name.push_back("lin_y_joint");
-                jointState.name.push_back("rot_z_joint");
-                jointState.name.push_back("Arm_Joint_1");
-                jointState.name.push_back("Arm_Joint_2");
-                jointState.name.push_back("Arm_Joint_3");
-                jointState.name.push_back("Arm_Joint_4");
-                jointState.name.push_back("Arm_Joint_5");
-                jointState.name.push_back("Arm_Joint_6");
-                
-                for(int i = 0;i<JOINTNUM;i++)
-                    jointState.position.push_back(temp_q.at(i));
-                
-                jointState.header.stamp=ros::Time::now();
-                pub_joint.publish(jointState);
+            if(joint_trajectory.size()&& isMoving){
+                trajectory_msgs::JointTrajectory jointTrajectory;
+
+                jointTrajectory = trajectory_msgs::JointTrajectory();
+                jointTrajectory.joint_names.push_back("lin_x_joint");
+                jointTrajectory.joint_names.push_back("lin_y_joint");
+                jointTrajectory.joint_names.push_back("rot_z_joint");
+                jointTrajectory.joint_names.push_back("Arm_Joint_1");
+                jointTrajectory.joint_names.push_back("Arm_Joint_2");
+                jointTrajectory.joint_names.push_back("Arm_Joint_3");         
+                jointTrajectory.joint_names.push_back("Arm_Joint_4"); 
+                jointTrajectory.joint_names.push_back("Arm_Joint_5"); 
+                jointTrajectory.joint_names.push_back("Arm_Joint_6");    
+                jointTrajectory.header.stamp = ros::Time::now();
+                trajectory_msgs::JointTrajectoryPoint points;
+                for(int j=0;j<joint_trajectory.size();j++){
+                    points=trajectory_msgs::JointTrajectoryPoint();
+                    std::array<double,JOINTNUM> temp_q = joint_trajectory.at(j);
+                    for(int k=0;k<JOINTNUM;k++){
+                        points.positions.push_back(temp_q.at(k));
+                        points.velocities.push_back(0.0);
+                    }
+                    
+                    points.time_from_start = ros::Duration(0.01);
+                    jointTrajectory.points.push_back(points);
+
+                }
+  
+                pub.publish(jointTrajectory);   
                 std::cout << "!!!!!!!!!!!!!!!PUBLISH!!!!!!!!! " << isMoving << std::endl;
+                joint_trajectory.clear();
                 isMoving=false;
             }
-
         }
 
 
@@ -525,6 +529,7 @@ void GvlOmplPlannerHelper::rosIter(){
 
         new_data_received = false;
         new_pose_received=false;
+        ros::spinOnce();
 
         r.sleep();
     }
