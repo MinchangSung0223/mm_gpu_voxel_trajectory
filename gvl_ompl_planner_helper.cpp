@@ -66,7 +66,7 @@ double joint_states[JOINTNUM] = {0,0,0,0,0,0,0,0,0};
 double task_goal_values[7] = {0,0,0,1,3.0,2.0,1.35}; 
 Vector3ui map_dimensions(700,500,400);
 std::array<double,JOINTNUM> send_q = {0};
-
+bool cmdMove=false;
 void printCatesianKDLFrame(KDL::Frame frame,char* str ){
     std::cout<<"======="<<str<<"=======\n\n"<<endl;
     for(int i =0;i<4;i++){
@@ -236,12 +236,22 @@ void rosjointStateCallback(const sensor_msgs::JointState::ConstPtr& msg){
     {
         myRobotJointValues[msg->name[i]] = msg->position[i];
         joint_states[i] = msg->position[i];
+        if(i ==0){
+                myRobotJointValues[msg->name[i]] = msg->position[i]+1.7;
+                joint_states[i] = msg->position[i]+1.7;
+        }
+        if(i ==1){
+                myRobotJointValues[msg->name[i]] = msg->position[i]+3.5;
+                joint_states[i] = msg->position[i]+3.5;
+        }
+        
     }
     gvl->setRobotConfiguration("myUrdfRobot",myRobotJointValues);
     gvl->setRobotConfiguration("myUrdfCollisionRobot",myRobotJointValues);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfRobot","myRobotMapBitVoxel",YELLOW);
     //LOGGING_INFO(Gpu_voxels, "ROS JointState " << endl);
+
     gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
     gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMapBitVoxel", BLUE);
 
@@ -436,17 +446,22 @@ void GvlOmplPlannerHelper::rosIter(){
     myRobotCollisionMapBitVoxel = dynamic_pointer_cast<BitVectorVoxelList>(gvl->getMap("myRobotCollisionMapBitVoxel"));
     
     ros::NodeHandle nh;
-    ros::Subscriber joint_sub = nh.subscribe("/joint_states", 1, rosjointStateCallback); 
+    ros::NodeHandle nh2;
+
+    ros::Subscriber joint_sub = nh.subscribe("/joint_smc", 1, rosjointStateCallback); 
     ros::Subscriber desiredPose_sub = nh.subscribe("/desired_pose", 1, rosDesiredPoseCallback); 
     ros::Subscriber moving_flag = nh.subscribe("/ismoving", 1, rosMovingFlagCallback); 
     
     
     //ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/camera/depth/color/points", 1,roscallback);
+
     ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/merged", 1,roscallback);
 
     //ros::Subscriber point_sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZ> >("/cam_0_zf", 1,roscallback);
     //ros::Publisher pub_joint =  nh.advertise<sensor_msgs::JointState>("/joint_states_desired", 1000);
-    ros::Publisher pub = nh.advertise<trajectory_msgs::JointTrajectory>("joint_trajectory", 1000);
+    ros::Publisher pub = nh.advertise<trajectory_msgs::JointTrajectory>("joint_trajectory", 100);
+
+    ros::Publisher cmdMove_pub = nh2.advertise<std_msgs::Bool>("/cmdMove", 100); 
     ros::Rate r(100);
     new_data_received = true; // call visualize on the first iteration
     new_pose_received=false;
@@ -473,10 +488,13 @@ void GvlOmplPlannerHelper::rosIter(){
             Vector3f());
             myEnvironmentMap->merge(countingVoxelList);
             num_colls = gvl->getMap("countingVoxelList")->as<gpu_voxels::voxellist::CountingVoxelList>()->collideWith(gvl->getMap("mySolutionMap")->as<gpu_voxels::voxellist::BitVectorVoxelList>(), 1.0f);
-            if(num_colls>50){
+            if(num_colls>400){
                 std::cout << "!!!!!!!!!!!!!!!Detected Collision!!!!!!!!! " << num_colls << " collisions " << std::endl;
+                cmdMove=false;
                 new_pose_received = true;
-            }
+            }else{
+                cmdMove=true;
+                }
 
 
         }
@@ -507,8 +525,16 @@ void GvlOmplPlannerHelper::rosIter(){
                 for(int j=0;j<joint_trajectory.size();j++){
                     points=trajectory_msgs::JointTrajectoryPoint();
                     std::array<double,JOINTNUM> temp_q = joint_trajectory.at(j);
+                    
                     for(int k=0;k<JOINTNUM;k++){
-                        points.positions.push_back(temp_q.at(k));
+                        if(k==0)
+                                points.positions.push_back(temp_q.at(k)-1.7);
+                        else if(k==1)
+                                points.positions.push_back(temp_q.at(k)-3.5);
+                        else if(k>1)
+                                points.positions.push_back(temp_q.at(k));
+
+
                         points.velocities.push_back(0.0);
                     }
                     
@@ -529,6 +555,9 @@ void GvlOmplPlannerHelper::rosIter(){
 
         new_data_received = false;
         new_pose_received=false;
+            std_msgs::Bool cmdMove_msg;
+            cmdMove_msg.data=cmdMove;
+            cmdMove_pub.publish(cmdMove_msg);
         ros::spinOnce();
 
         r.sleep();
@@ -772,16 +801,26 @@ bool GvlOmplPlannerHelper::isValid(const ompl::base::State *state) const
     // insert the robot into the map:
     gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMap", eBVM_OCCUPIED);
 
+    //gvl->setRobotConfiguration("myUrdfCollisionRobot",state_joint_values);
+    //gvl->insertRobotIntoMap("myUrdfCollisionRobot","myRobotCollisionMap",eBVM_OCCUPIED);
+
+
     PERF_MON_SILENT_MEASURE_AND_RESET_INFO_P("insert", "Pose Insertion", "pose_check");
 
     PERF_MON_START("coll_test");
     size_t num_colls_pc = gvl->getMap("myRobotMap")->as<voxelmap::ProbVoxelMap>()->collideWith(gvl->getMap("myEnvironmentMap")->as<voxelmap::ProbVoxelMap>(), 0.7f);
     gvl->insertRobotIntoMap("myUrdfRobot", "myRobotMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+30));
+
+   // size_t num_colls_pc2 = gvl->getMap("myRobotCollisionMap")->as<voxelmap::ProbVoxelMap>()->collideWith(gvl->getMap("myEnvironmentMap")->as<voxelmap::ProbVoxelMap>(), 0.7f);
+    //gvl->insertRobotIntoMap("myUrdfCollisionRobot", "myRobotCollisionMap", BitVoxelMeaning(eBVM_SWEPT_VOLUME_START+30));
+
     PERF_MON_SILENT_MEASURE_AND_RESET_INFO_P("coll_test", "Pose Collsion", "pose_check");
 
-    //std::cout << "Validity check on state ["  << values[0] << ", " << values[1] << ", " << values[2] << ", " << values[3] << ", " << values[4] << ", " << values[5] << "] resulting in " <<  num_colls_pc << " colls." << std::endl;
+    std::cout << "Validity check on state ["  << values[0] << ", " << values[1] << ", " << values[2] << ", " << values[3] << ", " << values[4] << ", " << values[5] << "] resulting in " <<  num_colls_pc << " colls." << std::endl;
+    //std::cout << "Validity check on state2 ["  << values[0] << ", " << values[1] << ", " << values[2] << ", " << values[3] << ", " << values[4] << ", " << values[5] << "] resulting in " <<  num_colls_pc2 << " colls." << std::endl;
 
-    return num_colls_pc == 0;
+        return num_colls_pc==0;
+
 }
 
 bool GvlOmplPlannerHelper::checkMotion(const ompl::base::State *s1, const ompl::base::State *s2,
